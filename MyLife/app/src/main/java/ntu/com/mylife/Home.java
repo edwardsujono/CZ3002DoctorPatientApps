@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.parse.Parse;
+import com.firebase.client.Firebase;
 
 
 public class Home extends AppCompatActivity {
@@ -25,11 +25,12 @@ public class Home extends AppCompatActivity {
                 finish();
             }
         }, secondsDelayed * 1000);
-        Parse.initialize(new Parse.Configuration.Builder(this)
-                        .applicationId("U4tGrQAixLd6qiu5qKPtxiFDrtfxshfduKAU0Jvx")
-                        .clientKey("r5dkD9YrxbvmSEaoqBotOulw74jmdf0Fb6jr1T8F")
-                        .server("https://parseapi.back4app.com/").build()
-        );
+
+        Firebase.setAndroidContext(this);
+        Firebase myFirebaseRef = new Firebase("https://lifemate.firebaseio.com/");
+        myFirebaseRef.child("message").setValue("Do you have data? You'll love Firebase.");
+
+
     }
 
 
