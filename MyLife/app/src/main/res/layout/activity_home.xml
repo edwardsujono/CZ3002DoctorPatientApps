@@ -5,28 +5,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Home"
 
-    android:background="#fd1d0f">
+    android:background="#009688">
 
 <ImageView
-    android:layout_width="100dp"
-    android:layout_height="100dp"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
     android:id="@+id/image_logo"
-    android:src="@drawable/image_logo"
+    android:src="@drawable/splashscreen_logo"
     android:layout_centerVertical="true"
     android:layout_centerHorizontal="true" />
-
-    <!--Text for the the splash image need to be van image view-->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Life"
-        android:textSize="40dp"
-        android:layout_marginTop="38dp"
-        android:textColor="#FFF"
-        android:layout_below="@+id/image_logo"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView" />
-
 
 
 

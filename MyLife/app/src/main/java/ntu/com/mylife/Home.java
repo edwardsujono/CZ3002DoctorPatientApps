@@ -9,6 +9,8 @@ import android.view.MenuItem;
 
 import com.firebase.client.Firebase;
 
+import ntu.com.mylife.controller.AccountManagement;
+
 
 public class Home extends AppCompatActivity {
 
@@ -26,9 +28,7 @@ public class Home extends AppCompatActivity {
             }
         }, secondsDelayed * 1000);
 
-        Firebase.setAndroidContext(this);
-        Firebase myFirebaseRef = new Firebase("https://lifemate.firebaseio.com/");
-        myFirebaseRef.child("message").setValue("Do you have data? You'll love Firebase.");
+
 
 
     }

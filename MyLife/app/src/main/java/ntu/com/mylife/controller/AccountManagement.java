@@ -1,9 +1,11 @@
-package ntu.com.mylife;
+package ntu.com.mylife.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import ntu.com.mylife.R;
 
 public class AccountManagement extends AppCompatActivity {
 
@@ -11,8 +13,6 @@ public class AccountManagement extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_management);
-
-
     }
 
 

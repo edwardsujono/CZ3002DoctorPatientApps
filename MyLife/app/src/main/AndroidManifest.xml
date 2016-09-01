@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AccountManagement"
+            android:name=".controller.AccountManagement"
             android:label="@string/title_activity_account_management" >
         </activity>
     </application>

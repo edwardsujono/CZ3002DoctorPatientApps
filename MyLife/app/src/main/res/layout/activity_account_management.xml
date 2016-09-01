@@ -1,54 +1,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ntu.com.mylife.AccountManagement"
-
-    android:background="#fd1101">
+    tools:context="ntu.com.mylife.controller.AccountManagement"
+    android:background="#009688"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#fd3a27">
+        android:background="#009688">
+
 
         <ImageView
-            android:layout_width="100dp"
+            android:layout_width="350dp"
             android:layout_height="100dp"
-            android:layout_marginTop="109dp"
-            android:layout_alignParentTop="true"
-            android:id="@+id/image_logo"
-            android:src="@drawable/image_logo"
-            android:layout_alignEnd="@+id/textView"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/imageView"
+            android:src="@drawable/splashscreen_logo"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            />
+
+        <ImageButton
+            android:layout_width="250dp"
+            android:layout_height="90dp"
+            android:id="@+id/button_register"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="150dp"
+            android:background="@drawable/sign_in"
+
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Life"
-            android:textSize="30dp"
-            android:layout_marginTop="10dp"
-            android:textColor="#FFF"
-            android:layout_below="@+id/image_logo"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/textView"
+            android:text="Dont have an account ?"
+            android:textSize="17dp"
             android:layout_gravity="center_horizontal" />
-
-        <Button
-            android:layout_marginTop="150dp"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Register"
-            android:id="@+id/button"
-            android:layout_gravity="center_horizontal"
-            android:background="#fd1001" />
-
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Sign In"
-            android:layout_marginTop="10dp"
-            android:id="@+id/button2"
-            android:layout_gravity="center_horizontal"
-            android:background="#fd8075" />
 
 
     </LinearLayout>
