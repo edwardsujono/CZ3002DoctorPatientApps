@@ -15,20 +15,20 @@
             android:layout_width="420dp"
             android:layout_height="140dp"
             android:id="@+id/imageView"
-            android:src="@drawable/image_logo"
+            android:src="@drawable/logo_full"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="100dp"
             />
 
         <ImageButton
-            android:layout_width="300dp"
-            android:layout_height="100dp"
+            android:layout_width="279dp"
+            android:layout_height="80dp"
             android:id="@+id/button_register"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="150dp"
-            android:background="@drawable/sign_in"
+            android:background="@drawable/button_sign_in"
 
-            />
+            android:src="@drawable/button_sign_in" />
 
         <TextView
             android:layout_width="wrap_content"
