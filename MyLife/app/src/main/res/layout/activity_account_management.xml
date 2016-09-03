@@ -12,8 +12,8 @@
 
 
         <ImageView
-            android:layout_width="350dp"
-            android:layout_height="100dp"
+            android:layout_width="420dp"
+            android:layout_height="140dp"
             android:id="@+id/imageView"
             android:src="@drawable/image_logo"
             android:layout_gravity="center_horizontal"
@@ -27,8 +27,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="150dp"
             android:background="@drawable/signin_button"
-
-            />
+/>
 
         <TextView
             android:layout_width="wrap_content"
