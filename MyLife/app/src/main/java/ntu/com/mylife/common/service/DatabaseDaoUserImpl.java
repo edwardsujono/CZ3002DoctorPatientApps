@@ -1,13 +1,14 @@
 package ntu.com.mylife.common.service;
-
 import android.util.Log;
 
+import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import ntu.com.mylife.common.data.Doctor;
 import ntu.com.mylife.common.data.Patient;
@@ -37,28 +38,49 @@ import ntu.com.mylife.common.data.UserType;
 public class DatabaseDaoUserImpl implements DatabaseDao {
 
     private Firebase firebaseDb;
-    private static String PATIENT = "patient";
-    private static String DOCTOR = "doctor";
+    private static String PATIENT = "patients";
+    private static String DOCTOR = "doctors";
+    private HashMap hashMapSaved ;
 
 
     public DatabaseDaoUserImpl(){
+
         this.firebaseDb = new Firebase("https://lifemate.firebaseio.com/");
+
+        //always put the event listener at constructor
+        //this below code will create separate thread so all this functionality will be
+        //asynchronous
+
+        firebaseDb.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+               hashMapSaved = (HashMap) snapshot.getValue();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+
     }
 
 
     @Override
     public void addData(UserType.Type type, Object object) {
 
-        if(type.equals(UserType.Type.PATIENT)){
+        if(type == UserType.Type.PATIENT){
             //save patient data record
             Patient patient = (Patient) object;
             Firebase basePatient =  firebaseDb.child(PATIENT);
-            basePatient.setValue(patient);
+            Firebase listPatients = basePatient.push();
+            listPatients.setValue(patient);
         }else{
             //save doctor data record
             Doctor doctor =  (Doctor) object;
             Firebase baseDoctor =  firebaseDb.child(DOCTOR);
-            baseDoctor.setValue(doctor);
+            Firebase listDoctors = baseDoctor.push();
+            listDoctors.setValue(doctor);
         }
     }
 
@@ -70,45 +92,34 @@ public class DatabaseDaoUserImpl implements DatabaseDao {
     @Override
     public Object findData(UserType.Type type) {
         final ArrayList<Object> listReturned = new ArrayList<Object>();
-
-        if(type.equals(UserType.Type.PATIENT)){
-           firebaseDb.addValueEventListener(new ValueEventListener() {
-               @Override
-               public void onDataChange(DataSnapshot snapshot) {
-                   for(DataSnapshot child:snapshot.getChildren()){
-                       Patient patient = child.getValue(Patient.class);
-                       listReturned.add(patient);
-                       Log.i("email Patient",patient.getEmail());
-                       Log.i("password Patient",patient.getPassword());
-                   }
-               }
-
-               @Override
-               public void onCancelled(FirebaseError firebaseError) {
-                   System.out.println("The read failed: " + firebaseError.getMessage());
-               }
-           });
+        Log.i("executed Find Data","yes");
+        if(type == UserType.Type.PATIENT){
+            HashMap hashPatients = (HashMap)hashMapSaved.get("patients");
+            for(Object key:hashPatients.keySet()){
+                HashMap patientMaps = (HashMap)hashPatients.get(key);
+                String email =(String) patientMaps.get("email");
+                String password = (String) patientMaps.get("password");
+                String userName = (String) patientMaps.get("userName");
+                String fullName = (String) patientMaps.get("fullName");
+                Patient patient = new Patient(fullName,userName,email,password);
+                listReturned.add(patient);
+            }
        }else{
-            // Otherwise it is doctor type of user
-            firebaseDb.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot snapshot) {
-                    for(DataSnapshot child:snapshot.getChildren()){
-                        Doctor doctor = child.getValue(Doctor.class);
-                        listReturned.add(doctor);
-                        Log.i("email Doctor",doctor.getEmail());
-                        Log.i("password Doctor",doctor.getPassword());
-                    }
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-                    System.out.println("The read failed: " + firebaseError.getMessage());
-                }
-            });
+            HashMap hashDoctor = (HashMap)hashMapSaved.get("doctors");
+            for(Object key:hashDoctor.keySet()){
+                HashMap doctorMaps = (HashMap)hashDoctor.get(key);
+                String email =(String) doctorMaps.get("email");
+                String password = (String) doctorMaps.get("password");
+                String userName = (String) doctorMaps.get("userName");
+                String fullName = (String) doctorMaps.get("fullName");
+                Doctor doctor = new Doctor(fullName,userName,email,password);
+                listReturned.add(doctor);
+            }
        }
         return listReturned;
     }
+
+
 
 
 

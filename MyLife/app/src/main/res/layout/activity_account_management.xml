@@ -15,27 +15,28 @@
             android:layout_width="420dp"
             android:layout_height="140dp"
             android:id="@+id/imageView"
-            android:src="@drawable/logo_full"
+            android:src="@drawable/image_logo"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="100dp"
             />
 
         <ImageButton
-            android:layout_width="279dp"
-            android:layout_height="80dp"
-            android:id="@+id/button_register"
+            android:layout_width="250dp"
+            android:layout_height="90dp"
+            android:id="@+id/button_sign_in"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="150dp"
-            android:background="@drawable/button_sign_in"
-
-            android:src="@drawable/button_sign_in" />
+            android:background="@drawable/signin_button"
+/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dont have an account ?"
             android:textSize="17dp"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/register_text"
+            android:layout_gravity="center_horizontal"
+            />
 
 
     </LinearLayout>

@@ -1,4 +1,4 @@
-package ntu.com.mylife;
+package ntu.com.mylife.view;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -7,8 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.firebase.client.Firebase;
-
+import ntu.com.mylife.R;
 import ntu.com.mylife.controller.AccountManagement;
 
 
@@ -18,6 +17,7 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
 
         //Splash Screen
         int secondsDelayed = 3;

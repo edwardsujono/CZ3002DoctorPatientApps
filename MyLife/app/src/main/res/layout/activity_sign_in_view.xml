@@ -1,0 +1,117 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ntu.com.mylife.view.SignInView"
+    android:background="#009688">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:layout_width="350dp"
+            android:layout_height="100dp"
+            android:id="@+id/image_logo_signin"
+            android:background="@drawable/image_logo"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="0dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="250dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/box_roles"
+                android:weightSum="1">
+
+                <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:id="@+id/patient_role_button"
+                    android:background="@drawable/patient_role_button_selected"
+                    />
+
+                <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/doctor_role_button"
+                    android:background="@drawable/doctor_role_button"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="270dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:weightSum="1"
+                android:layout_marginTop="-35dp"
+                >
+
+                <LinearLayout
+                    android:padding="0dp"
+                    android:orientation="vertical"
+                    android:layout_width="270dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/box_sign_in"
+                    android:layout_weight="0.28">
+
+                    <EditText
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/username_enter"
+                        android:layout_marginTop="30dp"
+                        android:hint="Username"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="15dp"
+                        android:textColor="#009688"
+                        android:textColorHint="#009688" />
+
+                    <EditText
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_horizontal"
+                        android:inputType="textPassword"
+                        android:ems="10"
+                        android:layout_marginTop="-10dp"
+                        android:textSize="15dp"
+                        android:id="@+id/password_enter"
+                        android:textColor="#009688"
+                        android:textColorHint="#009688"
+                        android:hint="Password"
+                        />
+                </LinearLayout>
+
+                <ImageButton
+                    android:layout_width="200dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/sign_in_button_to_enter"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/sign_in_to_enter"
+                    />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

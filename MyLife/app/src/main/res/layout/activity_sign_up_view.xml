@@ -1,0 +1,116 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#009688"
+    tools:context="ntu.com.mylife.view.SignUpView">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="350dp"
+            android:layout_height="100dp"
+            android:id="@+id/image_logo_signup"
+            android:background="@drawable/image_logo"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            />
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:background="@drawable/rounded_edittext"
+            android:textColor="#009688"
+            android:textColorHint="#009688"
+            android:hint="Username"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:id="@+id/username_input_register"
+            />
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:background="@drawable/rounded_edittext"
+            android:textColor="#009688"
+            android:textColorHint="#009688"
+            android:hint="Full Name"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:id="@+id/fullname_input_register" />
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:background="@drawable/rounded_edittext"
+            android:textColor="#009688"
+            android:textColorHint="#009688"
+            android:hint="Email"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:id="@+id/email_input_register" />
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:background="@drawable/rounded_edittext"
+            android:textColor="#009688"
+            android:textColorHint="#009688"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:id="@+id/password_input_register" />
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:background="@drawable/rounded_edittext"
+            android:textColor="#009688"
+            android:textColorHint="#009688"
+            android:hint="Re-enter Password"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:id="@+id/reenter_password_input_register" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/box_roles"
+            android:weightSum="1">
+
+            <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/patient_role_button_register"
+                android:background="@drawable/patient_role_button_selected"
+                />
+
+            <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/doctor_role_button_register"
+                android:background="@drawable/doctor_role_button"
+                />
+
+        </LinearLayout>
+        <ImageButton
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:background="@drawable/button_register"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/registerButton" />
+
+
+    </LinearLayout>
+</RelativeLayout>
