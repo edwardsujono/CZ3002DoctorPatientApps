@@ -1,5 +1,6 @@
 package ntu.com.mylife.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import com.firebase.client.Firebase;
 
 import ntu.com.mylife.R;
 import ntu.com.mylife.common.data.UserType;
@@ -27,7 +30,7 @@ public class SignUpView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_view);
-
+        Firebase.setAndroidContext(this);
         //instanstiate here
         //EDIT TEXT
         emailEditText = (EditText) findViewById(R.id.email_input_register);
@@ -66,8 +69,11 @@ public class SignUpView extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signUpController.processSignUp(userNameEditText.getText().toString(),fullNameEditText.getText().toString(),emailEditText.getText().toString(),
-                        passwordEditText.getText().toString(),reenterPasswordEditText.getText().toString(),TYPE);
+                if(signUpController.processSignUp(userNameEditText.getText().toString(),fullNameEditText.getText().toString(),emailEditText.getText().toString(),
+                        passwordEditText.getText().toString(),reenterPasswordEditText.getText().toString(),TYPE)){
+                    Intent intent = new Intent(SignUpView.this,MainPageView.class);
+                    startActivity(intent);
+                }
             }
         });
 

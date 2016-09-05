@@ -13,8 +13,8 @@ public interface DatabaseDao {
     //so always put EventListener constructor level, and cache it to HashMap variable(since FireBase records save in JSON format)
     //refer to DatabaseDaoUserImpl
 
-    public void addData(UserType.Type type, Object object);
-    public void deleteData(UserType.Type type, Object object);
-    public Object findData(UserType.Type type);
+    public void addData(UserType.Type type, Object object) throws Exception;
+    public void deleteData(UserType.Type type, Object object) throws Exception;
+    public Object findData(UserType.Type type) throws Exception;
 
 }

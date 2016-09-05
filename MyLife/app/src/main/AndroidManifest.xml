@@ -13,11 +13,7 @@
         <activity
             android:name=".view.Home"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".controller.AccountManagement"
@@ -30,6 +26,14 @@
         <activity
             android:name=".view.SignUpView"
             android:label="@string/title_activity_sign_up_view" >
+        </activity>
+        <activity
+            android:name=".view.MainPageView"
+            android:label="@string/title_activity_main_page_view" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

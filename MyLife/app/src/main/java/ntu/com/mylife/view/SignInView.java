@@ -1,5 +1,6 @@
 package ntu.com.mylife.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import com.firebase.client.Firebase;
 
 import ntu.com.mylife.R;
 import ntu.com.mylife.common.data.UserType;
@@ -25,6 +28,7 @@ public class SignInView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in_view);
+        Firebase.setAndroidContext(this);
 
         //instanstiate all the attribute here
         //Button
@@ -62,7 +66,10 @@ public class SignInView extends AppCompatActivity {
         signInButtonToEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signInController.processSignIn(TYPE,editTextUserName.getText().toString(),editTextPassword.getText().toString());
+                if(signInController.processSignIn(TYPE,editTextUserName.getText().toString(),editTextPassword.getText().toString())){
+                    Intent intent = new Intent(SignInView.this,MainPageView.class);
+                    startActivity(intent);
+                }
             }
         });
 

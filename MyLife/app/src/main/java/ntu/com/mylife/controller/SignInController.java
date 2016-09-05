@@ -28,25 +28,30 @@ public class SignInController {
     }
 
     public boolean processSignIn(UserType.Type type,String userName,String password){
-        boolean asnwer = false;
+
         ArrayList listUserFromDb = new ArrayList();
-        listUserFromDb = (ArrayList)db.findData(type);
-        if(type == UserType.Type.PATIENT){
-            for(Patient patient:(ArrayList<Patient>) listUserFromDb){
-                if(patient.getUserName().equals(userName) && patient.getPassword().equals(password)){
-                    Toast.makeText(myContext,"Sign In To Your Account",Toast.LENGTH_LONG).show();
-                    return true;
+        try {
+            listUserFromDb = (ArrayList) db.findData(type);
+            if(type == UserType.Type.PATIENT){
+                for(Patient patient:(ArrayList<Patient>) listUserFromDb){
+                    if(patient.getUserName().equals(userName) && patient.getPassword().equals(password)){
+                        Toast.makeText(myContext,"Sign In To Your Account",Toast.LENGTH_LONG).show();
+                        return true;
+                    }
+                }
+            }else{
+                for(Doctor doctor:(ArrayList<Doctor>) listUserFromDb){
+                    if(doctor.getUserName().equals(userName) && doctor.getPassword().equals(password)){
+                        Toast.makeText(myContext,"Sign In To Your Account",Toast.LENGTH_LONG).show();
+                        return true;
+                    }
                 }
             }
-        }else{
-            for(Doctor doctor:(ArrayList<Doctor>) listUserFromDb){
-                if(doctor.getUserName().equals(userName) && doctor.getPassword().equals(password)){
-                    Toast.makeText(myContext,"Sign In To Your Account",Toast.LENGTH_LONG).show();
-                    return true;
-                }
-            }
+            Toast.makeText(myContext,"User has not been registered yet",Toast.LENGTH_LONG).show();
+
+        }catch(Exception e){
+            return false;
         }
-        Toast.makeText(myContext,"User has not been registered yet",Toast.LENGTH_LONG).show();
 
         return false;
     }
