@@ -1,5 +1,4 @@
 package ntu.com.mylife.common.service;
-
 import android.util.Log;
 
 import com.firebase.client.AuthData;
@@ -93,7 +92,7 @@ public class DatabaseDaoUserImpl implements DatabaseDao {
     @Override
     public Object findData(UserType.Type type) {
         final ArrayList<Object> listReturned = new ArrayList<Object>();
-
+        Log.i("executed Find Data","yes");
         if(type == UserType.Type.PATIENT){
             HashMap hashPatients = (HashMap)hashMapSaved.get("patients");
             for(Object key:hashPatients.keySet()){

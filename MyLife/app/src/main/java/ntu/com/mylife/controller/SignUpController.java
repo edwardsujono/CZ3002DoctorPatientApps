@@ -28,25 +28,29 @@ public class SignUpController {
     }
 
 
-    public void processSignUp(String userName,String fullName,String email,String password,String reenterPasaword,UserType.Type type){
+    public boolean processSignUp(String userName,String fullName,String email,String password,String reenterPasaword,UserType.Type type){
         if(userName.equals("") || fullName.equals("") || email.equals("") || password.equals("") || reenterPasaword.equals("") ){
             alertDialog.showDialog("Please Fill all the field given");
-            return;
+            return false;
         }
 
         if(!password.equals(reenterPasaword)){
             alertDialog.showDialog("password and re-enter password did not match");
-            return;
+            return false;
         }
-
-        if(type == UserType.Type.PATIENT) {
-            Patient patient = new Patient(fullName, userName, email, password);
-            db.addData(type, patient);
-        }else{
-            Doctor doctor = new Doctor(fullName, userName , email , password);
-            db.addData(type,doctor);
+        try {
+            if (type == UserType.Type.PATIENT) {
+                Patient patient = new Patient(fullName, userName, email, password);
+                db.addData(type, patient);
+            } else {
+                Doctor doctor = new Doctor(fullName, userName, email, password);
+                db.addData(type, doctor);
+            }
+            alertDialog.showDialog("Sign In to your account");
+            return true;
+        }catch(Exception e){
+            return false;
         }
-        alertDialog.showDialog("Sign In to your account");
 
     }
 
