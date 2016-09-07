@@ -5,8 +5,8 @@ package ntu.com.mylife.common.service;
  */
 public interface DatabaseUserScheduleDao {
 
-    public void addData();
-    public Object searchData(String userName);
-    public void deleteData(String userName);
+    public void addData() throws Exception;
+    public Object searchData(String userName,String dayInserted) throws Exception;
+    public void deleteData(String userName) throws Exception;
 
 }

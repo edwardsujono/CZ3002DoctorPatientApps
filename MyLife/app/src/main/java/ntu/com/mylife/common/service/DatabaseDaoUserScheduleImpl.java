@@ -55,7 +55,7 @@ public class DatabaseDaoUserScheduleImpl implements DatabaseUserScheduleDao{
     }
 
     @Override
-    public Object searchData(String userName) {
+    public Object searchData(String userName,String dayInserted) {
 
         /* JSON Data Structure
         Under UserSchedule on FireBase
@@ -69,15 +69,33 @@ public class DatabaseDaoUserScheduleImpl implements DatabaseUserScheduleDao{
              ]}
        */
 
-        final ArrayList<Object> listReturned = new ArrayList<Object>();
+        ArrayList<String> listMessage = new ArrayList<String>();
+        ArrayList<String> listTime = new ArrayList<String>();
+        final HashMap<String,Object> listReturned = new HashMap<String,Object>();
+
         HashMap hashUsers = (HashMap)hashMapSaved.get("UserSchedule");
         for(Object key:hashUsers.keySet()){
             HashMap userMaps = (HashMap)hashUsers.get(key);
             String nameCompared = (String) userMaps.get("userName");
-
+            if(nameCompared.equals(userName)) {
+                ArrayList userSchedule = (ArrayList) userMaps.get("schedule");
+                for (HashMap hashSchedule : (ArrayList<HashMap>) userSchedule) {
+                    String day = (String) hashSchedule.get("day");
+                    if(day.equals(dayInserted)) {
+                        ArrayList<HashMap> timeSchedules = (ArrayList<HashMap>) hashSchedule.get("timeSchedule");
+                        for (HashMap hashTimeSchedule : timeSchedules) {
+                            String timeTimeSchedule = (String) hashTimeSchedule.get("time");
+                            String messageTimeSchedule = (String) hashTimeSchedule.get("message");
+                            listMessage.add(messageTimeSchedule);
+                            listTime.add(timeTimeSchedule);
+                        }
+                    }
+                }
+            }
         }
 
-
+        listReturned.put("listMessage",listMessage);
+        listReturned.put("listTime",listTime);
         return listReturned;
     }
 

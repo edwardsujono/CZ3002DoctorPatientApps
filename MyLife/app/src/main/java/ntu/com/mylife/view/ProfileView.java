@@ -5,22 +5,35 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.firebase.client.Firebase;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 import ntu.com.mylife.R;
+import ntu.com.mylife.common.service.DatabaseDaoUserImpl;
+import ntu.com.mylife.common.service.DatabaseDaoUserScheduleImpl;
+import ntu.com.mylife.common.service.DatabaseUserScheduleDao;
+import ntu.com.mylife.controller.CurrentScheduleRecyclerViewAdaptor;
 
 
 public class ProfileView extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private TextView todaySchedule,todayNumberSchedule,todayMonthSchedule;
+    private RecyclerView mRecyclerView;
+    private DatabaseUserScheduleDao dbScehdule;
+    private LinearLayoutManager mLayoutManager;
 
     public ProfileView() {
         // Required empty public constructor
@@ -29,7 +42,8 @@ public class ProfileView extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Firebase.setAndroidContext(this.getActivity());
+        dbScehdule = new DatabaseDaoUserScheduleImpl(this.getActivity());
     }
 
     @Override
@@ -44,6 +58,21 @@ public class ProfileView extends Fragment {
         todayNumberSchedule.setTextColor(Color.parseColor("#009688"));
         todayMonthSchedule.setTextColor(Color.parseColor("#009688"));
         instanstiateTodaySchedule();
+
+        //instanstiate current schedule
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.current_schedule_recyler_view);
+        CurrentScheduleRecyclerViewAdaptor adaptor;
+        try {
+            HashMap<String,Object> hashReturned = (HashMap) dbScehdule.searchData("edward454", "14-December-2016");
+            adaptor = new CurrentScheduleRecyclerViewAdaptor((ArrayList)hashReturned.get("listTime"),(ArrayList)hashReturned.get("listMessage"));
+        }catch(Exception e){
+            //do not included anything
+            adaptor = new CurrentScheduleRecyclerViewAdaptor(new ArrayList<String>(), new ArrayList<String>());
+        }
+        mRecyclerView.setAdapter(adaptor);
+        mLayoutManager = new LinearLayoutManager(this.getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
         return rootView;
 
     }
