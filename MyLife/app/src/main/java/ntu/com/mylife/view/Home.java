@@ -29,8 +29,6 @@ public class Home extends AppCompatActivity {
         }, secondsDelayed * 1000);
 
 
-
-
     }
 
 
