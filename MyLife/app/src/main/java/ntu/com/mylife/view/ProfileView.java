@@ -1,39 +1,39 @@
 package ntu.com.mylife.view;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-
-import com.firebase.client.Firebase;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Locale;
+import android.widget.Toast;
 
 import ntu.com.mylife.R;
+import ntu.com.mylife.common.service.DatabaseDao;
 import ntu.com.mylife.common.service.DatabaseDaoUserImpl;
-import ntu.com.mylife.common.service.DatabaseDaoUserScheduleImpl;
-import ntu.com.mylife.common.service.DatabaseUserScheduleDao;
-import ntu.com.mylife.controller.CurrentScheduleRecyclerViewAdaptor;
+import ntu.com.mylife.common.service.SharedPreferencesService;
 
-
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link ProfileView.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link ProfileView#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 public class ProfileView extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
 
     private OnFragmentInteractionListener mListener;
-    private TextView todaySchedule,todayNumberSchedule,todayMonthSchedule;
-    private RecyclerView mRecyclerView;
-    private DatabaseUserScheduleDao dbScehdule;
-    private LinearLayoutManager mLayoutManager;
+    private EditText textFullName,textAge,textDob,textBloodType,textAllergy,textMedicalRecord;
+    private Button buttonSave;
+    private DatabaseDao dbUser;
+    private SharedPreferencesService sharedPreferencesService;
+    private static String KEY_USER = "userName",KEY_FULL_NANE= "fullName",KEY_AGE = "age", KEY_DOB = "dob" , KEY_BLOOD = "blood" , KEY_ALLERGY = "allergy" , KEY_MEDICAL_RECORD= "medicalRecord", NAME_SHARED_PREFERENCES = "UserSharedPreferences";
 
     public ProfileView() {
         // Required empty public constructor
@@ -42,8 +42,8 @@ public class ProfileView extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Firebase.setAndroidContext(this.getActivity());
-        dbScehdule = new DatabaseDaoUserScheduleImpl(this.getActivity());
+        dbUser = new DatabaseDaoUserImpl();
+        sharedPreferencesService = new SharedPreferencesService(getActivity());
     }
 
     @Override
@@ -51,44 +51,65 @@ public class ProfileView extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView  =  inflater.inflate(R.layout.fragment_profile_view, container, false);
-        todaySchedule = (TextView) rootView.findViewById(R.id.today_fragment_day_main_page);
-        todayNumberSchedule = (TextView) rootView.findViewById(R.id.today_fragment_number_day_main_page);
-        todayMonthSchedule = (TextView) rootView.findViewById(R.id.today_fragment_month_main_page);
-        todaySchedule.setTextColor(Color.parseColor("#009688"));
-        todayNumberSchedule.setTextColor(Color.parseColor("#009688"));
-        todayMonthSchedule.setTextColor(Color.parseColor("#009688"));
-        instanstiateTodaySchedule();
+        //all attribute is defined here
+        textFullName = (EditText) rootView.findViewById(R.id.fullname_profile_editText);
+        textAge      = (EditText) rootView.findViewById(R.id.age_profile_editText);
+        textDob     = (EditText) rootView.findViewById(R.id.dob_profile_editText);
+        textBloodType = (EditText) rootView.findViewById(R.id.bloodType_profile_editText);
+        textAllergy = (EditText) rootView.findViewById(R.id.allergy_profile_editText);
+        textMedicalRecord = (EditText) rootView.findViewById(R.id.medicalCondition_profile_editText);
+        buttonSave        =  (Button) rootView.findViewById(R.id.button_save_profile);
 
-        //instanstiate current schedule
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.current_schedule_recyler_view);
-        CurrentScheduleRecyclerViewAdaptor adaptor;
-        try {
-            HashMap<String,Object> hashReturned = (HashMap) dbScehdule.searchData("edward454", "14-December-2016");
-            adaptor = new CurrentScheduleRecyclerViewAdaptor((ArrayList)hashReturned.get("listTime"),(ArrayList)hashReturned.get("listMessage"));
-        }catch(Exception e){
-            //do not included anything
-            adaptor = new CurrentScheduleRecyclerViewAdaptor(new ArrayList<String>(), new ArrayList<String>());
-        }
-        mRecyclerView.setAdapter(adaptor);
-        mLayoutManager = new LinearLayoutManager(this.getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        String currentUserName =   sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER);
+        loadEditText();
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textFullName.setText(textFullName.getText().toString());
+                textAge.setText(textAge.getText());
+                textDob.setText(textDob.getText());
+                textBloodType.setText(textBloodType.getText());
+                textAllergy.setText(textAllergy.getText());
+                textMedicalRecord.setText(textMedicalRecord.getText());
+                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_FULL_NANE,textFullName.getText().toString());
+                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_AGE,textAge.getText().toString());
+                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_DOB,textDob.getText().toString());
+                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_BLOOD,textBloodType.getText().toString());
+                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_ALLERGY,textAllergy.getText().toString());
+                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_MEDICAL_RECORD,textMedicalRecord.getText().toString());
+                Toast.makeText(getActivity(),"Contact is updated",Toast.LENGTH_LONG).show();
+            }
+        });
 
         return rootView;
+    }
+
+
+    public void loadEditText(){
+        if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_FULL_NANE) != null){
+            textFullName.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_FULL_NANE));
+        }
+        if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_DOB) != null){
+            textDob.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_DOB));
+        }
+        if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_AGE) != null){
+            textAge.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_AGE));
+        }
+        if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_BLOOD) != null){
+            textBloodType.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_BLOOD));
+        }
+        if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_ALLERGY) != null){
+            textAllergy.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_ALLERGY));
+        }
+        if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_MEDICAL_RECORD) != null){
+            textMedicalRecord.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_MEDICAL_RECORD) );
+        }
 
     }
 
 
-    private  void instanstiateTodaySchedule(){
 
-        Calendar rightNow = Calendar.getInstance();
-        String month =  new SimpleDateFormat("MMMM").format(rightNow.getTime());
-        String weekDay = new SimpleDateFormat("EEEE", Locale.US).format(rightNow.getTime());
-        int dayNumber = rightNow.getTime().getDate();
-        todaySchedule.setText(weekDay);
-        todayNumberSchedule.setText(dayNumber+"");
-        todayMonthSchedule.setText(month);
 
-    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

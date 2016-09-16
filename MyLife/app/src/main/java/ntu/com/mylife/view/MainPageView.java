@@ -1,7 +1,6 @@
 package ntu.com.mylife.view;
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -14,24 +13,15 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
-import com.firebase.client.Firebase;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 import ntu.com.mylife.R;
 import ntu.com.mylife.controller.NavigationDrawerRecyclerViewAdapter;
 
-public class MainPageView extends AppCompatActivity implements ProfileView.OnFragmentInteractionListener{
+public class MainPageView extends AppCompatActivity implements HomeView.OnFragmentInteractionListener{
 
 
     private Toolbar toolbar;                              // Declaring the Toolbar Object

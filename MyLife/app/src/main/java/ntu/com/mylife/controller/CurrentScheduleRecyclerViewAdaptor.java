@@ -1,5 +1,6 @@
 package ntu.com.mylife.controller;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +35,9 @@ public class CurrentScheduleRecyclerViewAdaptor extends RecyclerView.Adapter<Cur
     public void onBindViewHolder(ViewHolder holder, int position) {
         String timeStamp = listTime.get(position);
         String message = listMessage.get(position);
+        holder.currentMessage.setTextColor(Color.parseColor("#009688"));
         holder.currentMessage.setText(message);
+        holder.currentTime.setTextColor(Color.parseColor("#009688"));
         holder.currentTime.setText(timeStamp);
     }
 

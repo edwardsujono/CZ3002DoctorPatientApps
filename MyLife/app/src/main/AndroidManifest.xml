@@ -33,6 +33,7 @@
             android:label="@string/title_activity_main_page_view">
 
         </activity>
+        <activity android:name=".view.RecordView" />
         <activity android:name=".view.ChatView"></activity>
 
         <service

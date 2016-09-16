@@ -26,10 +26,13 @@ public class DatabaseDaoUserScheduleImpl implements DatabaseUserScheduleDao{
     private Context myContext;
     private HashMap hashMapSaved;
     private Firebase firebaseDb;
+    private String nameUser,timeSchedule;
 
-    public DatabaseDaoUserScheduleImpl(Context context){
+    public DatabaseDaoUserScheduleImpl(final Context context, final Callback callback, final String nameUser, final String timeSchedule){
         this.myContext = context;
         this.firebaseDb = new Firebase("https://lifemate.firebaseio.com/");
+        this.nameUser = nameUser;
+        this.timeSchedule = timeSchedule;
 
         //always put the event listener at constructor
         //this below code will create separate thread so all this functionality will be
@@ -39,6 +42,13 @@ public class DatabaseDaoUserScheduleImpl implements DatabaseUserScheduleDao{
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 hashMapSaved = (HashMap) snapshot.getValue();
+                try {
+                    HashMap hashReturned = (HashMap) searchData(nameUser, timeSchedule);
+                    callback.callbackFunction(hashReturned);
+                }catch(Exception e){
+                    //do nothing for now
+
+                }
             }
 
             @Override
@@ -68,20 +78,19 @@ public class DatabaseDaoUserScheduleImpl implements DatabaseUserScheduleDao{
                 }
              ]}
        */
-
         ArrayList<String> listMessage = new ArrayList<String>();
         ArrayList<String> listTime = new ArrayList<String>();
         final HashMap<String,Object> listReturned = new HashMap<String,Object>();
 
-        HashMap hashUsers = (HashMap)hashMapSaved.get("UserSchedule");
-        for(Object key:hashUsers.keySet()){
-            HashMap userMaps = (HashMap)hashUsers.get(key);
-            String nameCompared = (String) userMaps.get("userName");
-            if(nameCompared.equals(userName)) {
-                ArrayList userSchedule = (ArrayList) userMaps.get("schedule");
+
+        ArrayList<HashMap> listUserSchedule = (ArrayList<HashMap>)hashMapSaved.get("UserSchedule");
+        for(HashMap hashData: listUserSchedule){
+            String nameCompared = (String) hashData.get("userName");
+            if (nameCompared.equals(userName)) {
+                ArrayList userSchedule = (ArrayList) hashData.get("schedule");
                 for (HashMap hashSchedule : (ArrayList<HashMap>) userSchedule) {
                     String day = (String) hashSchedule.get("day");
-                    if(day.equals(dayInserted)) {
+                    if (day.equals(dayInserted)) {
                         ArrayList<HashMap> timeSchedules = (ArrayList<HashMap>) hashSchedule.get("timeSchedule");
                         for (HashMap hashTimeSchedule : timeSchedules) {
                             String timeTimeSchedule = (String) hashTimeSchedule.get("time");
@@ -91,7 +100,8 @@ public class DatabaseDaoUserScheduleImpl implements DatabaseUserScheduleDao{
                         }
                     }
                 }
-            }
+
+        }
         }
 
         listReturned.put("listMessage",listMessage);
@@ -103,4 +113,5 @@ public class DatabaseDaoUserScheduleImpl implements DatabaseUserScheduleDao{
     public void deleteData(String userName) {
 
     }
+
 }
