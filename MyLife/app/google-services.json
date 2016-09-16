@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "980649076636",
+    "firebase_url": "https://lifemate.firebaseio.com",
+    "project_id": "firebase-lifemate",
+    "storage_bucket": "firebase-lifemate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980649076636:android:44ee8d2c3a683418",
+        "android_client_info": {
+          "package_name": "ntu.com.mylife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980649076636-0k6h2grb0tum8tmmu097jbm7e5h3625d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfa_-mutr6K_R6cBpR7R05tjLdtM5wuHg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
