@@ -1,7 +1,6 @@
 package ntu.com.mylife.common.service;
 import android.util.Log;
 
-import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -35,8 +34,7 @@ import ntu.com.mylife.common.data.UserType;
 
 * */
 
-
-public class DatabaseDaoUserImpl implements DatabaseDao {
+public class DatabaseDaoUserImpl implements DatabaseDaoUser {
 
     private Firebase firebaseDb;
     private static String PATIENT = "patients";
@@ -60,7 +58,7 @@ public class DatabaseDaoUserImpl implements DatabaseDao {
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
+                Log.d("Read failed", firebaseError.getMessage());
             }
         });
 
@@ -95,7 +93,7 @@ public class DatabaseDaoUserImpl implements DatabaseDao {
         final ArrayList<Object> listReturned = new ArrayList<Object>();
         Log.i("executed Find Data","yes");
         if(type == UserType.Type.PATIENT){
-            HashMap hashPatients = (HashMap)hashMapSaved.get("patients");
+            HashMap hashPatients = (HashMap)hashMapSaved.get(PATIENT);
             for(Object key:hashPatients.keySet()){
                 HashMap patientMaps = (HashMap)hashPatients.get(key);
                 String email =(String) patientMaps.get("email");
@@ -130,7 +128,7 @@ public class DatabaseDaoUserImpl implements DatabaseDao {
                 listReturned.add(patient);
             }
        }else{
-            HashMap hashDoctor = (HashMap)hashMapSaved.get("doctors");
+            HashMap hashDoctor = (HashMap)hashMapSaved.get(DOCTOR);
             for(Object key:hashDoctor.keySet()){
                 HashMap doctorMaps = (HashMap)hashDoctor.get(key);
                 String email =(String) doctorMaps.get("email");

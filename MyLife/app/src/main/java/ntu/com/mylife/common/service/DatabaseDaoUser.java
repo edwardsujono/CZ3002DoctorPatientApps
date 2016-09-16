@@ -7,7 +7,7 @@ import ntu.com.mylife.common.data.UserType;
 /**
  * Created by LENOVO on 01/09/2016.
  */
-public interface DatabaseDao {
+public interface DatabaseDaoUser {
     //please be careful when using FireBase, their API is really unique that
     //eventListener just executed once at the start time and when there has data changes
     //so always put EventListener constructor level, and cache it to HashMap variable(since FireBase records save in JSON format)

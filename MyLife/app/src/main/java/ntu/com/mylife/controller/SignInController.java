@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import ntu.com.mylife.common.data.Doctor;
 import ntu.com.mylife.common.data.Patient;
 import ntu.com.mylife.common.data.UserType;
-import ntu.com.mylife.common.service.DatabaseDao;
+import ntu.com.mylife.common.service.DatabaseDaoUser;
 import ntu.com.mylife.common.service.DatabaseDaoUserImpl;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 
@@ -20,7 +20,7 @@ import ntu.com.mylife.common.service.SharedPreferencesService;
  */
 public class SignInController {
 
-    private DatabaseDao db;
+    private DatabaseDaoUser db;
     private Context myContext;
     private SharedPreferencesService sharedPreferencesService;
     private static String KEY_USER = "userName",NAME_SHARED_PREFERENCES = "UserSharedPreferences";
