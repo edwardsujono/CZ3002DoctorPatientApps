@@ -1,64 +1,141 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="ntu.com.mylife.view.ProfileView"
+    android:layout_height="match_parent"
+    tools:context="ntu.com.mylife.view.ProfileView"
     android:background="#FFF"
+    android:padding="10dp"
     >
 
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Friday"
-            android:textColor="#009688"
-            android:textSize="30dp"
-            android:id="@+id/today_fragment_day_main_page"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            />
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="02"
-            android:textSize="100dp"
-            android:textColor="#009688"
-            android:id="@+id/today_fragment_number_day_main_page"
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="September"
-            android:textColor="#009688"
-            android:textSize="30dp"
-            android:id="@+id/today_fragment_month_main_page"
-            android:layout_gravity="center_horizontal"
+            android:id="@+id/imageView2"
+            android:background="#000"
             />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            >
+            android:layout_height="50dp">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/current_schedule_recyler_view"
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#009688"
-                android:scrollbars="vertical"
-                >
-
-            </android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content"
+                android:id="@+id/fullname_profile_editText"
+                android:textColor="#009688"
+                android:hint="Full Name"
+                android:textColorHint="#009688"
+                android:backgroundTint="#009688"
+                />
 
 
         </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/age_profile_editText"
+                android:textColor="#009688"
+                android:hint="Age"
+                android:textColorHint="#009688"
+                android:backgroundTint="#009688"
+                />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dob_profile_editText"
+                android:textColor="#009688"
+                android:hint="DOB"
+                android:textColorHint="#009688"
+                android:backgroundTint="#009688"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bloodType_profile_editText"
+                android:textColor="#009688"
+                android:hint="Blood Type"
+                android:textColorHint="#009688"
+                android:backgroundTint="#009688"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/allergy_profile_editText"
+                android:textColor="#009688"
+                android:hint="Allergy"
+                android:textColorHint="#009688"
+                android:backgroundTint="#009688"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/medicalCondition_profile_editText"
+                android:textColor="#009688"
+                android:hint="Medical Condition"
+                android:textColorHint="#009688"
+                />
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="#009688"
+            android:text="Save"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/button_save_profile" />
+
+
     </LinearLayout>
+
 </FrameLayout>

@@ -32,7 +32,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.RecordView" />
-        <activity android:name=".controller.PDFController"></activity>
     </application>
 
 </manifest>

@@ -59,7 +59,17 @@ public class NavigationDrawerRecyclerViewAdapter extends RecyclerView.Adapter<Na
             super(itemView);
             iconImage = (ImageView) itemView.findViewById(R.id.icon_navigation_drawer);
             textIcon  = (TextView) itemView.findViewById(R.id.text_navigation_drawer);
+
+            iconImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
         }
+
+
     }
 
 }
