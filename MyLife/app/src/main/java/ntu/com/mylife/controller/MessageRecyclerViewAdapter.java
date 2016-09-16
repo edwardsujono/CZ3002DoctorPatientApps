@@ -36,25 +36,22 @@ public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<MessageRecy
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Message message = messageList.get(position);
-        holder.id.setText(message.getId());
-        holder.name.setText(message.getName());
-        holder.text.setText(message.getText());
-        holder.photoUrl.setText(message.getPhotoUrl());
+        holder.respondentName.setText(message.getRespondentName());
+        holder.message.setText(message.getMessage());
+        holder.date.setText(message.getDate());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView id;
-        private TextView text;
-        private TextView name;
-        private TextView photoUrl;
+        private TextView respondentName;
+        private TextView message;
+        private TextView date;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            id = (TextView) itemView.findViewById(R.id.id_text_view);
-            text = (TextView) itemView.findViewById(R.id.text_text_view);
-            name = (TextView) itemView.findViewById(R.id.name_text_view);
-            photoUrl = (TextView) itemView.findViewById(R.id.photo_url_text_view);
+            respondentName = (TextView) itemView.findViewById(R.id.respondent_name_text_view);
+            message = (TextView) itemView.findViewById(R.id.message_text_view);
+            date = (TextView) itemView.findViewById(R.id.date_text_view);
         }
 
     }

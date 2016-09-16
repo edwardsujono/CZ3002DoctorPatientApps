@@ -5,49 +5,43 @@ package ntu.com.mylife.common.data;
  */
 public class Message {
 
-    private String id;
-    private String text;
-    private String name;
-    private String photoUrl;
+    private String respondentName;
+    private String message;
+    private String date;
 
-    public Message(String id, String name, String text, String photoUrl) {
-        this.id = id;
-        this.name = name;
-        this.text = text;
-        this.photoUrl = photoUrl;
+    public Message(String respondentName, String message, String date) {
+        this.respondentName = respondentName;
+        this.message = message;
+        this.date = date;
     }
 
-    public String getId() {
-        return id;
+    public String getRespondentName() {
+        return respondentName;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getMessage() {
+        return message;
     }
 
-    public String getText() {
-        return text;
+    public String getDate() {
+        return date;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setRespondentName(String name) {
+        this.respondentName = name;
     }
 
-    public String getName() {
-        return name;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
 
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
+
+
 
 
 }
