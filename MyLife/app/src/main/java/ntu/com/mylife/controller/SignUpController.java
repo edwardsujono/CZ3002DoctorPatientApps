@@ -7,10 +7,9 @@ import com.firebase.client.Firebase;
 
 import ntu.com.mylife.common.data.Doctor;
 import ntu.com.mylife.common.data.Patient;
-import ntu.com.mylife.common.data.User;
 import ntu.com.mylife.common.data.UserType;
 import ntu.com.mylife.common.service.AlertDialogService;
-import ntu.com.mylife.common.service.DatabaseDao;
+import ntu.com.mylife.common.service.DatabaseDaoUser;
 import ntu.com.mylife.common.service.DatabaseDaoUserImpl;
 
 /**
@@ -18,7 +17,7 @@ import ntu.com.mylife.common.service.DatabaseDaoUserImpl;
  */
 public class SignUpController {
 
-    private DatabaseDao db;
+    private DatabaseDaoUser db;
     private AlertDialogService alertDialog;
 
     public SignUpController(Context myContext){

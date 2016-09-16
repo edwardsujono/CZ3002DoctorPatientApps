@@ -24,8 +24,13 @@ public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<MessageRecy
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.message,parent,false);
         return new ViewHolder(itemView);
+    }
+
+    @Override
+    public int getItemCount() {
+        return messageList.size();
     }
 
     @Override
@@ -46,10 +51,10 @@ public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<MessageRecy
 
         public ViewHolder(View itemView) {
             super(itemView);
-            id = (TextView) itemView.findViewById();
-            text = (TextView) itemView.findViewById();
-            name = (TextView) itemView.findViewById();
-            photoUrl = (TextView) itemView.findViewById();
+            id = (TextView) itemView.findViewById(R.id.id_text_view);
+            text = (TextView) itemView.findViewById(R.id.text_text_view);
+            name = (TextView) itemView.findViewById(R.id.name_text_view);
+            photoUrl = (TextView) itemView.findViewById(R.id.photo_url_text_view);
         }
 
     }
