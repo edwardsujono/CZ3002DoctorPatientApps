@@ -76,7 +76,7 @@ public class DatabaseDaoMessageImpl implements DatabaseDaoMessage {
             String content = (String) doctorMaps.get("message");
             String date = (String) doctorMaps.get("date");
 
-            Message message = new Message(respondentName, content, date);
+            Message message = new Message(respondentName, respondentName, content, date);
             listReturned.add(message);
         }
         return listReturned;
