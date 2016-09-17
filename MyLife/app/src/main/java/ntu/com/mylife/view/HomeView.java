@@ -20,13 +20,13 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.service.chatCallback;
+import ntu.com.mylife.common.service.MyCallback;
 import ntu.com.mylife.common.service.DatabaseDaoUserScheduleImpl;
 import ntu.com.mylife.common.service.DatabaseUserScheduleDao;
 import ntu.com.mylife.common.entity.databaseentity.CurrentScheduleRecyclerViewAdaptor;
 
 
-public class HomeView extends Fragment implements chatCallback {
+public class HomeView extends Fragment implements MyCallback {
 
     private OnFragmentInteractionListener mListener;
     private TextView todaySchedule,todayNumberSchedule,todayMonthSchedule;

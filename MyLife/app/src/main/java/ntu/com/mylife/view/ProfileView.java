@@ -20,6 +20,7 @@ import com.firebase.client.utilities.Base64;
 import java.io.ByteArrayOutputStream;
 
 import ntu.com.mylife.R;
+import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
 import ntu.com.mylife.common.service.DatabaseDaoUser;
 import ntu.com.mylife.common.service.DatabaseDaoUserImpl;
 import ntu.com.mylife.common.service.SharedPreferencesService;
@@ -81,13 +82,13 @@ public class ProfileView extends Fragment {
                 textBloodType.setText(textBloodType.getText());
                 textAllergy.setText(textAllergy.getText());
                 textMedicalRecord.setText(textMedicalRecord.getText());
-                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_FULL_NANE,textFullName.getText().toString());
-                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_AGE,textAge.getText().toString());
-                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_DOB,textDob.getText().toString());
-                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_BLOOD,textBloodType.getText().toString());
-                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_ALLERGY,textAllergy.getText().toString());
-                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_MEDICAL_RECORD,textMedicalRecord.getText().toString());
-                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_PROFILE_PICTURE, transformToEncoding64());
+                sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_FULL_NANE,textFullName.getText().toString());
+                sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_AGE,textAge.getText().toString());
+                sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_DOB,textDob.getText().toString());
+                sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_BLOOD,textBloodType.getText().toString());
+                sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_ALLERGY,textAllergy.getText().toString());
+                sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_MEDICAL_RECORD,textMedicalRecord.getText().toString());
+                sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_PROFILE_PICTURE, transformToEncoding64());
                 Toast.makeText(getActivity(),"Contact is updated",Toast.LENGTH_LONG).show();
             }
         });
@@ -116,7 +117,7 @@ public class ProfileView extends Fragment {
 
     public void loadEditText(){
         if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_FULL_NANE) != null){
-            textFullName.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_FULL_NANE));
+            textFullName.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,KEY_FULL_NANE));
         }
         if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_DOB) != null){
             textDob.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_DOB));

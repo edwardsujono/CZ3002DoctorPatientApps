@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ntu.com.mylife.R;
+import ntu.com.mylife.common.service.DatabaseDaoMedicalRecord;
+import ntu.com.mylife.common.service.DatabaseDaoMedicalRecordImpl;
+import ntu.com.mylife.common.service.MyCallback;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,13 +22,12 @@ import ntu.com.mylife.R;
  * Use the {@link MedicalRecordView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MedicalRecordView extends Fragment {
+public class MedicalRecordView extends Fragment implements MyCallback {
 
     //this class simply will show recycler view
 
     private OnFragmentInteractionListener mListener;
     private RecyclerView recyclerView;
-
 
 
     public MedicalRecordView() {
@@ -45,6 +47,8 @@ public class MedicalRecordView extends Fragment {
         return inflater.inflate(R.layout.fragment_medical_record_view, container, false);
     }
 
+
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -60,6 +64,11 @@ public class MedicalRecordView extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void callbackFunction(Object object) {
+
     }
 
     /**

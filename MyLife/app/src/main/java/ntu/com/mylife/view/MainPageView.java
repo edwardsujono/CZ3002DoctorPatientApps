@@ -21,7 +21,8 @@ import java.util.ArrayList;
 import ntu.com.mylife.R;
 import ntu.com.mylife.controller.NavigationDrawerRecyclerViewAdapter;
 
-public class MainPageView extends AppCompatActivity implements HomeView.OnFragmentInteractionListener,ProfileView.OnFragmentInteractionListener{
+public class MainPageView extends AppCompatActivity implements HomeView.OnFragmentInteractionListener,ProfileView.OnFragmentInteractionListener
+, MedicalRecordView.OnFragmentInteractionListener{
 
 
     private Toolbar toolbar;                              // Declaring the Toolbar Object

@@ -23,7 +23,7 @@ public class DatabaseDaoUserScheduleImpl implements DatabaseUserScheduleDao{
     private Firebase firebaseDb;
     private String nameUser,timeSchedule;
 
-    public DatabaseDaoUserScheduleImpl(final Context context, final chatCallback callback, final String nameUser, final String timeSchedule){
+    public DatabaseDaoUserScheduleImpl(final Context context, final MyCallback callback, final String nameUser, final String timeSchedule){
         this.myContext = context;
         this.firebaseDb = new Firebase("https://lifemate.firebaseio.com/");
         this.nameUser = nameUser;
