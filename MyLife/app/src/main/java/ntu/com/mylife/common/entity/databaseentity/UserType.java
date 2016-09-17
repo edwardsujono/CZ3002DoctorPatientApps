@@ -1,4 +1,4 @@
-package ntu.com.mylife.common.data;
+package ntu.com.mylife.common.entity.databaseentity;
 
 /**
  * Created by LENOVO on 01/09/2016.

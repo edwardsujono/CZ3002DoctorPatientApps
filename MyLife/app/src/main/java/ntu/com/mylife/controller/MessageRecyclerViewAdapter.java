@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.data.Message;
+import ntu.com.mylife.common.entity.applicationentity.Message;
 
 /**
  * Created by MARTINUS on 07-Sep-16.

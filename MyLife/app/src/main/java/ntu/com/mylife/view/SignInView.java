@@ -6,14 +6,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.firebase.client.Firebase;
 
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.data.UserType;
+import ntu.com.mylife.common.entity.databaseentity.UserType;
 import ntu.com.mylife.controller.SignInController;
 
 public class SignInView extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package ntu.com.mylife.common.data;
+package ntu.com.mylife.common.entity.databaseentity;
 
 /**
  * Created by LENOVO on 01/09/2016.
@@ -9,14 +9,18 @@ public class User {
     private String userName;
     private String email;
     private String password;
+    private String image;
 
-    public User(String fullName,String userName,String email,String password){
+
+
+    public User(String fullName, String userName, String email, String password, String image){
         this.fullName = fullName;
         this.userName = userName;
         this.email = email;
         this.password = password;
-    }
+        this.image = image;
 
+    }
 
     public String getFullName() {
         return fullName;
@@ -49,6 +53,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 

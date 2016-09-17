@@ -1,4 +1,4 @@
-package ntu.com.mylife.controller;
+package ntu.com.mylife.common.entity.databaseentity;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;

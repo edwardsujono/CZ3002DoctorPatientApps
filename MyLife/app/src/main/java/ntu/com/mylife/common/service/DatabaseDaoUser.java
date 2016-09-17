@@ -1,8 +1,6 @@
 package ntu.com.mylife.common.service;
 
-import java.util.ArrayList;
-
-import ntu.com.mylife.common.data.UserType;
+import ntu.com.mylife.common.entity.databaseentity.UserType;
 
 /**
  * Created by LENOVO on 01/09/2016.
