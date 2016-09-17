@@ -18,41 +18,9 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc9e04d-bb5a-4438-8540-812e41b9b88b" name="Default" comment="Refactor and added chat controller">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/data/Chat.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/Chat.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/data/DaySchedule.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/DaySchedule.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/data/Doctor.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/Doctor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/data/Message.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/Message.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/data/Patient.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/Patient.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/data/TimeSchedule.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/TimeSchedule.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/data/User.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/User.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/data/UserSchedule.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/UserSchedule.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/data/UserType.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/UserType.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/Callback.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/chatCallback.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/CurrentScheduleRecyclerViewAdaptor.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/CurrentScheduleRecyclerViewAdaptor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoChatImpl.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoChatImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoMessage.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoMessage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoMessageImpl.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoMessageImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoUser.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoUser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoUserImpl.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoUserImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoUserScheduleImpl.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoUserScheduleImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/ChatController.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/ChatController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/ChatRecyclerViewAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/ChatRecyclerViewAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/MessageRecyclerViewAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/MessageRecyclerViewAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/SignInController.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/SignInController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/SignUpController.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/SignUpController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/ChatView.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/ChatView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/HomeView.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/HomeView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/MessageView.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/MessageView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/SignInView.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/SignInView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/SignUpView.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/SignUpView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat_view.xml" />
+    <list default="true" id="bdc9e04d-bb5a-4438-8540-812e41b9b88b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/applicationentity/Chat.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/applicationentity/Message.java" />
     </list>
     <ignored path="MyLife.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -2880,7 +2848,13 @@
       <option name="project" value="LOCAL" />
       <updated>1474056214540</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Refactor and added chat controller">
+      <created>1474096239961</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1474096239961</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
