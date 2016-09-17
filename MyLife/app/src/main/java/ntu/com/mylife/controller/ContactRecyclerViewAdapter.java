@@ -10,18 +10,21 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import ntu.com.mylife.R;
 import ntu.com.mylife.common.entity.applicationentity.Chat;
+import ntu.com.mylife.common.entity.applicationentity.Contact;
+import ntu.com.mylife.common.entity.databaseentity.User;
 
 /**
  * Created by micha on 9/17/2016.
  */
 public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecyclerViewAdapter.ViewHolder> {
-    private ArrayList<Chat> chatList;
+    private ArrayList<Contact> contactList;
     private Context context;
 
-    public ContactRecyclerViewAdapter(ArrayList<Chat> chatList, Context context) {
-        this.chatList = chatList;
+    public ContactRecyclerViewAdapter(ArrayList<Contact> chatList, Context context) {
+        this.contactList = chatList;
         this.context = context;
     }
 
@@ -33,34 +36,27 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
 
     @Override
     public int getItemCount() {
-        return chatList.size();
+        return contactList.size();
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Chat chat = chatList.get(position);
-        holder.respondentImage.setImageBitmap(chat.getRespondentBitmap());
-        holder.respondentName.setText(chat.getRespondentName());
-        holder.lastMessage.setText(chat.getLatestMessage());
-        holder.lastMessageTime.setText(chat.getLatestMessageTime());
+        Contact contact = contactList.get(position);
+        holder.contactImage.setImageBitmap(contact.getContactBitmap());
+        holder.contactName.setText(contact.getContactName());
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView respondentImage;
-        private TextView respondentName;
-        private TextView lastMessage;
-        private TextView lastMessageTime;
+        private CircleImageView contactImage;
+        private TextView contactName;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            respondentImage = (ImageView) itemView.findViewById(R.id.respondent_image);
-            respondentName = (TextView) itemView.findViewById(R.id.respondent_name);
-            lastMessage = (TextView) itemView.findViewById(R.id.latest_message);
-            lastMessageTime = (TextView) itemView.findViewById(R.id.latest_message_time);
-
+            contactImage = (CircleImageView) itemView.findViewById(R.id.contact_image);
+            contactName = (TextView) itemView.findViewById(R.id.contact_name);
         }
 
     }

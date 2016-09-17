@@ -19,6 +19,7 @@ import ntu.com.mylife.controller.ChatCallback;
 import ntu.com.mylife.controller.ChatController;
 import ntu.com.mylife.controller.ChatRecyclerViewAdapter;
 
+
 public class ChatView extends Fragment implements ChatCallback {
 
     private ArrayList<Chat> chatList;

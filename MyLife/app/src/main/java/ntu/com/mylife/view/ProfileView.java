@@ -1,6 +1,9 @@
 package ntu.com.mylife.view;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -9,7 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.firebase.client.utilities.Base64;
+
+import java.io.ByteArrayOutputStream;
 
 import ntu.com.mylife.R;
 import ntu.com.mylife.common.service.DatabaseDaoUser;
@@ -29,9 +37,13 @@ public class ProfileView extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private EditText textFullName,textAge,textDob,textBloodType,textAllergy,textMedicalRecord;
+    private ImageView profileImage;
     private Button buttonSave;
+    private Bitmap bitmap;
     private SharedPreferencesService sharedPreferencesService;
-    private static String KEY_USER = "userName",KEY_FULL_NANE= "fullName",KEY_AGE = "age", KEY_DOB = "dob" , KEY_BLOOD = "blood" , KEY_ALLERGY = "allergy" , KEY_MEDICAL_RECORD= "medicalRecord", NAME_SHARED_PREFERENCES = "UserSharedPreferences";
+    private static String KEY_USER = "userName",KEY_FULL_NANE= "fullName",KEY_AGE = "age", KEY_DOB = "dob" ,
+            KEY_BLOOD = "blood" , KEY_ALLERGY = "allergy" , KEY_MEDICAL_RECORD= "medicalRecord", NAME_SHARED_PREFERENCES = "UserSharedPreferences"
+            , KEY_PROFILE_PICTURE = "profilePicture";
 
     public ProfileView() {
         // Required empty public constructor
@@ -56,6 +68,7 @@ public class ProfileView extends Fragment {
         textAllergy = (EditText) rootView.findViewById(R.id.allergy_profile_editText);
         textMedicalRecord = (EditText) rootView.findViewById(R.id.medicalCondition_profile_editText);
         buttonSave        =  (Button) rootView.findViewById(R.id.button_save_profile);
+        profileImage =  (ImageView) rootView.findViewById(R.id.image_profile);
 
         String currentUserName =   sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER);
         loadEditText();
@@ -74,11 +87,30 @@ public class ProfileView extends Fragment {
                 sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_BLOOD,textBloodType.getText().toString());
                 sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_ALLERGY,textAllergy.getText().toString());
                 sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_MEDICAL_RECORD,textMedicalRecord.getText().toString());
+                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_PROFILE_PICTURE, transformToEncoding64());
                 Toast.makeText(getActivity(),"Contact is updated",Toast.LENGTH_LONG).show();
             }
         });
 
+        //so whenever user click the photo, then camera view will shown
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+
         return rootView;
+    }
+
+    //when
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        bitmap = (Bitmap) data.getExtras().get("data");
+        profileImage.setImageBitmap(bitmap);
     }
 
 
@@ -101,11 +133,23 @@ public class ProfileView extends Fragment {
         if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_MEDICAL_RECORD) != null){
             textMedicalRecord.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_MEDICAL_RECORD) );
         }
+        if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_PROFILE_PICTURE) != null){
+            byte[] decodedString = android.util.Base64.decode(sharedPreferencesService.getDataFromSharedPreferences(
+                    NAME_SHARED_PREFERENCES, KEY_PROFILE_PICTURE
+            ), android.util.Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            profileImage.setImageBitmap(bitmap);
+        }
 
     }
 
-
-
+    public String transformToEncoding64(){
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,bos);
+        byte[] bb = bos.toByteArray();
+        String image = Base64.encodeBytes(bb);
+        return image;
+    }
 
 
     // TODO: Rename method, update argument and hook method into UI event

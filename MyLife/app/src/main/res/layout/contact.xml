@@ -14,13 +14,13 @@
         android:gravity="center_vertical">
         
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/respondent_image"
+            android:id="@+id/contact_image"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:src="@drawable/camera_btn"/>
 
         <TextView
-            android:id="@+id/respondent_name"
+            android:id="@+id/contact_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"

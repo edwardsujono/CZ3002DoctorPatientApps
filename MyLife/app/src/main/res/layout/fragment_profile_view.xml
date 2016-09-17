@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     tools:context="ntu.com.mylife.view.ProfileView"
     android:background="#FFF"
-    android:padding="10dp"
+    android:padding="20dp"
     >
 
 
@@ -16,7 +16,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/imageView2"
+            android:id="@+id/image_profile"
             android:background="#000"
             />
 

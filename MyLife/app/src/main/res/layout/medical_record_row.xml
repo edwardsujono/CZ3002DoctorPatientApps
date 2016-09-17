@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="225dp"
+    android:orientation="vertical"
+    android:background="#FFF"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/medical_record_time"
+        android:textSize="30dp"
+        android:text="12:00"
+        android:textColor="#009688"
+        android:layout_marginLeft="30dp"
+        android:paddingTop="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/horizontal_line"
+        android:textColor="#009688"
+        android:layout_marginLeft="30dp"
+        android:text="--------------------------------------------------------------"
+        android:layout_marginTop="1dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/medical_record_description"
+        android:textColor="#009688"
+        android:layout_marginLeft="50dp"
+        android:text="- Cough need to rest for 10000 days"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/medical_record_from_doctor"
+        android:textColor="#009688"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="200dp"
+        android:text="Doctor: Edward Sujono"
+        />
+
+</LinearLayout>
