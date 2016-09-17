@@ -9,11 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.service.DatabaseDao;
+import ntu.com.mylife.common.service.DatabaseDaoUser;
 import ntu.com.mylife.common.service.DatabaseDaoUserImpl;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 
@@ -22,7 +21,7 @@ import ntu.com.mylife.common.service.SharedPreferencesService;
  * Activities that contain this fragment must implement the
  * {@link ProfileView.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ProfileView#newInstance} factory method to
+ * Use the {@link ProfileView#  } factory method to
  * create an instance of this fragment.
  */
 public class ProfileView extends Fragment {
@@ -31,7 +30,6 @@ public class ProfileView extends Fragment {
     private OnFragmentInteractionListener mListener;
     private EditText textFullName,textAge,textDob,textBloodType,textAllergy,textMedicalRecord;
     private Button buttonSave;
-    private DatabaseDao dbUser;
     private SharedPreferencesService sharedPreferencesService;
     private static String KEY_USER = "userName",KEY_FULL_NANE= "fullName",KEY_AGE = "age", KEY_DOB = "dob" , KEY_BLOOD = "blood" , KEY_ALLERGY = "allergy" , KEY_MEDICAL_RECORD= "medicalRecord", NAME_SHARED_PREFERENCES = "UserSharedPreferences";
 
@@ -42,7 +40,6 @@ public class ProfileView extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dbUser = new DatabaseDaoUserImpl();
         sharedPreferencesService = new SharedPreferencesService(getActivity());
     }
 

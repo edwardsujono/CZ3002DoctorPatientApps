@@ -3,6 +3,7 @@ package ntu.com.mylife.controller;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,10 @@ public class NavigationDrawerRecyclerViewAdapter extends RecyclerView.Adapter<Na
             iconImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.i("v:id",v.getId()+"");
+                    switch(v.getId()){
 
+                    }
                 }
             });
 

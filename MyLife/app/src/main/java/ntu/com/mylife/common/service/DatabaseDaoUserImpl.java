@@ -102,29 +102,6 @@ public class DatabaseDaoUserImpl implements DatabaseDaoUser {
                 String fullName = (String) patientMaps.get("fullName");
                 Patient patient = new Patient(fullName,userName,email,password);
                 //just for patient need to get the other info regarding with the user
-
-                if(patientMaps.get("age") != null){
-                        int age = (int)patientMaps.get("age");
-                        patient.setAge(age);
-                }
-                if(patientMaps.get("bloodType") != null){
-                        String bloodType = (String) patientMaps.get("bloodType");
-                        patient.setBloodType(bloodType);
-                }
-                if(patientMaps.get("allergy") != null){
-                        String allergy = (String) patientMaps.get("allergy");
-                        patient.setAllergy(allergy);
-                }
-
-                if(patientMaps.get("medicalCondition") != null){
-                        String medicalCondition = (String) patientMaps.get("medicalCondition");
-                        patient.setMedicalCondition(medicalCondition);
-                }
-
-                if(patientMaps.get("dob") != null){
-                        Date dob = (Date) patientMaps.get("dob");
-                        patient.setDob(dob);
-                }
                 listReturned.add(patient);
             }
        }else{
