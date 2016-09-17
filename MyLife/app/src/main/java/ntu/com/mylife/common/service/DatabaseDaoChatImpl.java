@@ -59,26 +59,14 @@ public class DatabaseDaoChatImpl implements DatabaseDaoChat {
 
         HashMap hashMessage = (HashMap) hashMapSaved.get(CHAT);
         for (Object key : hashMessage.keySet()) {
-            HashMap doctorMaps = (HashMap) hashMessage.get(key);
+            HashMap chatMaps = (HashMap) hashMessage.get(key);
 
-            //Temporary
-            String userId = "";
-            Bitmap bitmap = null;
+            String username1 = (String) chatMaps.get("username1");
+            String username2 = (String) chatMaps.get("username2");
+            String latestMessage = (String) chatMaps.get("latestMessage");
+            String latestMessageTime = (String) chatMaps.get("latestMessageTime");
 
-            String respondentName;
-            if (userId.equals(doctorMaps.get("id1"))) {
-                respondentName = (String) doctorMaps.get("id2");
-            } else {
-                respondentName = (String) doctorMaps.get("id1");
-            }
-
-            String latestMessage = (String) doctorMaps.get("latestMessage");
-            String latestMessageTime = (String) doctorMaps.get("latestMessageTime");
-
-            //For reference
-            //String id =(String) doctorMaps.get("id");
-
-            Chat chat = new Chat(bitmap, respondentName, latestMessage, latestMessageTime);
+            Chat chat = new Chat(username1, username2, latestMessage, latestMessageTime);
             listReturned.add(chat);
         }
         return listReturned;

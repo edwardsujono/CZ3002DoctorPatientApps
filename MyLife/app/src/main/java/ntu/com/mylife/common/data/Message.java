@@ -5,18 +5,24 @@ package ntu.com.mylife.common.data;
  */
 public class Message {
 
-    private String respondentName;
+    private String senderUsername;
+    private String receiverUsername;
     private String message;
     private String date;
 
-    public Message(String respondentName, String message, String date) {
-        this.respondentName = respondentName;
+    public Message(String senderUsername, String receiverUsername, String message, String date) {
+        this.senderUsername = senderUsername;
+        this.receiverUsername = receiverUsername;
         this.message = message;
         this.date = date;
     }
 
-    public String getRespondentName() {
-        return respondentName;
+    public String getSenderUsername() {
+        return senderUsername;
+    }
+
+    public String getReceiverUsername() {
+        return receiverUsername;
     }
 
     public String getMessage() {
@@ -27,8 +33,12 @@ public class Message {
         return date;
     }
 
-    public void setRespondentName(String name) {
-        this.respondentName = name;
+    public void setSenderUsername(String username) {
+        this.senderUsername = username;
+    }
+
+    public void setReceiverUsername(String username) {
+        this.receiverUsername = username;
     }
 
     public void setMessage(String message) {
