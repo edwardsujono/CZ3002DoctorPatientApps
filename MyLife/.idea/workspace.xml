@@ -19,6 +19,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdc9e04d-bb5a-4438-8540-812e41b9b88b" name="Default" comment="">
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
@@ -30,6 +31,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/MessageRecyclerViewAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/MessageRecyclerViewAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/MessageView.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/MessageView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/message.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/message.xml" />
+=======
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/applicationentity/Chat.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/applicationentity/Message.java" />
+>>>>>>> e4e4752ff04a5b5047754eb21d7d4d998a279a0f
     </list>
     <ignored path="MyLife.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -2714,7 +2719,13 @@
       <option name="project" value="LOCAL" />
       <updated>1474056214540</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Refactor and added chat controller">
+      <created>1474096239961</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1474096239961</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
