@@ -26,4 +26,6 @@
         android:textColor="#FFF"
         android:id="@+id/text_navigation_drawer" />
 
+
+
 </LinearLayout>

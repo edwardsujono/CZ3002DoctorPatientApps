@@ -3,8 +3,11 @@ package ntu.com.mylife.controller;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+
+import java.util.ArrayList;
 
 import ntu.com.mylife.common.data.Doctor;
 import ntu.com.mylife.common.data.Patient;
@@ -47,12 +50,27 @@ public class SignUpController {
         try {
             if (type == UserType.Type.PATIENT) {
                 Patient patient = new Patient(fullName, userName, email, password);
+                //need to find redundant username
+                ArrayList<Patient> listPatient = (ArrayList<Patient>) db.findData(UserType.Type.PATIENT);
+                for(Patient patientIteration: listPatient){
+                    if(patientIteration.getUserName().equals(userName)){
+                        Toast.makeText(myContext, "Sorry username has been exist", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                }
                 db.addData(type, patient);
                 sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES, KEY_USER, userName);
             } else {
                 Doctor doctor = new Doctor(fullName, userName, email, password);
+                ArrayList<Doctor> listDoctor = (ArrayList<Doctor>) db.findData(UserType.Type.DOCTOR);
+                for(Doctor doctorIteration: listDoctor){
+                    if(doctorIteration.getUserName().equals(userName)){
+                        Toast.makeText(myContext, "Sorry username has been exist", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                }
                 db.addData(type, doctor);
-                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER,userName);
+                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES, KEY_USER, userName);
             }
             alertDialog.showDialog("Sign In to your account");
             return true;

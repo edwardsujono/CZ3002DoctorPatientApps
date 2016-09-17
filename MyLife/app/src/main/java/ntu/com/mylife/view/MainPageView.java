@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import ntu.com.mylife.R;
 import ntu.com.mylife.controller.NavigationDrawerRecyclerViewAdapter;
 
-public class MainPageView extends AppCompatActivity implements HomeView.OnFragmentInteractionListener{
+public class MainPageView extends AppCompatActivity implements HomeView.OnFragmentInteractionListener,ProfileView.OnFragmentInteractionListener{
 
 
     private Toolbar toolbar;                              // Declaring the Toolbar Object
@@ -69,12 +69,14 @@ public class MainPageView extends AppCompatActivity implements HomeView.OnFragme
         mRecyclerView.setHasFixedSize(true);
         //adapter for the navigation drawer
         ArrayList<String> listTextNavigationDrawer = new ArrayList<String>();
+        listTextNavigationDrawer.add("Home");
         listTextNavigationDrawer.add("Profile");
         listTextNavigationDrawer.add("Medical Record");
         listTextNavigationDrawer.add("Contact Doctor");
         listTextNavigationDrawer.add("Calendar");
 
         ArrayList<Bitmap> listBitmapNavigationDrawer = new ArrayList<Bitmap>();
+        listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_doctor));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_profile));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_report));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_doctor));
@@ -92,13 +94,8 @@ public class MainPageView extends AppCompatActivity implements HomeView.OnFragme
 
         Drawer.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
-        mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // event when click home button
-                Log.i("Drawer Open","True");
-            }
-        });
+        mRecyclerView.bringToFront();
+        Drawer.requestLayout();
 
     }
 
@@ -110,8 +107,6 @@ public class MainPageView extends AppCompatActivity implements HomeView.OnFragme
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        Log.i("ID Item selected",id+"");
-
         Drawer.openDrawer(Gravity.LEFT);
         return super.onOptionsItemSelected(item);
     }
