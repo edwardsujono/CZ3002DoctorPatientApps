@@ -35,7 +35,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.RecordView" />
-        <activity android:name=".view.ChatView"></activity>
+        <activity android:name=".view.MessageView">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".controller.MyFirebaseMessagingService">
             <intent-filter>

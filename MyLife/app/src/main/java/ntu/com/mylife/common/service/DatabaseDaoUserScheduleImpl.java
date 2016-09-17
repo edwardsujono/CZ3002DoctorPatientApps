@@ -10,11 +10,6 @@ import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import ntu.com.mylife.common.data.Doctor;
-import ntu.com.mylife.common.data.Patient;
-import ntu.com.mylife.common.data.UserSchedule;
-import ntu.com.mylife.common.data.UserType;
-
 /**
  * Created by LENOVO on 03/09/2016.
  */
@@ -28,7 +23,7 @@ public class DatabaseDaoUserScheduleImpl implements DatabaseUserScheduleDao{
     private Firebase firebaseDb;
     private String nameUser,timeSchedule;
 
-    public DatabaseDaoUserScheduleImpl(final Context context, final Callback callback, final String nameUser, final String timeSchedule){
+    public DatabaseDaoUserScheduleImpl(final Context context, final chatCallback callback, final String nameUser, final String timeSchedule){
         this.myContext = context;
         this.firebaseDb = new Firebase("https://lifemate.firebaseio.com/");
         this.nameUser = nameUser;

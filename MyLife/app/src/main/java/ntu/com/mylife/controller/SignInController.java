@@ -1,16 +1,15 @@
 package ntu.com.mylife.controller;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 
 import java.util.ArrayList;
 
-import ntu.com.mylife.common.data.Doctor;
-import ntu.com.mylife.common.data.Patient;
-import ntu.com.mylife.common.data.UserType;
+import ntu.com.mylife.common.entity.databaseentity.Doctor;
+import ntu.com.mylife.common.entity.databaseentity.Patient;
+import ntu.com.mylife.common.entity.databaseentity.UserType;
 import ntu.com.mylife.common.service.DatabaseDaoUser;
 import ntu.com.mylife.common.service.DatabaseDaoUserImpl;
 import ntu.com.mylife.common.service.SharedPreferencesService;
@@ -23,7 +22,7 @@ public class SignInController {
     private DatabaseDaoUser db;
     private Context myContext;
     private SharedPreferencesService sharedPreferencesService;
-    private static String KEY_USER = "userName",NAME_SHARED_PREFERENCES = "UserSharedPreferences";
+    private static String KEY_USER = "userName",USER_TYPE="userType", NAME_SHARED_PREFERENCES = "UserSharedPreferences";
 
 
     public SignInController(Context context){
@@ -43,6 +42,7 @@ public class SignInController {
                     if(patient.getUserName().equals(userName) && patient.getPassword().equals(password)){
                         Toast.makeText(myContext,"Sign In To Your Account",Toast.LENGTH_LONG).show();
                         sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER,userName);
+                        sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,USER_TYPE,type.toString());
                         return true;
                     }
                 }
@@ -51,6 +51,7 @@ public class SignInController {
                     if(doctor.getUserName().equals(userName) && doctor.getPassword().equals(password)){
                         Toast.makeText(myContext,"Sign In To Your Account",Toast.LENGTH_LONG).show();
                         sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER,userName);
+                        sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,USER_TYPE,type.toString());
                         return true;
                     }
                 }

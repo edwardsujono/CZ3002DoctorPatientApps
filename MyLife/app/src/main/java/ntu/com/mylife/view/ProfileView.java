@@ -3,6 +3,7 @@ package ntu.com.mylife.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -133,10 +134,14 @@ public class ProfileView extends Fragment {
             textMedicalRecord.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_MEDICAL_RECORD) );
         }
         if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_PROFILE_PICTURE) != null){
+            byte[] decodedString = android.util.Base64.decode(sharedPreferencesService.getDataFromSharedPreferences(
+                    NAME_SHARED_PREFERENCES, KEY_PROFILE_PICTURE
+            ), android.util.Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            profileImage.setImageBitmap(bitmap);
         }
 
     }
-
 
     public String transformToEncoding64(){
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
