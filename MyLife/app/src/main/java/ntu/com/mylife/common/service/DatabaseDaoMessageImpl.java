@@ -10,7 +10,7 @@ import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import ntu.com.mylife.common.data.Message;
+import ntu.com.mylife.common.entity.databaseentity.Message;
 
 /**
  * Created by MARTINUS on 07-Sep-16.
