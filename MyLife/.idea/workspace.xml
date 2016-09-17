@@ -24,78 +24,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc9e04d-bb5a-4438-8540-812e41b9b88b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/camera_btn.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/send_btn.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/Chat.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/ChatCallback.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/ChatController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/Message.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat_view.xml" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\appcompat_v7_23_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\cardview_v7_23_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\firebase_analytics_9_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\firebase_analytics_impl_9_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\firebase_client_android_2_5_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\firebase_client_jvm_2_5_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\firebase_messaging_9_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\jackson_annotations_2_2_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\jackson_core_2_2_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\jackson_databind_2_2_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\play_services_basement_9_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\play_services_tasks_9_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\recyclerview_v7_23_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\support_annotations_23_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\support_v4_23_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\.idea\libraries\tubesock_0_0_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\app\src\main\res\layout\activity_chat_view.xml" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\app\src\main\java\ntu\com\mylife\common\data\Chat.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/applicationentity/Chat.java" />
-      <change type="MOVED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\app\src\main\java\ntu\com\mylife\common\data\DaySchedule.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/DaySchedule.java" />
-      <change type="MOVED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\app\src\main\java\ntu\com\mylife\common\data\Doctor.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/Doctor.java" />
-      <change type="MOVED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\app\src\main\java\ntu\com\mylife\common\data\Message.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/applicationentity/Message.java" />
-      <change type="MOVED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\app\src\main\java\ntu\com\mylife\common\data\Patient.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/Patient.java" />
-      <change type="MOVED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\app\src\main\java\ntu\com\mylife\common\data\TimeSchedule.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/TimeSchedule.java" />
-      <change type="MOVED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\app\src\main\java\ntu\com\mylife\common\data\User.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/User.java" />
-      <change type="MOVED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\app\src\main\java\ntu\com\mylife\common\data\UserSchedule.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/UserSchedule.java" />
-      <change type="MOVED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\app\src\main\java\ntu\com\mylife\common\data\UserType.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/UserType.java" />
-      <change type="MOVED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\app\src\main\java\ntu\com\mylife\common\service\Callback.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/chatCallback.java" />
-      <change type="MOVED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\app\src\main\java\ntu\com\mylife\controller\CurrentScheduleRecyclerViewAdaptor.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/entity/databaseentity/CurrentScheduleRecyclerViewAdaptor.java" />
-      <change type="MOVED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\app\src\main\java\ntu\com\mylife\view\PdfView.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/MedicalRecordView.java" />
-      <change type="MOVED" beforePath="C:\Users\LENOVO\Desktop\School\Freelance\CZ3002DoctorPatientApps\MyLife\app\src\main\res\layout\fragment_pdf_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_medical_record_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.gitignore" afterPath="$PROJECT_DIR$/../.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/ChatRecyclerViewAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/ChatRecyclerViewAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/ChatView.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/ChatView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoChatImpl.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoChatImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoMessage.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoMessage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoMessageImpl.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoMessageImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoUser.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoUser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoUserImpl.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoUserImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoUserScheduleImpl.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/common/service/DatabaseDaoUserScheduleImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/HomeView.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/HomeView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/MessageRecyclerViewAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/MessageRecyclerViewAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/MessageView.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/MessageView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/ProfileView.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/ProfileView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/SignInController.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/SignInController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/SignInView.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/SignInView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/SignUpController.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/controller/SignUpController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/SignUpView.java" afterPath="$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/SignUpView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_message_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_message_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_common_9_4_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_common_9_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_core_9_4_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_core_9_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_iid_9_4_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_iid_9_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="bdc9e04d-bb5a-4438-8540-812e41b9b88b" name="Default" comment="" />
     <ignored path="MyLife.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -125,8 +54,8 @@
       <file leaf-file-name="MedicalRecordView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/MedicalRecordView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.47685835">
+              <caret line="49" column="30" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -2685,7 +2614,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31983805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2699,7 +2628,7 @@
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6369771" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.294375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.294375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -3157,8 +3086,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ntu/com/mylife/view/MedicalRecordView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.47685835">
+          <caret line="49" column="30" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
           <folding />
         </state>
       </provider>
