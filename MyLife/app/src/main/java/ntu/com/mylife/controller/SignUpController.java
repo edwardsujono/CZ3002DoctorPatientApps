@@ -2,13 +2,12 @@ package ntu.com.mylife.controller;
 
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import com.firebase.client.Firebase;
 
-import ntu.com.mylife.common.data.Doctor;
-import ntu.com.mylife.common.data.Patient;
-import ntu.com.mylife.common.data.UserType;
+import ntu.com.mylife.common.entity.databaseentity.Doctor;
+import ntu.com.mylife.common.entity.databaseentity.Patient;
+import ntu.com.mylife.common.entity.databaseentity.UserType;
 import ntu.com.mylife.common.service.AlertDialogService;
 import ntu.com.mylife.common.service.DatabaseDaoUser;
 import ntu.com.mylife.common.service.DatabaseDaoUserImpl;
@@ -23,7 +22,7 @@ public class SignUpController {
     private AlertDialogService alertDialog;
     private Context myContext;
     private SharedPreferencesService sharedPreferencesService;
-    private static String KEY_USER = "userName",NAME_SHARED_PREFERENCES = "UserSharedPreferences";
+    private static String KEY_USER = "userName", USER_TYPE="userType", NAME_SHARED_PREFERENCES = "UserSharedPreferences";
 
     public SignUpController(Context myContext){
         Firebase.setAndroidContext(myContext);
@@ -46,13 +45,15 @@ public class SignUpController {
         }
         try {
             if (type == UserType.Type.PATIENT) {
-                Patient patient = new Patient(fullName, userName, email, password);
+                Patient patient = new Patient(fullName, userName, email, password, "");
                 db.addData(type, patient);
                 sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES, KEY_USER, userName);
+                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,USER_TYPE,type.toString());
             } else {
-                Doctor doctor = new Doctor(fullName, userName, email, password);
+                Doctor doctor = new Doctor(fullName, userName, email, password, "");
                 db.addData(type, doctor);
                 sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER,userName);
+                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,USER_TYPE,type.toString());
             }
             alertDialog.showDialog("Sign In to your account");
             return true;

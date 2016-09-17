@@ -10,7 +10,7 @@ import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import ntu.com.mylife.common.data.Message;
+import ntu.com.mylife.common.entity.databaseentity.Message;
 
 /**
  * Created by MARTINUS on 07-Sep-16.
@@ -63,12 +63,12 @@ public class DatabaseDaoMessageImpl implements DatabaseDaoMessage {
             //For reference
             //String id =(String) doctorMaps.get("id");
 
-            String senderUsername = (String) messageMaps.get("senderUsername");
             String receiverUsername = (String) messageMaps.get("receiverUsername");
+            String senderUsername = (String) messageMaps.get("senderUsername");
             String messageContent = (String) messageMaps.get("message");
             String date = (String) messageMaps.get("date");
 
-            Message message = new Message(senderUsername, receiverUsername, messageContent, date);
+            Message message = new Message(receiverUsername, senderUsername, messageContent, date);
             listReturned.add(message);
         }
         return listReturned;

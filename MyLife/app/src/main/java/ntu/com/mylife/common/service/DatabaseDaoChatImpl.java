@@ -1,6 +1,5 @@
 package ntu.com.mylife.common.service;
 
-import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.firebase.client.DataSnapshot;
@@ -11,7 +10,7 @@ import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import ntu.com.mylife.common.data.Chat;
+import ntu.com.mylife.common.entity.databaseentity.Chat;
 
 /**
  * Created by MARTINUS on 17-Sep-16.

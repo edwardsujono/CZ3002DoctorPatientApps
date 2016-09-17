@@ -1,6 +1,6 @@
 package ntu.com.mylife.controller;
 
-import android.media.Image;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.data.Chat;
+import ntu.com.mylife.common.entity.applicationentity.Chat;
 
 /**
  * Created by MARTINUS on 16-Sep-16.
@@ -19,9 +19,11 @@ import ntu.com.mylife.common.data.Chat;
 public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<Chat> chatList;
+    private Context context;
 
-    public ChatRecyclerViewAdapter(ArrayList<Chat> chatList) {
+    public ChatRecyclerViewAdapter(ArrayList<Chat> chatList, Context context) {
         this.chatList = chatList;
+        this.context = context;
     }
 
     @Override

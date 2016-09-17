@@ -7,12 +7,11 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
-import ntu.com.mylife.common.data.Doctor;
-import ntu.com.mylife.common.data.Patient;
-import ntu.com.mylife.common.data.UserType;
+import ntu.com.mylife.common.entity.databaseentity.Doctor;
+import ntu.com.mylife.common.entity.databaseentity.Patient;
+import ntu.com.mylife.common.entity.databaseentity.UserType;
 
 /**
  * Created by LENOVO on 01/09/2016.
@@ -100,7 +99,8 @@ public class DatabaseDaoUserImpl implements DatabaseDaoUser {
                 String password = (String) patientMaps.get("password");
                 String userName = (String) patientMaps.get("userName");
                 String fullName = (String) patientMaps.get("fullName");
-                Patient patient = new Patient(fullName,userName,email,password);
+                String encodedImage = (String) patientMaps.get("encodedImage");
+                Patient patient = new Patient(fullName,userName,email,password, encodedImage);
                 //just for patient need to get the other info regarding with the user
                 listReturned.add(patient);
             }
@@ -112,7 +112,8 @@ public class DatabaseDaoUserImpl implements DatabaseDaoUser {
                 String password = (String) doctorMaps.get("password");
                 String userName = (String) doctorMaps.get("userName");
                 String fullName = (String) doctorMaps.get("fullName");
-                Doctor doctor = new Doctor(fullName,userName,email,password);
+                String encodedImage = (String) doctorMaps.get("encodedImage");
+                Doctor doctor = new Doctor(fullName,userName,email,password, encodedImage);
                 listReturned.add(doctor);
             }
        }

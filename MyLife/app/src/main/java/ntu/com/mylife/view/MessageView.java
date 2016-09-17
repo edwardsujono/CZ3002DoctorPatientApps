@@ -9,12 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.data.Message;
 
 public class MessageView extends AppCompatActivity {
 
@@ -27,8 +25,6 @@ public class MessageView extends AppCompatActivity {
     private EditText mMessageEditText;
 
     private DatabaseReference mDatabaseReference;
-
-    private class MessageViewHolder
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

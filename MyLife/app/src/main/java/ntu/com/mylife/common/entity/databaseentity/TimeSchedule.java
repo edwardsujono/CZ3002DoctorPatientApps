@@ -1,0 +1,11 @@
+package ntu.com.mylife.common.entity.databaseentity;
+
+/**
+ * Created by LENOVO on 03/09/2016.
+ */
+public class TimeSchedule {
+
+    private String message;
+    private String time;
+
+}
