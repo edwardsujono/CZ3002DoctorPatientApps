@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import ntu.com.mylife.R;
 import ntu.com.mylife.common.service.OnItemClickListener;
+import ntu.com.mylife.view.ContactView;
 import ntu.com.mylife.view.HomeView;
 import ntu.com.mylife.view.MedicalRecordView;
 import ntu.com.mylife.view.ProfileView;
@@ -91,7 +92,7 @@ public class NavigationDrawerRecyclerViewAdapter extends RecyclerView.Adapter<Na
                     ft.replace(R.id.fragment_transition_main_page, new MedicalRecordView());
                     break;
                 case 3:
-                    //ft.replace(R.id.fragment_transition_main_page, new ProfileView());
+                    ft.replace(R.id.fragment_transition_main_page, new ContactView());
                     break;
             }
             ft.commit();
