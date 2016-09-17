@@ -30,7 +30,7 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact,parent,false);
         return new ViewHolder(itemView);
     }
 
@@ -42,7 +42,8 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Contact contact = contactList.get(position);
-        holder.contactImage.setImageBitmap(contact.getContactBitmap());
+        if(contact.getContactBitmap()!=null)
+            holder.contactImage.setImageBitmap(contact.getContactBitmap());
         holder.contactName.setText(contact.getContactName());
     }
 

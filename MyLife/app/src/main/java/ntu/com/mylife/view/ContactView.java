@@ -3,16 +3,23 @@ package ntu.com.mylife.view;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import ntu.com.mylife.R;
+import java.util.ArrayList;
 
-public class ContactView extends Fragment {
+import ntu.com.mylife.R;
+import ntu.com.mylife.common.entity.applicationentity.Contact;
+import ntu.com.mylife.common.service.MyCallback;
+import ntu.com.mylife.controller.ContactController;
+import ntu.com.mylife.controller.ContactRecyclerViewAdapter;
+
+public class ContactView extends Fragment implements MyCallback {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -26,29 +33,18 @@ public class ContactView extends Fragment {
 
     private RecyclerView mContactRecyclerView;
     private LinearLayoutManager linearLayoutManager;
+    private ContactRecyclerViewAdapter contactRecyclerViewAdapter;
+
+    private ArrayList<Contact> contactList;
+
+    private ContactController contactController;
 
 
     public ContactView() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ContactView.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ContactView newInstance(String param1, String param2) {
-        ContactView fragment = new ContactView();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,8 +64,22 @@ public class ContactView extends Fragment {
         mContactRecyclerView = (RecyclerView) v.findViewById(R.id.contactRecyclerView);
         linearLayoutManager = new LinearLayoutManager(getActivity());
 
+        contactList = new ArrayList<>();
+
+        contactRecyclerViewAdapter = new ContactRecyclerViewAdapter(contactList, getActivity());
+
+        mContactRecyclerView.setLayoutManager(linearLayoutManager);
+        mContactRecyclerView.setAdapter(contactRecyclerViewAdapter);
+
+        contactController  = new ContactController(contactList, getActivity(), this);
 
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        contactController.fetchContact();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -109,5 +119,15 @@ public class ContactView extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void callbackFunction(Object object) {
+        contactList.clear();
+        for(Contact c: (ArrayList<Contact>)object) {
+            contactList.add(c);
+            Log.d("ContactView", c.getContactName());
+        }
+        contactRecyclerViewAdapter.notifyDataSetChanged();
     }
 }

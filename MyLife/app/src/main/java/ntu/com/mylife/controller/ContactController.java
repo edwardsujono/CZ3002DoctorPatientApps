@@ -5,9 +5,9 @@ import android.content.Context;
 import java.util.ArrayList;
 
 import ntu.com.mylife.common.entity.applicationentity.Contact;
-import ntu.com.mylife.common.entity.databaseentity.UserType;
 import ntu.com.mylife.common.service.DatabaseDaoContact;
 import ntu.com.mylife.common.service.DatabaseDaoContactImpl;
+import ntu.com.mylife.common.service.MyCallback;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 
 /**
@@ -28,28 +28,23 @@ public class ContactController {
 
     private DatabaseDaoContact databaseDaoContact;
 
-    public ContactController(ArrayList<Contact> contactList, Context context) {
+    private MyCallback callback;
+
+    public ContactController(ArrayList<Contact> contactList, Context context, MyCallback callback) {
         this.contactList = contactList;
         this.context = context;
+        this.callback = callback;
 
         sharedPreferencesService = new SharedPreferencesService(context);
 
         userId = sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES, KEY_USER);
         userType = sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES, USER_TYPE);
 
-        databaseDaoContact = new DatabaseDaoContactImpl(userType);
+        databaseDaoContact = new DatabaseDaoContactImpl(userType, callback);
     }
 
     public void fetchContact() {
-        ArrayList<Contact> tmpList =  (ArrayList<Contact>)databaseDaoContact.findData();
-
-        contactList.clear();
-
-        for(Contact c: tmpList) {
-            contactList.add(c);
-        }
-
-        
+        databaseDaoContact.findData();
     }
 
 

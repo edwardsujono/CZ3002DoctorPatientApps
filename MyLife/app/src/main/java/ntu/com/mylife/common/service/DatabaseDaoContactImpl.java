@@ -2,10 +2,12 @@ package ntu.com.mylife.common.service;
 
 import android.util.Log;
 
+import com.firebase.client.Firebase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
@@ -18,18 +20,41 @@ import ntu.com.mylife.common.entity.databaseentity.UserType;
 /**
  * Created by micha on 9/17/2016.
  */
+
+
+/*FireBase data will be saved in form of JSON file
+
+   Structure data please defined here:
+   Patient/Doctor data dtructure
+ {"patient" :  {
+                    "name" : "Edward Sujono"
+                    "email" : "wowdogs"
+                    "password" : "hahaha"
+                    "age" : 17
+               }
+ }
+
+ Extracted into Contact model
+
+* */
+
+
 public class DatabaseDaoContactImpl implements DatabaseDaoContact {
 
     private DatabaseReference databaseReference;
     private DatabaseReference contactDatabaseReference;
     private HashMap hashMapSaved;
-    private static String DOCTOR = "doctor";
-    private static String PATIENT = "patient";
+    private static String DOCTOR = "doctors";
+    private static String PATIENT = "patients";
+    private static String FULLNAME = "fullName";
+    private String stringType;
 
-    public DatabaseDaoContactImpl(String type) {
+    private MyCallback callback;
+
+    public DatabaseDaoContactImpl(String type, MyCallback callback) {
+        this.callback = callback;
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        String stringType;
         if(type.equals(DOCTOR))
             stringType = PATIENT;
         else
@@ -37,10 +62,20 @@ public class DatabaseDaoContactImpl implements DatabaseDaoContact {
 
         contactDatabaseReference = databaseReference.child(stringType);
 
+    }
+
+    @Override
+    public void findData() {
+
+
+        Log.e("DatabaseDaoContact", contactDatabaseReference.toString());
+
         contactDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 hashMapSaved = (HashMap) dataSnapshot.getValue();
+                Log.e("Inside", String.valueOf(dataSnapshot.toString()));
+                fromHashMapToArrayList();
             }
 
             @Override
@@ -48,18 +83,22 @@ public class DatabaseDaoContactImpl implements DatabaseDaoContact {
                 Log.e("DatabaseDaoContactImpl", databaseError.getMessage());
             }
         });
-
     }
 
-    @Override
-    public Object findData() {
-        if(hashMapSaved == null)
-            return null;
+    private void fromHashMapToArrayList() {
+
+        if(hashMapSaved == null) {
+            Log.e("findData", "failed");
+            return;
+        }
 
         final ArrayList<Contact> contactList = new ArrayList<>();
 
-        for(Object key: hashMapSaved.keySet()) {
-            String contactName = (String) hashMapSaved.get(key);
+        for(Object attr: hashMapSaved.values()) {
+
+            HashMap hashMapAttr = (HashMap) attr;
+
+            String contactName = (String)hashMapAttr.get(FULLNAME);
             String imageName = "";
 
             Contact contact = new Contact(contactName, null);
@@ -67,6 +106,7 @@ public class DatabaseDaoContactImpl implements DatabaseDaoContact {
             contactList.add(contact);
         }
 
-        return contactList;
+        callback.callbackFunction(contactList);
+
     }
 }
