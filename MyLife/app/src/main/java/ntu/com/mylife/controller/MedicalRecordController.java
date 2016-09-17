@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import java.util.ArrayList;
 
+import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
 import ntu.com.mylife.common.entity.databaseentity.MedicalRecord;
 import ntu.com.mylife.common.service.DatabaseDaoMedicalRecord;
 import ntu.com.mylife.common.service.DatabaseDaoMedicalRecordImpl;
@@ -23,14 +24,15 @@ public class MedicalRecordController {
     public MedicalRecordController(Activity activity,MyCallback callback){
         this.activity = activity;
         this.callback = callback;
-        db = new DatabaseDaoMedicalRecordImpl(activity);
-
+        db = new DatabaseDaoMedicalRecordImpl(activity,callback);
+        sharedPreferencesService = new SharedPreferencesService(activity.getBaseContext());
     }
 
 
     public ArrayList<MedicalRecord> getListMedicalRecord(){
-       // ArrayList<MedicalRecord> listReturned = db.getRecord()
-        return null;
+       ArrayList<MedicalRecord> listReturned = (ArrayList<MedicalRecord>)db.getRecord(
+               sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER));
+        return listReturned;
     }
 
 }

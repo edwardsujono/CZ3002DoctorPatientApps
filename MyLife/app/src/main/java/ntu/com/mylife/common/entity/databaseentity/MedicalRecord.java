@@ -7,10 +7,12 @@ public class MedicalRecord {
 
     private String time;
     private String medicalRecordDescription;
+    private String fromDoctor;
 
-    public MedicalRecord(String time,String medicalRecordDescription){
+    public MedicalRecord(String time,String medicalRecordDescription,String fromDoctor){
         this.time = time;
         this.medicalRecordDescription = medicalRecordDescription;
+        this.fromDoctor = fromDoctor;
     }
 
 
@@ -28,5 +30,12 @@ public class MedicalRecord {
 
     public void setMedicalRecordDescription(String medicalRecordDescription) {
         this.medicalRecordDescription = medicalRecordDescription;
+    }
+    public String getFromDoctor() {
+        return fromDoctor;
+    }
+
+    public void setFromDoctor(String fromDoctor) {
+        this.fromDoctor = fromDoctor;
     }
 }

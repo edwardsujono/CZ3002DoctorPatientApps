@@ -42,9 +42,6 @@ public class ProfileView extends Fragment {
     private Button buttonSave;
     private Bitmap bitmap;
     private SharedPreferencesService sharedPreferencesService;
-    private static String KEY_USER = "userName",KEY_FULL_NANE= "fullName",KEY_AGE = "age", KEY_DOB = "dob" ,
-            KEY_BLOOD = "blood" , KEY_ALLERGY = "allergy" , KEY_MEDICAL_RECORD= "medicalRecord", NAME_SHARED_PREFERENCES = "UserSharedPreferences"
-            , KEY_PROFILE_PICTURE = "profilePicture";
 
     public ProfileView() {
         // Required empty public constructor
@@ -71,7 +68,7 @@ public class ProfileView extends Fragment {
         buttonSave        =  (Button) rootView.findViewById(R.id.button_save_profile);
         profileImage =  (ImageView) rootView.findViewById(R.id.image_profile);
 
-        String currentUserName =   sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER);
+        String currentUserName =   sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER);
         loadEditText();
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,27 +113,27 @@ public class ProfileView extends Fragment {
 
 
     public void loadEditText(){
-        if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_FULL_NANE) != null){
-            textFullName.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,KEY_FULL_NANE));
+        if(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_FULL_NANE) != null){
+            textFullName.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_FULL_NANE));
         }
-        if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_DOB) != null){
-            textDob.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_DOB));
+        if(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_DOB) != null){
+            textDob.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_DOB));
         }
-        if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_AGE) != null){
-            textAge.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_AGE));
+        if(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_AGE) != null){
+            textAge.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_AGE));
         }
-        if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_BLOOD) != null){
-            textBloodType.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_BLOOD));
+        if(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_BLOOD) != null){
+            textBloodType.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_BLOOD));
         }
-        if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_ALLERGY) != null){
-            textAllergy.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_ALLERGY));
+        if(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_ALLERGY) != null){
+            textAllergy.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_ALLERGY));
         }
-        if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_MEDICAL_RECORD) != null){
-            textMedicalRecord.setText(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_MEDICAL_RECORD) );
+        if(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_MEDICAL_RECORD) != null){
+            textMedicalRecord.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_MEDICAL_RECORD) );
         }
-        if(sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_PROFILE_PICTURE) != null){
+        if(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_PROFILE_PICTURE) != null){
             byte[] decodedString = android.util.Base64.decode(sharedPreferencesService.getDataFromSharedPreferences(
-                    NAME_SHARED_PREFERENCES, KEY_PROFILE_PICTURE
+                    SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_PROFILE_PICTURE
             ), android.util.Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             profileImage.setImageBitmap(bitmap);

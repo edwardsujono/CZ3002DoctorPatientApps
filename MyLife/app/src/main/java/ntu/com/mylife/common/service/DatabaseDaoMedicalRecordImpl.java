@@ -11,6 +11,7 @@ import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
 import ntu.com.mylife.common.entity.databaseentity.MedicalRecord;
 
 /**
@@ -20,13 +21,14 @@ public class DatabaseDaoMedicalRecordImpl implements DatabaseDaoMedicalRecord{
 
     private Activity activity;
     private Firebase firebaseDb;
-    private HashMap<String,Object> hashMapSaved;
+    private HashMap<String,Object> hashMapSaved = new HashMap<String,Object>();
+    private MyCallback callback;
+    private SharedPreferencesService sharedPreferencesService;
 
-
-    public DatabaseDaoMedicalRecordImpl(Activity activity){
+    public DatabaseDaoMedicalRecordImpl(Activity activity, MyCallback callback){
         this.activity = activity;
-
-
+        this.callback = callback;
+        this.sharedPreferencesService = new SharedPreferencesService(activity.getBaseContext());
         //initialize firebaseDB
         this.firebaseDb = new Firebase("https://lifemate.firebaseio.com/");
 
@@ -38,6 +40,7 @@ public class DatabaseDaoMedicalRecordImpl implements DatabaseDaoMedicalRecord{
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 hashMapSaved = (HashMap) snapshot.getValue();
+                getRecord(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER));
             }
 
             @Override
@@ -52,6 +55,7 @@ public class DatabaseDaoMedicalRecordImpl implements DatabaseDaoMedicalRecord{
     public Object getRecord(Object object) {
         ArrayList<MedicalRecord> listMedicalRecord = new ArrayList<MedicalRecord>();
         ArrayList<HashMap<String,Object>> mapMedicalRecords = (ArrayList<HashMap<String,Object>>)hashMapSaved.get("MedicalRecords");
+        if(mapMedicalRecords == null) return null;
         for(HashMap<String,Object> mapIter: mapMedicalRecords){
             //if userID asked same with the userId checked
             if(mapIter.get("userId").equals(object)){
@@ -59,9 +63,11 @@ public class DatabaseDaoMedicalRecordImpl implements DatabaseDaoMedicalRecord{
                 for(HashMap<String,Object> recordIter: mapListRecord){
                     String time =(String) recordIter.get("time");
                     String medicalRecordDescription = (String) recordIter.get("medicalRecordDescription");
-                    MedicalRecord medicalRecord = new MedicalRecord(time,medicalRecordDescription);
+                    String fromDoctor = (String) recordIter.get("fromDoctor");
+                    MedicalRecord medicalRecord = new MedicalRecord(time,medicalRecordDescription,fromDoctor);
                     listMedicalRecord.add(medicalRecord);
                 }
+                callback.callbackFunction(listMedicalRecord);
             }
         }
         return listMedicalRecord;
