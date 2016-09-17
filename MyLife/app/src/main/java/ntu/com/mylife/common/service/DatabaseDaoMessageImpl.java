@@ -58,17 +58,25 @@ public class DatabaseDaoMessageImpl implements DatabaseDaoMessage {
 
         HashMap hashMessage = (HashMap)hashMapSaved.get(MESSAGE);
         for(Object key:hashMessage.keySet()){
-            HashMap messageMaps = (HashMap) hashMessage.get(key);
+            HashMap doctorMaps = (HashMap) hashMessage.get(key);
 
             //For reference
             //String id =(String) doctorMaps.get("id");
 
-            String receiverUsername = (String) messageMaps.get("receiverUsername");
-            String senderUsername = (String) messageMaps.get("senderUsername");
-            String messageContent = (String) messageMaps.get("message");
-            String date = (String) messageMaps.get("date");
+            //Temporary
+            String userId = "";
 
-            Message message = new Message(receiverUsername, senderUsername, messageContent, date);
+            String respondentName;
+            if (userId.equals(doctorMaps.get("sender"))) {
+                respondentName = (String) doctorMaps.get("receiverId");
+            } else {
+                respondentName = (String) doctorMaps.get("senderId");
+            }
+
+            String content = (String) doctorMaps.get("message");
+            String date = (String) doctorMaps.get("date");
+
+            Message message = new Message(respondentName, respondentName, content, date);
             listReturned.add(message);
         }
         return listReturned;
