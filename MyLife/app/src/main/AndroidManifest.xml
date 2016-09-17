@@ -19,11 +19,7 @@
         <activity
             android:name=".view.SignInView"
             android:label="@string/title_activity_sign_in_view">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".view.SignUpView"
@@ -34,6 +30,14 @@
 
         </activity>
         <activity android:name=".view.RecordView" />
+
+        <activity android:name=".view.MessageView">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".controller.MyFirebaseMessagingService">
