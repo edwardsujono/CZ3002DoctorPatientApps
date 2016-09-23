@@ -6,6 +6,6 @@ package ntu.com.mylife.common.service;
 public interface DatabaseDaoMedicalRecord {
 
     public Object getRecord(Object object);
-    public void addNewMedicalRecord(Object object);
+    public void addNewMedicalRecord(Object object,String userName);
     public void deleteMedicalRecord(Object object);
 }

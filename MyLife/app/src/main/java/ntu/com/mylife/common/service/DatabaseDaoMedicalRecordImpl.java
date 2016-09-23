@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
+import ntu.com.mylife.common.entity.databaseentity.FireBaseKey;
 import ntu.com.mylife.common.entity.databaseentity.MedicalRecord;
 
 /**
@@ -51,6 +52,13 @@ public class DatabaseDaoMedicalRecordImpl implements DatabaseDaoMedicalRecord{
     }
 
 
+    //constructor useful for adding because it's process no need to have callback function
+    public DatabaseDaoMedicalRecordImpl(Activity activity){
+        this.activity = activity;
+        this.firebaseDb = new Firebase("https://lifemate.firebaseio.com/");
+    }
+
+
     @Override
     public Object getRecord(Object object) {
         ArrayList<MedicalRecord> listMedicalRecord = new ArrayList<MedicalRecord>();
@@ -74,8 +82,12 @@ public class DatabaseDaoMedicalRecordImpl implements DatabaseDaoMedicalRecord{
     }
 
     @Override
-    public void addNewMedicalRecord(Object object) {
-
+    public void addNewMedicalRecord(Object object,String userName) {
+        MedicalRecord medicalRecord = (MedicalRecord) object;
+        Firebase baseMedicalReport = firebaseDb.child(FireBaseKey.MEDICAL_RECORD);
+        Firebase medicalRecordForParticularPerson = baseMedicalReport.child(userName);
+        Firebase listMedicalRecord = medicalRecordForParticularPerson.getParent().child("listRecord").push();
+        listMedicalRecord.setValue(medicalRecord);
     }
 
     @Override

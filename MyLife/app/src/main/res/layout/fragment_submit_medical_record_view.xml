@@ -1,0 +1,70 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ntu.com.mylife.view.SubmitMedicalRecordView"
+    android:background="#FFF"
+    >
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Name Here"
+            android:textColor="#009688"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25dp"
+            android:layout_marginTop="120dp"
+            android:id="@+id/name_click_medical_record" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:layout_marginTop="50dp"
+            android:ems="10"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="DATE"
+            android:textColor="#009688"
+            android:textColorHint="#009688"
+            android:backgroundTint="#009688"
+            android:id="@+id/editText" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="DESCRIPTION"
+            android:textColorHint="#009688"
+            android:backgroundTint="#009688"
+            android:id="@+id/edit_text_medical_record_description" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#222"
+            android:text="Add a description of medical report ...."
+            android:id="@+id/addTextDescription" />
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            android:background="#009688"
+            android:id="@+id/submit_medical_report_button" />
+
+
+    </LinearLayout>
+
+</FrameLayout>
