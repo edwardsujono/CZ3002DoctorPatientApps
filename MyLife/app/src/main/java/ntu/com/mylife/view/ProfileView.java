@@ -19,6 +19,7 @@ import com.firebase.client.utilities.Base64;
 
 import java.io.ByteArrayOutputStream;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import ntu.com.mylife.R;
 import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
 import ntu.com.mylife.common.service.DatabaseDaoUser;
@@ -38,7 +39,7 @@ public class ProfileView extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private EditText textFullName,textAge,textDob,textBloodType,textAllergy,textMedicalRecord;
-    private ImageView profileImage;
+    private CircleImageView profileImage;
     private Button buttonSave;
     private Bitmap bitmap;
     private SharedPreferencesService sharedPreferencesService;
@@ -66,7 +67,7 @@ public class ProfileView extends Fragment {
         textAllergy = (EditText) rootView.findViewById(R.id.allergy_profile_editText);
         textMedicalRecord = (EditText) rootView.findViewById(R.id.medicalCondition_profile_editText);
         buttonSave        =  (Button) rootView.findViewById(R.id.button_save_profile);
-        profileImage =  (ImageView) rootView.findViewById(R.id.image_profile);
+        profileImage =  (CircleImageView) rootView.findViewById(R.id.image_profile);
 
         String currentUserName =   sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER);
         loadEditText();
