@@ -66,8 +66,7 @@ public class ContactView extends Fragment implements MyCallback {
 
         contactList = new ArrayList<>();
 
-        contactRecyclerViewAdapter = new ContactRecyclerViewAdapter(contactList, getActivity());
-
+        contactRecyclerViewAdapter = new ContactRecyclerViewAdapter(contactList, getActivity().getBaseContext(),getActivity());
         mContactRecyclerView.setLayoutManager(linearLayoutManager);
         mContactRecyclerView.setAdapter(contactRecyclerViewAdapter);
 
