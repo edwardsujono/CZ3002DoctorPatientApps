@@ -18,15 +18,16 @@ public class ContactOptionsController {
     private SharedPreferencesService sharedPreferencesService;
 
     public ContactOptionsController(Activity myActivity){
-        dbMedicalRecord = new DatabaseDaoMedicalRecordImpl(myActivity);
+
         this.myActivity = myActivity;
         sharedPreferencesService = new SharedPreferencesService(myActivity.getBaseContext());
+        dbMedicalRecord = new DatabaseDaoMedicalRecordImpl(myActivity);
     }
 
     public void submitMedicalReport(Object object){
-        dbMedicalRecord.addNewMedicalRecord(object,
-                sharedPreferencesService.getDataFromSharedPreferences
-                        (SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.CURRENT_CLICK_CONTACT));
+        //directly add the file using this constructor
+        dbMedicalRecord.addNewMedicalRecord(object,sharedPreferencesService.getDataFromSharedPreferences
+                (SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.CURRENT_CLICK_CONTACT));
     }
 
     public void createNotification(){

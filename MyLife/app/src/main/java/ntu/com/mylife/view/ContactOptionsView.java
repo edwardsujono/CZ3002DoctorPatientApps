@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import ntu.com.mylife.R;
+import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
 import ntu.com.mylife.common.entity.databaseentity.MedicalRecord;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 import ntu.com.mylife.controller.ContactOptionsController;
@@ -30,7 +32,9 @@ public class ContactOptionsView extends Fragment {
 
     //declare our own attributes
     private Button submitMedicalReportButton,createReminderButton,startChatButton;
-
+    private TextView nameClicked;
+    private SharedPreferencesService sharedPreferencesService;
+;
     public ContactOptionsView() {
         // Required empty public constructor
     }
@@ -49,12 +53,15 @@ public class ContactOptionsView extends Fragment {
         submitMedicalReportButton = (Button) rootView.findViewById(R.id.submit_medical_report_button);
         createReminderButton = (Button) rootView.findViewById(R.id.create_reminder_button);
         startChatButton = (Button) rootView.findViewById(R.id.start_chat_button);
+        nameClicked = (TextView) rootView.findViewById(R.id.username_contact_options);
 
+        sharedPreferencesService = new SharedPreferencesService(getActivity().getBaseContext());
+        nameClicked.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.CURRENT_CLICK_CONTACT));
         final FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
         submitMedicalReportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ft.replace(R.layout.activity_main_page_view, new SubmitMedicalRecordView());
+                ft.replace(R.id.fragment_transition_main_page, new SubmitMedicalRecordView());
                 ft.commit();
             }
         });
@@ -62,7 +69,6 @@ public class ContactOptionsView extends Fragment {
         createReminderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
 
@@ -70,10 +76,8 @@ public class ContactOptionsView extends Fragment {
         startChatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
-
         return rootView;
     }
 

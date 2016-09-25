@@ -52,6 +52,7 @@ public class SubmitMedicalRecordView extends Fragment {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_submit_medical_record_view, container, false);
         editTextMedicalReport = (EditText) rootView.findViewById(R.id.edit_text_medical_record_description);
+        editTextDate = (EditText) rootView.findViewById(R.id.edit_text_date_medical_record);
         submitMedicalDescriptionButton = (Button) rootView.findViewById(R.id.submit_medical_report_button);
         nameClick = (TextView) rootView.findViewById(R.id.name_click_medical_record);
         sharedPreferencesService = new SharedPreferencesService(getActivity().getBaseContext());
@@ -71,16 +72,6 @@ public class SubmitMedicalRecordView extends Fragment {
         });
         return rootView;
     }
-
-
-
-
-
-
-
-
-
-
 
 
 

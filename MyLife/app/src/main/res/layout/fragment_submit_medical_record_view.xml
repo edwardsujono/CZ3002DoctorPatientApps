@@ -33,7 +33,7 @@
             android:textColor="#009688"
             android:textColorHint="#009688"
             android:backgroundTint="#009688"
-            android:id="@+id/editText" />
+            android:id="@+id/edit_text_date_medical_record" />
 
         <EditText
             android:layout_width="match_parent"
