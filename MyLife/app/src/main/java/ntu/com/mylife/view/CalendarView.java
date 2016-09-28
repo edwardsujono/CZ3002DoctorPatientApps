@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,9 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import ntu.com.mylife.R;
@@ -33,7 +37,7 @@ import ntu.com.mylife.controller.MedicalRecordRecyclerViewAdaptor;
  * Use the {@link CalendarView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CalendarView extends Fragment implements MyCallback {
+public class CalendarView extends Fragment implements MyCallback, OnDateSelectedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -45,7 +49,11 @@ public class CalendarView extends Fragment implements MyCallback {
 
     private OnFragmentInteractionListener mListener;
 
+    /**
+     * Use library from https://github.com/prolificinteractive/material-calendarview
+     */
     private MaterialCalendarView mCalendarView;
+
     private RecyclerView mRecyclerView;
     private CurrentScheduleRecyclerViewAdaptor adaptor;
     private LinearLayoutManager mLayoutManager;
@@ -89,23 +97,41 @@ public class CalendarView extends Fragment implements MyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_calendar_view, container, false);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.current_schedule_recyler_view);
+
         mCalendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
+
+        Date date = new Date();
+        mCalendarView.setDateSelected(date, true);
+
+        ArrayList<String> t = new ArrayList<>();
+        ArrayList<String> s = new ArrayList<>();
+
+        s.add("Coding");
+        s.add("Coding");
+        s.add("Die die Coding");
+
+        t.add("00:00");
+        t.add("01:00");
+        t.add("02:00");
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.current_schedule_recyler_view);
-
-        dbSchedule = new DatabaseDaoUserScheduleImpl(
-                this.getActivity(),
-                this,
-                sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER),
-                "14-December-2016"
-        );
-
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.current_schedule_recyler_view);
-
-        adaptor = new CurrentScheduleRecyclerViewAdaptor(new ArrayList<String>(), new ArrayList<String>());
+        adaptor = new CurrentScheduleRecyclerViewAdaptor(t, s);
         mRecyclerView.setAdapter(adaptor);
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         return view;
+    }
+
+    /**
+     * This is callback when a date is selected
+     * @param widget
+     * @param date
+     * @param selected
+     */
+    @Override
+    public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+
     }
 
     @Override
