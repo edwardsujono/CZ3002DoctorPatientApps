@@ -56,7 +56,7 @@ public class MedicalRecordRecyclerViewAdaptor extends RecyclerView.Adapter<Medic
         public ViewHolder(View itemView) {
             super(itemView);
             medicalRecordTme = (TextView) itemView.findViewById(R.id.medical_record_time);
-            medicalRecordDescription  = (TextView) itemView.findViewById(R.id.medical_record_time);
+            medicalRecordDescription  = (TextView) itemView.findViewById(R.id.medical_record_description);
             medicalRecordFromDoctor = (TextView) itemView.findViewById(R.id.medical_record_from_doctor);
         }
     }

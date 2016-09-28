@@ -38,7 +38,7 @@ public class DatabaseDaoUserImpl implements DatabaseDaoUser {
     private Firebase firebaseDb;
     private static String PATIENT = "patients";
     private static String DOCTOR = "doctors";
-    private HashMap hashMapSaved ;
+    private HashMap hashMapSaved;
 
 
     public DatabaseDaoUserImpl(){

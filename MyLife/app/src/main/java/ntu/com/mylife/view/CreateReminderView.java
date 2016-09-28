@@ -1,7 +1,6 @@
 package ntu.com.mylife.view;
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -10,76 +9,51 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
-import ntu.com.mylife.common.entity.databaseentity.MedicalRecord;
-import ntu.com.mylife.common.service.SharedPreferencesService;
-import ntu.com.mylife.controller.ContactOptionsController;
-
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ContactOptionsView.OnFragmentInteractionListener} interface
+ * {@link CreateReminderView.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ContactOptionsView#} factory method to
+ * Use the {@link CreateReminderView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ContactOptionsView extends Fragment {
+public class CreateReminderView extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    //declare our own attributes
-    private EditText submitMedicalReportButton,createReminderButton,startChatButton;
-    private TextView nameClicked;
-    private SharedPreferencesService sharedPreferencesService;
-;
-    public ContactOptionsView() {
+
+    //declared all the attribute here
+    private EditText editTextDate,editTextTime,editTextDescription;
+    private Button buttonCreateReminder;
+
+
+    public CreateReminderView() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_contact_options, container, false);
-        submitMedicalReportButton = (EditText) rootView.findViewById(R.id.submit_medical_report_button);
-        createReminderButton = (EditText) rootView.findViewById(R.id.create_reminder_button);
-        startChatButton = (EditText) rootView.findViewById(R.id.start_chat_button);
+        View rootView = inflater.inflate(R.layout.fragment_create_reminder_view, container, false);
+        editTextDate = (EditText)rootView.findViewById(R.id.edit_text_date_createReminder);
+        editTextTime = (EditText)rootView.findViewById(R.id.edit_text_time_createReminder);
+        editTextDescription = (EditText) rootView.findViewById(R.id.edit_text_description_createReminder);
+        buttonCreateReminder = (Button) rootView.findViewById(R.id.submit_medical_report_button);
 
-        nameClicked = (TextView) rootView.findViewById(R.id.username_contact_options);
-
-        sharedPreferencesService = new SharedPreferencesService(getActivity().getBaseContext());
-        nameClicked.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.CURRENT_CLICK_CONTACT));
-        final FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
-        submitMedicalReportButton.setOnClickListener(new View.OnClickListener() {
+        buttonCreateReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ft.replace(R.id.fragment_transition_main_page, new SubmitMedicalRecordView());
-                ft.commit();
-            }
-        });
 
-        createReminderButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ft.replace(R.id.fragment_transition_main_page, new CreateReminderView());
-                ft.commit();
-            }
-        });
-
-
-        startChatButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
             }
         });
         return rootView;
