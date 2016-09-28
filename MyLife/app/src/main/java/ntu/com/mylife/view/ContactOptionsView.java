@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import ntu.com.mylife.R;
@@ -31,7 +32,7 @@ public class ContactOptionsView extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     //declare our own attributes
-    private Button submitMedicalReportButton,createReminderButton,startChatButton;
+    private EditText submitMedicalReportButton,createReminderButton,startChatButton;
     private TextView nameClicked;
     private SharedPreferencesService sharedPreferencesService;
 ;
@@ -50,9 +51,10 @@ public class ContactOptionsView extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_contact_options, container, false);
-        submitMedicalReportButton = (Button) rootView.findViewById(R.id.submit_medical_report_button);
-        createReminderButton = (Button) rootView.findViewById(R.id.create_reminder_button);
-        startChatButton = (Button) rootView.findViewById(R.id.start_chat_button);
+        submitMedicalReportButton = (EditText) rootView.findViewById(R.id.submit_medical_report_button);
+        createReminderButton = (EditText) rootView.findViewById(R.id.create_reminder_button);
+        startChatButton = (EditText) rootView.findViewById(R.id.start_chat_button);
+
         nameClicked = (TextView) rootView.findViewById(R.id.username_contact_options);
 
         sharedPreferencesService = new SharedPreferencesService(getActivity().getBaseContext());
@@ -69,6 +71,8 @@ public class ContactOptionsView extends Fragment {
         createReminderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ft.replace(R.id.fragment_transition_main_page, new CreateReminderView());
+                ft.commit();
             }
         });
 
