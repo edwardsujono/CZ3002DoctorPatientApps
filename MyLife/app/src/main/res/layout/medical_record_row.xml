@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/medical_record_from_doctor"
             android:textColor="#009688"
+
             android:layout_marginTop="100dp"
             android:layout_marginLeft="200dp"
             android:text="Doctor: Edward Sujono"

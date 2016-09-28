@@ -23,4 +23,8 @@
         <item name="android:minWidth">1dp</item>
     </style>
 
+    <style name="CustomTextAppearance" parent="TextAppearance.MaterialCalendarWidget.Date">
+        <item name="android:textColor">@color/mcv_text_date_dark</item>
+    </style>
+
 </resources>
