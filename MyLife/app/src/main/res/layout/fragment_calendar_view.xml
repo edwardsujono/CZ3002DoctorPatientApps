@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ntu.com.mylife.view.CalendarView"
-    android:background="#FFF">
+    android:background="@color/cardview_light_background">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,12 +16,15 @@
             android:layout_height="0dp"
             app:mcv_showOtherDates="all"
             app:mcv_selectionColor="#009688"
-            android:layout_weight="2"/>
+            android:layout_weight="1"
+            app:mcv_tileSize="40dp"
+            app:mcv_headerTextAppearance="@style/CustomCalendarHeader"
+            app:mcv_weekDayTextAppearance="@style/CustomCalendarWeekDay"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:id="@+id/current_schedule_recyler_view"
             android:layout_height="0dp"
-            android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+            android:layout_weight="1" />
     </LinearLayout>
 </FrameLayout>

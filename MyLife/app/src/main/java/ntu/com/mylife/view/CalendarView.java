@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ import ntu.com.mylife.controller.MedicalRecordRecyclerViewAdaptor;
  * Use the {@link CalendarView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CalendarView extends Fragment implements MyCallback, OnDateSelectedListener {
+public class CalendarView extends Fragment implements MyCallback{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -122,18 +123,19 @@ public class CalendarView extends Fragment implements MyCallback, OnDateSelected
         mRecyclerView.setAdapter(adaptor);
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+        /**
+         * Callback when a date is selected
+         */
+        mCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                Log.e("onDateSelected", String.valueOf(date.getDay()));
+
+            }
+        });
+
         return view;
-    }
-
-    /**
-     * This is callback when a date is selected
-     * @param widget
-     * @param date
-     * @param selected
-     */
-    @Override
-    public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-
     }
 
     @Override
@@ -178,6 +180,7 @@ public class CalendarView extends Fragment implements MyCallback, OnDateSelected
      * activity.
      * <p>
      * See the Android Training lesson <a href=
+     *
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */

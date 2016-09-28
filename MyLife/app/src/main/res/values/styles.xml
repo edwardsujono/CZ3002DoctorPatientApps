@@ -5,6 +5,14 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="CustomCalendarHeader" parent="TextAppearance.MaterialCalendarWidget.Header">
+        <item name="android:textColor">@color/mcv_text_date_light</item>
+    </style>
+
+    <style name="CustomCalendarWeekDay" parent="TextAppearance.MaterialCalendarWidget.WeekDay">
+        <item name="android:textColor">@color/mcv_text_date_light</item>
+    </style>
+
     <style name="edittext_msg" parent="android:Widget.Holo.Light.EditText">
         <item name="android:ems">10</item>
         <item name="android:imeActionId">100</item>

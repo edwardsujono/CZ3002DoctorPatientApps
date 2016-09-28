@@ -23,7 +23,7 @@ import ntu.com.mylife.controller.NavigationDrawerRecyclerViewAdapter;
 
 public class MainPageView extends AppCompatActivity implements HomeView.OnFragmentInteractionListener,ProfileView.OnFragmentInteractionListener
 , MedicalRecordView.OnFragmentInteractionListener, ContactView.OnFragmentInteractionListener, ContactOptionsView.OnFragmentInteractionListener ,
-SubmitMedicalRecordView.OnFragmentInteractionListener,CreateReminderView.OnFragmentInteractionListener{
+SubmitMedicalRecordView.OnFragmentInteractionListener,CreateReminderView.OnFragmentInteractionListener, CalendarView.OnFragmentInteractionListener{
 
 
     private Toolbar toolbar;                              // Declaring the Toolbar Object
