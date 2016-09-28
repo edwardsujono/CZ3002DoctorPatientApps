@@ -5,22 +5,22 @@ package ntu.com.mylife.common.entity.applicationentity;
  */
 public class Message {
 
-    private String respondentName;
+    private String senderName;
     private String message;
     private String date;
 
-    public Message(String respondentName, String message, String date) {
-        this.respondentName = respondentName;
+    public Message(String sender, String message, String date) {
+        this.senderName = sender;
         this.message = message;
         this.date = date;
     }
 
-    public String getRespondentName() {
-        return respondentName;
+    public String getSenderName() {
+        return senderName;
     }
 
-    public void setRespondentName(String respondentName) {
-        this.respondentName = respondentName;
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
     }
 
     public String getMessage() {

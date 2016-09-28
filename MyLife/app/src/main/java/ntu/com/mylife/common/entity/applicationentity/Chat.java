@@ -9,12 +9,14 @@ public class Chat {
 
     private Bitmap respondentBitmap;
     private String respondentName;
+    private String respondentId;
     private String latestMessage;
     private String latestMessageTime;
 
-    public Chat(Bitmap respondentBitmap, String respondentName, String latestMessage, String latestMessageTime) {
+    public Chat(Bitmap respondentBitmap, String respondentName, String respondentId, String latestMessage, String latestMessageTime) {
         this.respondentBitmap = respondentBitmap;
         this.respondentName = respondentName;
+        this.respondentId = respondentId;
         this.latestMessage = latestMessage;
         this.latestMessageTime = latestMessageTime;
     }
@@ -49,5 +51,13 @@ public class Chat {
 
     public void setLatestMessageTime(String latestMessageTime) {
         this.latestMessageTime = latestMessageTime;
+    }
+
+    public String getRespondentId() {
+        return respondentId;
+    }
+
+    public void setRespondentId(String respondentId) {
+        this.respondentId = respondentId;
     }
 }

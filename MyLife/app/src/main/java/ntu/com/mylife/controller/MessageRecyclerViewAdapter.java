@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.entity.databaseentity.Message;
+import ntu.com.mylife.common.entity.applicationentity.Message;
 
 /**
  * Created by MARTINUS on 07-Sep-16.
@@ -36,7 +36,7 @@ public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<MessageRecy
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Message message = messageList.get(position);
-        holder.respondentName.setText(message.getSenderUsername());
+        holder.respondentName.setText(message.getSenderName());
         holder.message.setText(message.getMessage());
         holder.date.setText(message.getDate());
     }
