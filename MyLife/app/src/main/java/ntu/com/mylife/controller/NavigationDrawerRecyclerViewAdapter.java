@@ -1,11 +1,13 @@
 package ntu.com.mylife.controller;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.DialogInterface;
+
 import android.graphics.Bitmap;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,10 +37,10 @@ public class NavigationDrawerRecyclerViewAdapter extends RecyclerView.Adapter<Na
     private Context myContext;
     private ArrayList<String> listText;
     private ArrayList<Bitmap> listImageView;
-    private Activity myActivity;
+    private AppCompatActivity myActivity;
 
 
-    public NavigationDrawerRecyclerViewAdapter(Activity activity, ArrayList<String> listText, ArrayList<Bitmap> listImageView){
+    public NavigationDrawerRecyclerViewAdapter(AppCompatActivity activity, ArrayList<String> listText, ArrayList<Bitmap> listImageView){
         this.listText = listText;
         this.listImageView = listImageView;
         this.myActivity = activity;
@@ -81,7 +83,7 @@ public class NavigationDrawerRecyclerViewAdapter extends RecyclerView.Adapter<Na
         @Override
         public void onClick(View v) {
             Log.i("position: ",""+getPosition());
-            final FragmentTransaction ft = myActivity.getFragmentManager().beginTransaction();
+            final FragmentTransaction ft = myActivity.getSupportFragmentManager().beginTransaction();
             switch(getPosition()){
                 case 0:
                     ft.replace(R.id.fragment_transition_main_page, new HomeView());
@@ -100,6 +102,9 @@ public class NavigationDrawerRecyclerViewAdapter extends RecyclerView.Adapter<Na
 
             }
             ft.commit();
+            View mainDrawerView = myActivity.findViewById(R.id.drawer_navigation_drawer);
+            DrawerLayout drawer = (DrawerLayout) mainDrawerView;
+            drawer.closeDrawer(GravityCompat.START);
         }
     }
 

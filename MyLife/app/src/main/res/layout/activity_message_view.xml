@@ -8,7 +8,7 @@
     tools:context=".view.MessageView">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/messageRecyclerView"
+        android:id="@+id/message_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -32,7 +32,7 @@
             android:onClick="onClick" />
 
         <EditText
-            android:id="@+id/inputEditText"
+            android:id="@+id/input_edittext"
             style="@style/edittext_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,13 +41,12 @@
         </EditText>
 
         <ImageButton
-            android:id="@+id/sendButton"
+            android:id="@+id/send_button"
             style="@style/btn"
             android:layout_weight="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/send_btn"
-            android:onClick="onClick"/>
+            android:background="@drawable/send_btn" />
 
     </LinearLayout>
 </LinearLayout>

@@ -1,6 +1,7 @@
 package ntu.com.mylife.controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 
 import ntu.com.mylife.R;
 import ntu.com.mylife.common.entity.applicationentity.Chat;
+import ntu.com.mylife.view.MessageView;
 
 /**
  * Created by MARTINUS on 16-Sep-16.
@@ -47,7 +49,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView respondentImage;
         private TextView respondentName;
@@ -61,6 +63,15 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
             respondentName = (TextView) itemView.findViewById(R.id.respondent_name);
             lastMessage = (TextView) itemView.findViewById(R.id.latest_message);
             lastMessageTime = (TextView) itemView.findViewById(R.id.latest_message_time);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getLayoutPosition();
+            Intent intent = new Intent(context, MessageView.class);
+            intent.putExtra("respondentUsername", chatList.get(position).getRespondentId());
+            context.startActivity(intent);
 
         }
 

@@ -45,7 +45,7 @@ public class ChatController {
         this.daoChat = new DatabaseDaoChatImpl();
         this.daoUser = new DatabaseDaoUserImpl();
         this.context = context;
-        this.chatCallback = chatCallback;
+        this.chatCallback = callback;
         sharedPreferencesService = new SharedPreferencesService(context);
         userId = sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER);
         userType = sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES, USER_TYPE);
@@ -73,38 +73,34 @@ public class ChatController {
             oppositeUserType = UserType.Type.PATIENT;
         }
         try {
-            chatObjectList = (ArrayList<Object>) daoUser.findData(oppositeUserType);
+            userObjectList = (ArrayList<Object>) daoUser.findData(oppositeUserType);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        //For each user found, find the corresponding chat data
+        for (Object userObject : userObjectList) {
+            User user = (User) userObject;
+            String encodedImage = user.getImage();
+            String respondentFullname = user.getFullName();
+            String respondentUsername = user.getUserName();
 
-        for (Object chatObject : chatObjectList) {
-            Chat chatDB = (Chat) chatObject;
-            String encodedImage = "";
-            String respondentUsername = "";
-            String respondentName = "";
-            if (chatDB.getUsername1().equals(userId)) {
-                respondentUsername = chatDB.getUsername2();
-            } else {
-                respondentUsername = chatDB.getUsername1();
-            }
-            //Find the corresponding user document
-            for (Object userObject : userObjectList) {
-                User user = (User) userObject;
-                if (respondentUsername.equals(user.getUserName())) {
-                    respondentName = user.getFullName();
-                    encodedImage = user.getImage();
-                    break;
-                }
-            }
-
-            //
+            //Decode the image data
             byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-            ntu.com.mylife.common.entity.applicationentity.Chat chat = new ntu.com.mylife.common.entity.applicationentity.Chat(bitmap, respondentName, chatDB.getLatestMessage(), chatDB.getLatestMessageTime());
-            chatList.add(chat);
+            for (Object chatObject : chatObjectList) {
+                Chat chatDB = (Chat) chatObject;
+                if ((chatDB.getUsername1().equals(userId) && chatDB.getUsername2().equals(respondentUsername)) ||
+                        chatDB.getUsername1().equals(respondentUsername) && chatDB.getUsername2().equals(userId)) {
+                    String latestMessage = chatDB.getLatestMessage();
+                    String latestMessageTime = chatDB.getLatestMessageTime();
+                    ntu.com.mylife.common.entity.applicationentity.Chat chat =
+                            new ntu.com.mylife.common.entity.applicationentity.Chat(bitmap, respondentFullname, respondentUsername, latestMessage, latestMessageTime);
+                    chatList.add(chat);
+                }
+            }
+
         }
 
         //Done
