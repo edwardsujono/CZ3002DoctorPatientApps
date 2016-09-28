@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import ntu.com.mylife.R;
@@ -26,6 +27,7 @@ public class CreateReminderView extends Fragment {
 
     //declared all the attribute here
     private EditText editTextDate,editTextTime,editTextDescription;
+    private Button buttonCreateReminder;
 
 
     public CreateReminderView() {
@@ -43,6 +45,17 @@ public class CreateReminderView extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_create_reminder_view, container, false);
+        editTextDate = (EditText)rootView.findViewById(R.id.edit_text_date_createReminder);
+        editTextTime = (EditText)rootView.findViewById(R.id.edit_text_time_createReminder);
+        editTextDescription = (EditText) rootView.findViewById(R.id.edit_text_description_createReminder);
+        buttonCreateReminder = (Button) rootView.findViewById(R.id.submit_medical_report_button);
+
+        buttonCreateReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return rootView;
     }
 
