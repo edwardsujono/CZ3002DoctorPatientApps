@@ -1,6 +1,9 @@
 package ntu.com.mylife.common.service;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -9,6 +12,10 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
+
+import ntu.com.mylife.common.entity.databaseentity.DaySchedule;
+import ntu.com.mylife.common.entity.databaseentity.UserSchedule;
 
 /**
  * Created by LENOVO on 03/09/2016.
@@ -42,10 +49,33 @@ public class DatabaseDaoUserScheduleImpl implements DatabaseUserScheduleDao{
                     callback.callbackFunction(hashReturned);
                 }catch(Exception e){
                     //do nothing for now
-
                 }
             }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+    }
 
+    //this constructor needed because we just want to add some database
+    public DatabaseDaoUserScheduleImpl(){
+        this.firebaseDb = new Firebase("https://lifemate.firebaseio.com/");
+    }
+
+    public DatabaseDaoUserScheduleImpl(final MyCallback callback, final String userName){
+        this.firebaseDb = new Firebase("https://lifemate.firebaseio.com/");
+        firebaseDb.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                hashMapSaved = (HashMap) snapshot.getValue();
+                try {
+                    ArrayList<DaySchedule> listDaySchedules = searchNewNotification(userName);
+                    callback.callbackFunction(listDaySchedules);
+                }catch(Exception e){
+                    //do nothing for now
+                }
+            }
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
@@ -55,8 +85,11 @@ public class DatabaseDaoUserScheduleImpl implements DatabaseUserScheduleDao{
 
 
     @Override
-    public void addData() {
-
+    public void addData(Object object) {
+        DaySchedule schedule = (DaySchedule) object;
+        Firebase scheduleObject = firebaseDb.child("UserSchedule");
+        Firebase listSchedule = scheduleObject.push();
+        listSchedule.setValue(schedule);
     }
 
     @Override
@@ -64,49 +97,57 @@ public class DatabaseDaoUserScheduleImpl implements DatabaseUserScheduleDao{
 
         /* JSON Data Structure
         Under UserSchedule on FireBase
-            {"userName": "edward454",
-             "schedule" : [
-                {"day" : "14-December-2016"
-                 "timeSchedule" : [
-                    {"time" : "12:30" , "message" : "take your medicine"}
-                 ]
-                }
-             ]}
+        {
+            "date" : "12-30-2016",
+            "time" : "12:20"
+            "userName" : "edward"
+            "description" : "Hey Edward This is the time for us to sleep"
+            "futureTimeMillis" : 12671726176721
+        }
        */
-        ArrayList<String> listMessage = new ArrayList<String>();
+        HashMap<String,Object> returnHash = new HashMap<String,Object>();
+        HashMap<String,Object> userSchedule =(HashMap<String,Object>) hashMapSaved.get("UserSchedule");
         ArrayList<String> listTime = new ArrayList<String>();
-        final HashMap<String,Object> listReturned = new HashMap<String,Object>();
-
-
-        ArrayList<HashMap> listUserSchedule = (ArrayList<HashMap>)hashMapSaved.get("UserSchedule");
-        for(HashMap hashData: listUserSchedule){
-            String nameCompared = (String) hashData.get("userName");
-            if (nameCompared.equals(userName)) {
-                ArrayList userSchedule = (ArrayList) hashData.get("schedule");
-                for (HashMap hashSchedule : (ArrayList<HashMap>) userSchedule) {
-                    String day = (String) hashSchedule.get("day");
-                    if (day.equals(dayInserted)) {
-                        ArrayList<HashMap> timeSchedules = (ArrayList<HashMap>) hashSchedule.get("timeSchedule");
-                        for (HashMap hashTimeSchedule : timeSchedules) {
-                            String timeTimeSchedule = (String) hashTimeSchedule.get("time");
-                            String messageTimeSchedule = (String) hashTimeSchedule.get("message");
-                            listMessage.add(messageTimeSchedule);
-                            listTime.add(timeTimeSchedule);
-                        }
-                    }
-                }
-
+        ArrayList<String> listDescription = new ArrayList<String>();
+        for(String key:userSchedule.keySet()){
+            HashMap<String,String> userData =  (HashMap<String,String>)userSchedule.get(key);
+            String name = userData.get("userName");
+            String date = userData.get("date");
+            if(userName.equals(name) && dayInserted.equals(date)){
+                //get all the schedule of that particular person
+                String time = userData.get("time");
+                String description = userData.get("description");
+                listTime.add(time);
+                listDescription.add(description);
+            }
         }
-        }
-
-        listReturned.put("listMessage",listMessage);
-        listReturned.put("listTime",listTime);
-        return listReturned;
+        returnHash.put("listTime",listTime);
+        returnHash.put("listMessage",listDescription);
+        return returnHash;
     }
 
     @Override
     public void deleteData(String userName) {
 
+    }
+
+    public ArrayList<DaySchedule> searchNewNotification(String userName){
+        ArrayList<DaySchedule> listDaySchedule = new ArrayList<DaySchedule>();
+        HashMap<String,Object> userSchedule =(HashMap<String,Object>) hashMapSaved.get("UserSchedule");
+        for(String key:userSchedule.keySet()){
+            HashMap<String,Object> userData =  (HashMap<String,Object>)userSchedule.get(key);
+            String name = (String)userData.get("userName");
+            String date = (String)userData.get("date");
+            if(userName.equals(name)){
+                //get all the schedule of that particular person
+                String time = (String)userData.get("time");
+                String description = (String)userData.get("description");
+                long futureTimeMillis = (long)userData.get("futureTimeMillis");
+                DaySchedule daySchedule = new DaySchedule(date,time,userName,description,futureTimeMillis);
+                listDaySchedule.add(daySchedule);
+            }
+        }
+        return listDaySchedule;
     }
 
 }

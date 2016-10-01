@@ -28,6 +28,7 @@ import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
 import ntu.com.mylife.common.entity.databaseentity.CurrentScheduleRecyclerViewAdaptor;
 import ntu.com.mylife.common.entity.databaseentity.DaySchedule;
 import ntu.com.mylife.common.service.DatabaseDaoUserScheduleImpl;
+import ntu.com.mylife.common.service.DatabaseUserScheduleDao;
 import ntu.com.mylife.common.service.MyCallback;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 import ntu.com.mylife.controller.MedicalRecordRecyclerViewAdaptor;
@@ -60,8 +61,10 @@ public class CalendarView extends Fragment implements MyCallback{
     private RecyclerView mRecyclerView;
     private CurrentScheduleRecyclerViewAdaptor adaptor;
     private LinearLayoutManager mLayoutManager;
-    private DatabaseDaoUserScheduleImpl dbSchedule;
+    private DatabaseUserScheduleDao dbSchedule;
     private SharedPreferencesService sharedPreferencesService;
+    private String userName;
+    private Context myContext;
 
     public CalendarView() {
         // Required empty public constructor
@@ -89,6 +92,8 @@ public class CalendarView extends Fragment implements MyCallback{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPreferencesService   = new SharedPreferencesService(getActivity());
+        userName = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER);
+        myContext = getContext();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -110,20 +115,21 @@ public class CalendarView extends Fragment implements MyCallback{
         ArrayList<String> t = new ArrayList<>();
         ArrayList<String> s = new ArrayList<>();
 
-        s.add("Coding");
-        s.add("Coding");
-        s.add("Die die Coding");
+//        s.add("Coding");
+//        s.add("Coding");
+//        s.add("Die die Coding");
+//
+//        t.add("00:00");
+//        t.add("01:00");
+//        t.add("02:00");
 
-        t.add("00:00");
-        t.add("01:00");
-        t.add("02:00");
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.current_schedule_recyler_view);
         adaptor = new CurrentScheduleRecyclerViewAdaptor(t, s);
         mRecyclerView.setAdapter(adaptor);
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-
+        final MyCallback callback = this;
         /**
          * Callback when a date is selected
          */
@@ -131,7 +137,9 @@ public class CalendarView extends Fragment implements MyCallback{
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 Log.e("onDateSelected", String.valueOf(date.getDay()));
-
+                //dbScheduleImplementation
+                String dateInserted = date.getDay()+"-"+date.getMonth()+"-"+date.getYear();
+                dbSchedule = new DatabaseDaoUserScheduleImpl(myContext,callback,userName,dateInserted);
             }
         });
 

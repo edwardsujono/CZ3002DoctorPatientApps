@@ -21,10 +21,12 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import ntu.com.mylife.R;
+import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
 import ntu.com.mylife.common.service.MyCallback;
 import ntu.com.mylife.common.service.DatabaseDaoUserScheduleImpl;
 import ntu.com.mylife.common.service.DatabaseUserScheduleDao;
 import ntu.com.mylife.common.entity.databaseentity.CurrentScheduleRecyclerViewAdaptor;
+import ntu.com.mylife.common.service.SharedPreferencesService;
 
 
 public class HomeView extends Fragment implements MyCallback {
@@ -34,6 +36,8 @@ public class HomeView extends Fragment implements MyCallback {
     private RecyclerView mRecyclerView;
     private DatabaseUserScheduleDao dbScehdule;
     private LinearLayoutManager mLayoutManager;
+    private SharedPreferencesService sharedPreferencesService;
+    private String userName;
 
     public HomeView() {
         // Required empty public constructor
@@ -43,6 +47,8 @@ public class HomeView extends Fragment implements MyCallback {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this.getActivity());
+        sharedPreferencesService = new SharedPreferencesService(getActivity());
+        userName = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER);
     }
 
     @Override
@@ -57,9 +63,10 @@ public class HomeView extends Fragment implements MyCallback {
         todayNumberSchedule.setTextColor(Color.parseColor("#009688"));
         todayMonthSchedule.setTextColor(Color.parseColor("#009688"));
         instanstiateTodaySchedule();
-
+        final Calendar myCalendar = Calendar.getInstance();
+        String today =myCalendar.get(Calendar.DAY_OF_MONTH)+"-"+myCalendar.get(Calendar.MONTH)+"-"+myCalendar.get(Calendar.YEAR);
         //instanstiate current schedule
-        dbScehdule = new DatabaseDaoUserScheduleImpl(this.getActivity(),this,"edward454","14-December-2016");
+        dbScehdule = new DatabaseDaoUserScheduleImpl(this.getActivity(),this,userName,today);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.current_schedule_recyler_view);
         CurrentScheduleRecyclerViewAdaptor adaptor;
         adaptor = new CurrentScheduleRecyclerViewAdaptor(new ArrayList<String>(), new ArrayList<String>());

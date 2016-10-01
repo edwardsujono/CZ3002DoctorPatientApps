@@ -8,4 +8,10 @@ public class TimeSchedule {
     private String message;
     private String time;
 
+    public TimeSchedule(String message,String time){
+        this.message = message;
+        this.time = time;
+    }
+
+
 }

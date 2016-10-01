@@ -12,6 +12,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import java.util.Random;
+
 import ntu.com.mylife.R;
 
 /**
@@ -20,24 +22,15 @@ import ntu.com.mylife.R;
 public class NotificationService extends IntentService {
 
     private NotificationManager alarmNotificationManager;
-    private Activity activity;
-    private String message;
 
-    /**
-     * Creates an IntentService.  Invoked by your subclass's constructor.
-     *
-     * @param name Used to name the worker thread, important only for debugging.
-     */
-    public NotificationService(String name,Activity activity,String message)
+    public NotificationService()
     {
-        super(name);
-        this.activity = activity;
-        this.message = message;
+        super("Notification");
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        sendMessage(message);
+        sendMessage(intent.getStringExtra("notification"));
     }
 
 
@@ -46,8 +39,8 @@ public class NotificationService extends IntentService {
         alarmNotificationManager = (NotificationManager) this
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         //get pending Intent from the first activity
-        long time = System.currentTimeMillis();
-        PendingIntent contentIntent = PendingIntent.getService(activity.getBaseContext(),(int)time,new Intent(this,activity.getClass()),0);
+        Random generate = new Random();
+        PendingIntent contentIntent = PendingIntent.getService(this,generate.nextInt(),new Intent(this,this.getClass()),0);
         NotificationCompat.Builder alamNotificationBuilder = new NotificationCompat.Builder(
                 this).setContentTitle("Alarm").setSmallIcon(R.drawable.icon_doctor)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))

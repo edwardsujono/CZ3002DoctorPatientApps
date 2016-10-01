@@ -19,7 +19,11 @@ import android.view.View;
 import java.util.ArrayList;
 
 import ntu.com.mylife.R;
+import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
+import ntu.com.mylife.common.entity.databaseentity.UserType;
+import ntu.com.mylife.common.service.SharedPreferencesService;
 import ntu.com.mylife.controller.NavigationDrawerRecyclerViewAdapter;
+import ntu.com.mylife.controller.NotificationController;
 
 public class MainPageView extends AppCompatActivity implements HomeView.OnFragmentInteractionListener,ProfileView.OnFragmentInteractionListener
 , MedicalRecordView.OnFragmentInteractionListener, ContactView.OnFragmentInteractionListener, ContactOptionsView.OnFragmentInteractionListener ,
@@ -32,7 +36,9 @@ SubmitMedicalRecordView.OnFragmentInteractionListener,CreateReminderView.OnFragm
     private DrawerLayout Drawer;                                  // Declaring DrawerLayout
     private  ActionBarDrawerToggle mDrawerToggle;                  // Declaring Action Bar Drawer Toggle
     private Fragment mainFragment;
-
+    private NotificationController notificationController;
+    private SharedPreferencesService sharedPreferencesService;
+    private String TYPE ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,9 @@ SubmitMedicalRecordView.OnFragmentInteractionListener,CreateReminderView.OnFragm
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         Drawer = (DrawerLayout) findViewById(R.id.drawer_navigation_drawer);
+        sharedPreferencesService = new SharedPreferencesService(this);
+        TYPE = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,"userType");
+
         instanstiateNavigationDrawer();
 
 //        //Fragment
@@ -56,6 +65,9 @@ SubmitMedicalRecordView.OnFragmentInteractionListener,CreateReminderView.OnFragm
 //        transaction.commit();
 
 
+        //set up notification Controller
+        String userName = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER);
+        notificationController = new NotificationController(this,userName);
     }
 
 
@@ -70,17 +82,18 @@ SubmitMedicalRecordView.OnFragmentInteractionListener,CreateReminderView.OnFragm
 
         mRecyclerView.setHasFixedSize(true);
         //adapter for the navigation drawer
+        //change the left Drawer based on the type of the user
         ArrayList<String> listTextNavigationDrawer = new ArrayList<String>();
         listTextNavigationDrawer.add("Home");
         listTextNavigationDrawer.add("Profile");
-        listTextNavigationDrawer.add("Medical Record");
-        listTextNavigationDrawer.add("Contact Doctor");
+        if(TYPE.equals(UserType.Type.PATIENT))listTextNavigationDrawer.add("Medical Record");
+        if(TYPE.equals(UserType.Type.PATIENT))listTextNavigationDrawer.add("Contact Doctor");
+        else listTextNavigationDrawer.add("Contact Patient");
         listTextNavigationDrawer.add("Calendar");
-
         ArrayList<Bitmap> listBitmapNavigationDrawer = new ArrayList<Bitmap>();
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_doctor));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_profile));
-        listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_report));
+        if(TYPE.equals(UserType.Type.PATIENT))listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_report));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_doctor));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_calendar));
 

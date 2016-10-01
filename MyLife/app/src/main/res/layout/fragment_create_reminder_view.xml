@@ -36,7 +36,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#FFF"
+            android:textColor="#009688"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:hint="TIME"
@@ -47,7 +47,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#FFF"
+            android:textColor="#009688"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:hint="DESCRIPTION"
@@ -71,7 +71,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="100dp"
             android:background="#009688"
-            android:id="@+id/submit_medical_report_button" />
+            android:id="@+id/create_reminder_button" />
 
     </LinearLayout>
 
