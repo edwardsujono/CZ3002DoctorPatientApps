@@ -1,45 +1,62 @@
-
 <android.support.v4.widget.DrawerLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_navigation_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="7dp">
+
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="universitylife.com.magicreader.AboutActivity">
+
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/header"></include>
+<!--
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="fixed"
+            app:tabGravity="fill"/>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+-->
+
+        <fragment
+            android:id="@+id/fragment_transition_main_page"
+            android:name="ntu.com.mylife.view.HomeView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/toolbar" />
+
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RecyclerView"
         android:layout_width="220dp"
         android:layout_height="match_parent"
         android:layout_gravity="left|start"
-        android:choiceMode= "singleChoice"
         android:background="#009688"
-        android:scrollbars="vertical"
-        >
+        android:choiceMode="singleChoice"
+        android:scrollbars="vertical">
 
     </android.support.v7.widget.RecyclerView>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="universitylife.com.magicreader.AboutActivity"
-        >
-
-
-        <include layout="@layout/header"
-            android:id="@+id/toolbar"></include>
-
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="ntu.com.mylife.view.HomeView"
-            android:id="@+id/fragment_transition_main_page"
-            android:layout_below="@+id/toolbar"
-            android:layout_alignParentStart="true" />
-
-
-
-    </RelativeLayout>
 </android.support.v4.widget.DrawerLayout>
 
 

@@ -1,9 +1,11 @@
 package ntu.com.mylife.view;
 
-import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +13,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-
 import java.util.ArrayList;
 
 import ntu.com.mylife.R;
@@ -24,21 +24,25 @@ import ntu.com.mylife.common.entity.databaseentity.UserType;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 import ntu.com.mylife.controller.NavigationDrawerRecyclerViewAdapter;
 import ntu.com.mylife.controller.NotificationController;
+import ntu.com.mylife.controller.TabsPagerAdapter;
 
-public class MainPageView extends AppCompatActivity implements HomeView.OnFragmentInteractionListener,ProfileView.OnFragmentInteractionListener
-, MedicalRecordView.OnFragmentInteractionListener, ContactView.OnFragmentInteractionListener, ContactOptionsView.OnFragmentInteractionListener ,
-SubmitMedicalRecordView.OnFragmentInteractionListener,CreateReminderView.OnFragmentInteractionListener, CalendarView.OnFragmentInteractionListener{
-
+public class MainPageView extends AppCompatActivity implements HomeView.OnFragmentInteractionListener,ProfileView.OnFragmentInteractionListener,
+        MedicalRecordView.OnFragmentInteractionListener, ChatView.OnFragmentInteractionListener,
+        ContactOptionsView.OnFragmentInteractionListener, SubmitMedicalRecordView.OnFragmentInteractionListener,
+        CreateReminderView.OnFragmentInteractionListener, CalendarView.OnFragmentInteractionListener {
 
     private Toolbar toolbar;                              // Declaring the Toolbar Object
+
+
     private RecyclerView mRecyclerView;                           // Declaring RecyclerView
     private LinearLayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
     private DrawerLayout Drawer;                                  // Declaring DrawerLayout
-    private  ActionBarDrawerToggle mDrawerToggle;                  // Declaring Action Bar Drawer Toggle
     private Fragment mainFragment;
     private NotificationController notificationController;
     private SharedPreferencesService sharedPreferencesService;
     private String TYPE ;
+    private ActionBarDrawerToggle mDrawerToggle;                  // Declaring Action Bar Drawer Toggle
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +50,25 @@ SubmitMedicalRecordView.OnFragmentInteractionListener,CreateReminderView.OnFragm
         setContentView(R.layout.activity_main_page_view);
         //instanstiate general attribute here
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        /*
+        tabsPagerAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+        viewPager = (ViewPager) findViewById(R.id.view_pager_container);
+        viewPager.setAdapter(tabsPagerAdapter);
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+        */
+
+
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         Drawer = (DrawerLayout) findViewById(R.id.drawer_navigation_drawer);
         sharedPreferencesService = new SharedPreferencesService(this);
         TYPE = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,"userType");
 
         instanstiateNavigationDrawer();
+
+
+
 
 //        //Fragment
 //        // Create new fragment and transaction
@@ -114,7 +131,26 @@ SubmitMedicalRecordView.OnFragmentInteractionListener,CreateReminderView.OnFragm
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_page_view, menu);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_navigation_drawer);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

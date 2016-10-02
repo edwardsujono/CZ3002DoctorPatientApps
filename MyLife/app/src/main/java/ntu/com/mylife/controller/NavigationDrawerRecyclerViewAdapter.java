@@ -3,6 +3,7 @@ package ntu.com.mylife.controller;
 import android.app.Activity;
 import android.content.Context;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -26,6 +27,7 @@ import ntu.com.mylife.common.entity.databaseentity.UserType;
 import ntu.com.mylife.common.service.OnItemClickListener;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 import ntu.com.mylife.view.CalendarView;
+import ntu.com.mylife.view.ContactContainerView;
 import ntu.com.mylife.view.ContactView;
 import ntu.com.mylife.view.HomeView;
 import ntu.com.mylife.view.MedicalRecordView;
@@ -103,7 +105,10 @@ public class NavigationDrawerRecyclerViewAdapter extends RecyclerView.Adapter<Na
                     ft.replace(R.id.fragment_transition_main_page, new MedicalRecordView());
                     break;
                 case 3:
-                    ft.replace(R.id.fragment_transition_main_page, new ContactView());
+                    //ft.replace(R.id.fragment_transition_main_page, new ContactView());
+                    Intent intent = new Intent(myActivity, ContactContainerView.class);
+                    myActivity.startActivity(intent);
+
                     break;
                 case 4:
                     ft.replace(R.id.fragment_transition_main_page, new CalendarView());
