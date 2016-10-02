@@ -45,14 +45,6 @@ public class ContactView extends Fragment implements MyCallback {
         // Required empty public constructor
     }
 
-    public ContactView(AppCompatActivity appCompatActivity) {
-        // Required empty public constructor
-        this.appCompatActivity = appCompatActivity;
-    }
-
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

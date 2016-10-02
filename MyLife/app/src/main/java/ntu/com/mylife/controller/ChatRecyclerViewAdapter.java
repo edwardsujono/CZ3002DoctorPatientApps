@@ -3,6 +3,7 @@ package ntu.com.mylife.controller;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,10 +43,12 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Chat chat = chatList.get(position);
-        holder.respondentImage.setImageBitmap(chat.getRespondentBitmap());
+        if(chat.getRespondentBitmap() != null)
+            holder.respondentImage.setImageBitmap(chat.getRespondentBitmap());
         holder.respondentName.setText(chat.getRespondentName());
         holder.lastMessage.setText(chat.getLatestMessage());
         holder.lastMessageTime.setText(chat.getLatestMessageTime());
+        Log.e("onBind", position +" " + chat.getRespondentName());
     }
 
 
@@ -71,6 +74,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
             int position = getLayoutPosition();
             Intent intent = new Intent(context, MessageView.class);
             intent.putExtra("respondentUsername", chatList.get(position).getRespondentId());
+            intent.putExtra("chatExist", true);
             context.startActivity(intent);
 
         }

@@ -111,6 +111,8 @@ public class MainPageView extends AppCompatActivity implements HomeView.OnFragme
         else listTextNavigationDrawer.add("Chat Patient");
 
         listTextNavigationDrawer.add("Calendar");
+        listTextNavigationDrawer.add("Log Out");
+
         ArrayList<Bitmap> listBitmapNavigationDrawer = new ArrayList<Bitmap>();
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_doctor));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_profile));
@@ -118,6 +120,7 @@ public class MainPageView extends AppCompatActivity implements HomeView.OnFragme
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_doctor));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.ic_chat));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_calendar));
+        listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.logout));
 
         NavigationDrawerRecyclerViewAdapter myAdapter = new NavigationDrawerRecyclerViewAdapter(this,listTextNavigationDrawer,listBitmapNavigationDrawer);
         mRecyclerView.setAdapter(myAdapter);

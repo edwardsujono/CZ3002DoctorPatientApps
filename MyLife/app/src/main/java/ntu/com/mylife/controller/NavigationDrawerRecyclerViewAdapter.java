@@ -115,6 +115,12 @@ public class NavigationDrawerRecyclerViewAdapter extends RecyclerView.Adapter<Na
                     break;
                 case 5:
                     ft.replace(R.id.fragment_transition_main_page, new CalendarView());
+                    break;
+                case 6:
+                    Intent intent = new Intent(myActivity,AccountManagement.class);
+                    myActivity.startActivity(intent);
+                    break;
+
 
             }
             else
@@ -126,11 +132,19 @@ public class NavigationDrawerRecyclerViewAdapter extends RecyclerView.Adapter<Na
                        ft.replace(R.id.fragment_transition_main_page, new ProfileView());
                        break;
                    case 2:
-                       Intent intent = new Intent(myActivity, ContactContainerView.class);
-                       myActivity.startActivity(intent);
+                       ft.replace(R.id.fragment_transition_main_page, new ContactView());
+                       //Intent intent = new Intent(myActivity, ContactContainerView.class);
+                       //myActivity.startActivity(intent);
                        break;
                    case 3:
+                       ft.replace(R.id.fragment_transition_main_page, new ChatView());
+                       break;
+                   case 4:
                        ft.replace(R.id.fragment_transition_main_page, new CalendarView());
+                       break;
+                   case 5:
+                       Intent intent = new Intent(myActivity,AccountManagement.class);
+                       myActivity.startActivity(intent);
                        break;
 
                }

@@ -59,6 +59,7 @@ public class MessageController {
 
         UserType.Type respondentUserType;
         //Query userdata (for respondent)
+
         if (userType.equals(UserType.Type.DOCTOR.toString())) {
             respondentUserType = UserType.Type.PATIENT;
         } else {

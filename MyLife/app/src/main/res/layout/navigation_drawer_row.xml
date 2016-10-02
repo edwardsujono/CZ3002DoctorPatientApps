@@ -12,7 +12,6 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:id="@+id/icon_navigation_drawer"
-
         />
 
     <TextView

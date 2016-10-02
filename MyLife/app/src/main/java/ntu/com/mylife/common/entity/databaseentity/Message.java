@@ -10,6 +10,10 @@ public class Message {
     private String message;
     private String date;
 
+    public Message() {
+
+    }
+
     public Message(String receiverUsername, String senderUsername, String message, String date) {
         this.senderUsername = senderUsername;
         this.receiverUsername = receiverUsername;

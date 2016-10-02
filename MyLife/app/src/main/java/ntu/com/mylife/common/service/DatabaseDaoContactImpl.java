@@ -47,6 +47,7 @@ public class DatabaseDaoContactImpl implements DatabaseDaoContact {
     private static String DOCTOR = "doctors";
     private static String PATIENT = "patients";
     private static String FULLNAME = "fullName";
+    private static String USERNAME = "userName";
     private String stringType;
 
     private MyCallback callback;
@@ -98,7 +99,7 @@ public class DatabaseDaoContactImpl implements DatabaseDaoContact {
 
             HashMap hashMapAttr = (HashMap) attr;
 
-            String contactName = (String)hashMapAttr.get(FULLNAME);
+            String contactName = (String)hashMapAttr.get(USERNAME);
             String imageName = "";
 
             Contact contact = new Contact(contactName, null);

@@ -17,7 +17,7 @@
             android:id="@+id/contact_image"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:src="@drawable/camera_btn"/>
+            android:src="@drawable/personlogo"/>
 
         <TextView
             android:id="@+id/contact_name"

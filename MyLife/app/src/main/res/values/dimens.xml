@@ -5,8 +5,8 @@
 
 
     <!-- Additional dimension for chat-->
-    <dimen name="chat_height">200dp</dimen>
-    <dimen name="chat_margin">4dp</dimen>
+    <dimen name="chat_height">100dp</dimen>
+    <dimen name="chat_margin">10dp</dimen>
 
     <!-- Additional dimension for contact-->
     <dimen name="contact_height">200dp</dimen>

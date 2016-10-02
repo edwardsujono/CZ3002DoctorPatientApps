@@ -3,45 +3,44 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/chat_height"
     android:layout_margin="@dimen/chat_margin"
-    android:orientation="vertical"
-    android:background="@color/cardview_dark_background">
+    android:orientation="horizontal"
+    android:background="@color/cardview_light_background">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
             android:id="@+id/respondent_image"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"/>
+            android:src="@drawable/personlogo"
+            android:gravity="center_vertical"/>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/respondent_name" />
+                android:id="@+id/respondent_name"
+                android:textColor="@color/cardview_dark_background"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/latest_message"/>
+                android:id="@+id/latest_message"
+                android:textColor="@color/cardview_dark_background"
+                android:textAppearance="?android:textAppearanceMedium" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/latest_message_time"/>
+                android:id="@+id/latest_message_time"
+                android:textColor="@color/cardview_dark_background"
+                android:textAppearance="?android:textAppearanceSmall"/>
 
         </LinearLayout>
-
-    </LinearLayout>
 
 </LinearLayout>

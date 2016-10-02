@@ -2,6 +2,7 @@ package ntu.com.mylife.view;
 
 import android.app.Activity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -36,6 +37,7 @@ public class ContactOptionsView extends Fragment {
     private EditText submitMedicalReportButton,createReminderButton,startChatButton;
     private TextView nameClicked;
     private SharedPreferencesService sharedPreferencesService;
+    private String currentClickedUser;
 ;
     public ContactOptionsView() {
         // Required empty public constructor
@@ -59,7 +61,8 @@ public class ContactOptionsView extends Fragment {
         nameClicked = (TextView) rootView.findViewById(R.id.username_contact_options);
 
         sharedPreferencesService = new SharedPreferencesService(getActivity().getBaseContext());
-        nameClicked.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.CURRENT_CLICK_CONTACT));
+        currentClickedUser = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.CURRENT_CLICK_CONTACT);
+        nameClicked.setText(currentClickedUser);
         final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         submitMedicalReportButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,8 +83,13 @@ public class ContactOptionsView extends Fragment {
         startChatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ft.replace(R.id.fragment_transition_main_page, new ChatView());
-                ft.commit();
+
+
+
+                Intent intent = new Intent(getContext(), MessageView.class);
+                intent.putExtra("respondentUsername", currentClickedUser);
+                intent.putExtra("chatExist", false);
+                startActivity(intent);
             }
         });
         return rootView;
