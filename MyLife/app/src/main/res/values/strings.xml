@@ -15,4 +15,5 @@
     <string name="title_activity_activity_tab">ActivityTab</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_contact_container_view">ContactContainerView</string>
 </resources>

@@ -23,16 +23,13 @@ import ntu.com.mylife.controller.NavigationDrawerRecyclerViewAdapter;
 import ntu.com.mylife.controller.TabsPagerAdapter;
 
 public class MainPageView extends AppCompatActivity implements HomeView.OnFragmentInteractionListener,ProfileView.OnFragmentInteractionListener,
-        MedicalRecordView.OnFragmentInteractionListener, ContactView.OnFragmentInteractionListener, ChatView.OnFragmentInteractionListener,
+        MedicalRecordView.OnFragmentInteractionListener, ChatView.OnFragmentInteractionListener,
         ContactOptionsView.OnFragmentInteractionListener, SubmitMedicalRecordView.OnFragmentInteractionListener,
-        CreateReminderView.OnFragmentInteractionListener {
-
-    private ViewPager viewPager;
-    private TabsPagerAdapter tabsPagerAdapter;
-    private TabLayout tabLayout;
-
+        CreateReminderView.OnFragmentInteractionListener, CalendarView.OnFragmentInteractionListener {
 
     private Toolbar toolbar;                              // Declaring the Toolbar Object
+
+
     private RecyclerView mRecyclerView;                           // Declaring RecyclerView
     private LinearLayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
     private DrawerLayout Drawer;                                  // Declaring DrawerLayout
@@ -46,12 +43,13 @@ public class MainPageView extends AppCompatActivity implements HomeView.OnFragme
         //instanstiate general attribute here
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        /*
         tabsPagerAdapter = new TabsPagerAdapter(getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(R.id.view_pager_container);
         viewPager.setAdapter(tabsPagerAdapter);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
-
+        */
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
@@ -139,11 +137,6 @@ public class MainPageView extends AppCompatActivity implements HomeView.OnFragme
             super.onBackPressed();
         }
     }
-
-    public void setViewPagerPosition(int position) {
-        viewPager.setCurrentItem(position);
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

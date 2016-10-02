@@ -19,7 +19,7 @@
         <include
             android:id="@+id/toolbar"
             layout="@layout/header"></include>
-
+<!--
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
+-->
 
         <fragment
             android:id="@+id/fragment_transition_main_page"
