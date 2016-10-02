@@ -40,7 +40,7 @@ public class NotificationController implements MyCallback {
             scheduleNotification(getNotification(daySchedule.getDescription()),daySchedule.getFutureTimeMillis()-1000*60*60*beforeTime);
             Log.i("Future Time Millis",System.currentTimeMillis()-1000*60*60+30000+"");
         }
-        Toast.makeText(this.myActivity,"Notification is updated",Toast.LENGTH_LONG).show();
+//        Toast.makeText(this.myActivity,"Notification is updated",Toast.LENGTH_LONG).show();
     }
 
 

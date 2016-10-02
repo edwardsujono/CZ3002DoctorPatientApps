@@ -93,7 +93,7 @@ public class NavigationDrawerRecyclerViewAdapter extends RecyclerView.Adapter<Na
         public void onClick(View v) {
             Log.i("position: ",""+getPosition());
             final FragmentTransaction ft = myActivity.getSupportFragmentManager().beginTransaction();
-           if(type.equals(UserType.Type.PATIENT))
+           if(type.equals(UserType.Type.PATIENT+""))
             switch(getPosition()){
                 case 0:
                     ft.replace(R.id.fragment_transition_main_page, new HomeView());
@@ -123,7 +123,8 @@ public class NavigationDrawerRecyclerViewAdapter extends RecyclerView.Adapter<Na
                        ft.replace(R.id.fragment_transition_main_page, new ProfileView());
                        break;
                    case 2:
-                       ft.replace(R.id.fragment_transition_main_page, new ContactView());
+                       Intent intent = new Intent(myActivity, ContactContainerView.class);
+                       myActivity.startActivity(intent);
                        break;
                    case 3:
                        ft.replace(R.id.fragment_transition_main_page, new CalendarView());

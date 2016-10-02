@@ -1,5 +1,6 @@
 package ntu.com.mylife.view;
 
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -22,7 +23,8 @@ import android.widget.TextView;
 import ntu.com.mylife.R;
 import ntu.com.mylife.controller.TabsPagerAdapter;
 
-public class ContactContainerView extends AppCompatActivity {
+public class ContactContainerView extends AppCompatActivity implements ContactOptionsView.OnFragmentInteractionListener,
+        SubmitMedicalRecordView.OnFragmentInteractionListener, CreateReminderView.OnFragmentInteractionListener{
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -75,4 +77,8 @@ public class ContactContainerView extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }

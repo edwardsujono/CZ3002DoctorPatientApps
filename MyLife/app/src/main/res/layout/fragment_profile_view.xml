@@ -17,7 +17,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/image_profile"
-            android:background="#000"
+            android:background="@drawable/personlogo"
             />
 
         <LinearLayout

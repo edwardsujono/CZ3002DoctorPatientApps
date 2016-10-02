@@ -96,21 +96,21 @@ public class MainPageView extends AppCompatActivity implements HomeView.OnFragme
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
 //        getSupportActionBar().setHomeButtonEnabled(true);
-
+        getSupportActionBar().setTitle("Life Mate");
         mRecyclerView.setHasFixedSize(true);
         //adapter for the navigation drawer
         //change the left Drawer based on the type of the user
         ArrayList<String> listTextNavigationDrawer = new ArrayList<String>();
         listTextNavigationDrawer.add("Home");
         listTextNavigationDrawer.add("Profile");
-        if(TYPE.equals(UserType.Type.PATIENT))listTextNavigationDrawer.add("Medical Record");
-        if(TYPE.equals(UserType.Type.PATIENT))listTextNavigationDrawer.add("Contact Doctor");
+        if(TYPE.equals(UserType.Type.PATIENT+""))listTextNavigationDrawer.add("Medical Record");
+        if(TYPE.equals(UserType.Type.PATIENT+""))listTextNavigationDrawer.add("Contact Doctor");
         else listTextNavigationDrawer.add("Contact Patient");
         listTextNavigationDrawer.add("Calendar");
         ArrayList<Bitmap> listBitmapNavigationDrawer = new ArrayList<Bitmap>();
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_doctor));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_profile));
-        if(TYPE.equals(UserType.Type.PATIENT))listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_report));
+        if(TYPE.equals(UserType.Type.PATIENT+""))listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_report));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_doctor));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_calendar));
 
