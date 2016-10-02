@@ -27,6 +27,7 @@ import ntu.com.mylife.common.entity.databaseentity.UserType;
 import ntu.com.mylife.common.service.OnItemClickListener;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 import ntu.com.mylife.view.CalendarView;
+import ntu.com.mylife.view.ChatView;
 import ntu.com.mylife.view.ContactContainerView;
 import ntu.com.mylife.view.ContactView;
 import ntu.com.mylife.view.HomeView;
@@ -105,12 +106,14 @@ public class NavigationDrawerRecyclerViewAdapter extends RecyclerView.Adapter<Na
                     ft.replace(R.id.fragment_transition_main_page, new MedicalRecordView());
                     break;
                 case 3:
-                    //ft.replace(R.id.fragment_transition_main_page, new ContactView());
-                    Intent intent = new Intent(myActivity, ContactContainerView.class);
-                    myActivity.startActivity(intent);
-
+                    ft.replace(R.id.fragment_transition_main_page, new ContactView());
+                    //Intent intent = new Intent(myActivity, ContactContainerView.class);
+                    //myActivity.startActivity(intent);
                     break;
                 case 4:
+                    ft.replace(R.id.fragment_transition_main_page, new ChatView());
+                    break;
+                case 5:
                     ft.replace(R.id.fragment_transition_main_page, new CalendarView());
 
             }

@@ -6,7 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -148,7 +148,7 @@ public class CreateReminderView extends Fragment {
                     reminderController.addToDatabaseReminder(daySchedule);
 
                 }catch(Exception e){
-                    Log.e("error on create reminder",e.getMessage());
+                    Log.e("error on create",e.getMessage());
                 }
             }
         });

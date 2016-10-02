@@ -1,10 +1,11 @@
 package ntu.com.mylife.view;
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
+
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,7 @@ public class ContactOptionsView extends Fragment {
 
         sharedPreferencesService = new SharedPreferencesService(getActivity().getBaseContext());
         nameClicked.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.CURRENT_CLICK_CONTACT));
-        final FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
+        final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         submitMedicalReportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +81,8 @@ public class ContactOptionsView extends Fragment {
         startChatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ft.replace(R.id.fragment_transition_main_page, new ChatView());
+                ft.commit();
             }
         });
         return rootView;

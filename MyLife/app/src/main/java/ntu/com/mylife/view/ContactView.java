@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,13 +37,19 @@ public class ContactView extends Fragment implements MyCallback {
     private ContactRecyclerViewAdapter contactRecyclerViewAdapter;
 
     private ArrayList<Contact> contactList;
-
+    private AppCompatActivity appCompatActivity;
     private ContactController contactController;
 
 
     public ContactView() {
         // Required empty public constructor
     }
+
+    public ContactView(AppCompatActivity appCompatActivity) {
+        // Required empty public constructor
+        this.appCompatActivity = appCompatActivity;
+    }
+
 
 
 

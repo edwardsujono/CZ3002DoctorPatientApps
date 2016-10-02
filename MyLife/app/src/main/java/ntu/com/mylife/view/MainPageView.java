@@ -29,7 +29,7 @@ import ntu.com.mylife.controller.TabsPagerAdapter;
 public class MainPageView extends AppCompatActivity implements HomeView.OnFragmentInteractionListener,ProfileView.OnFragmentInteractionListener,
         MedicalRecordView.OnFragmentInteractionListener, ChatView.OnFragmentInteractionListener,
         ContactOptionsView.OnFragmentInteractionListener, SubmitMedicalRecordView.OnFragmentInteractionListener,
-        CreateReminderView.OnFragmentInteractionListener, CalendarView.OnFragmentInteractionListener {
+        CreateReminderView.OnFragmentInteractionListener, CalendarView.OnFragmentInteractionListener, ContactView.OnFragmentInteractionListener {
 
     private Toolbar toolbar;                              // Declaring the Toolbar Object
 
@@ -106,12 +106,17 @@ public class MainPageView extends AppCompatActivity implements HomeView.OnFragme
         if(TYPE.equals(UserType.Type.PATIENT+""))listTextNavigationDrawer.add("Medical Record");
         if(TYPE.equals(UserType.Type.PATIENT+""))listTextNavigationDrawer.add("Contact Doctor");
         else listTextNavigationDrawer.add("Contact Patient");
+
+        if(TYPE.equals(UserType.Type.PATIENT+""))listTextNavigationDrawer.add("Chat Doctor");
+        else listTextNavigationDrawer.add("Chat Patient");
+
         listTextNavigationDrawer.add("Calendar");
         ArrayList<Bitmap> listBitmapNavigationDrawer = new ArrayList<Bitmap>();
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_doctor));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_profile));
         if(TYPE.equals(UserType.Type.PATIENT+""))listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_report));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_doctor));
+        listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.ic_chat));
         listBitmapNavigationDrawer.add(BitmapFactory.decodeResource(getResources(), R.drawable.icon_calendar));
 
         NavigationDrawerRecyclerViewAdapter myAdapter = new NavigationDrawerRecyclerViewAdapter(this,listTextNavigationDrawer,listBitmapNavigationDrawer);

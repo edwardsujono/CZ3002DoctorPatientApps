@@ -3,7 +3,7 @@ package ntu.com.mylife.view;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +17,6 @@ import ntu.com.mylife.common.entity.databaseentity.MedicalRecord;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 import ntu.com.mylife.controller.ContactOptionsController;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SubmitMedicalRecordView.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SubmitMedicalRecordView#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SubmitMedicalRecordView extends Fragment {
 
     private OnFragmentInteractionListener mListener;

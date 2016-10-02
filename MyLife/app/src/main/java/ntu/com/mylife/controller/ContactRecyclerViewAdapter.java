@@ -1,8 +1,10 @@
 package ntu.com.mylife.controller;
 
+
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.Context;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,7 +30,7 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
     private Activity myActivity;
     private SharedPreferencesService sharedPreferencesService;
 
-    public ContactRecyclerViewAdapter(ArrayList<Contact> chatList, Context context,Activity activity) {
+    public ContactRecyclerViewAdapter(ArrayList<Contact> chatList, Context context, Activity activity) {
         this.contactList = chatList;
         this.context = context;
         this.myActivity = activity;
@@ -71,7 +73,9 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
         @Override
         public void onClick(View v) {
             Log.i("position",getPosition()+"");
-            final FragmentTransaction ft =myActivity.getFragmentManager().beginTransaction();
+            AppCompatActivity tmp = (AppCompatActivity)myActivity;
+
+            final FragmentTransaction ft = tmp.getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_transition_main_page, new ContactOptionsView());
             sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.CURRENT_CLICK_CONTACT,contactName.getText().toString());
             ft.commit();
