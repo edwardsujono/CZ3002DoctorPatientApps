@@ -7,6 +7,6 @@ public interface DatabaseDaoChat {
 
     public void addData(Object object) throws Exception;
     public void deleteData(Object object) throws Exception;
-    public Object findData() throws Exception;
+    public void findData() throws Exception;
 
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 
 import com.firebase.client.Firebase;
 
@@ -18,6 +19,7 @@ import ntu.com.mylife.common.service.DatabaseDaoChat;
 import ntu.com.mylife.common.service.DatabaseDaoChatImpl;
 import ntu.com.mylife.common.service.DatabaseDaoUser;
 import ntu.com.mylife.common.service.DatabaseDaoUserImpl;
+import ntu.com.mylife.common.service.MyCallback;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 
 /**
@@ -28,7 +30,7 @@ public class ChatController {
     private DatabaseDaoChat daoChat;
     private DatabaseDaoUser daoUser;
     private AlertDialogService alertDialog;
-    private ChatCallback chatCallback;
+    private MyCallback callback;
     private Context context;
     private SharedPreferencesService sharedPreferencesService;
     private static String KEY_USER = "userName";
@@ -39,16 +41,19 @@ public class ChatController {
 
     private List<ntu.com.mylife.common.entity.applicationentity.Chat> chatList;
 
-    public ChatController(ArrayList<ntu.com.mylife.common.entity.applicationentity.Chat> chatList, Context context, ChatCallback callback){
+    public ChatController(ArrayList<ntu.com.mylife.common.entity.applicationentity.Chat> chatList, Context context, MyCallback callback){
         Firebase.setAndroidContext(context);
         this.chatList = chatList;
-        this.daoChat = new DatabaseDaoChatImpl();
+        this.daoChat = new DatabaseDaoChatImpl(callback);
         this.daoUser = new DatabaseDaoUserImpl();
         this.context = context;
-        this.chatCallback = callback;
+        this.callback = callback;
         sharedPreferencesService = new SharedPreferencesService(context);
         userId = sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER);
         userType = sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES, USER_TYPE);
+
+        Log.e("Key User", userId);
+        Log.e("User Type", userType);
 
         //Load chat
         loadChat();
@@ -58,26 +63,34 @@ public class ChatController {
         ArrayList<Object> chatObjectList = new ArrayList<Object>();
         ArrayList<Object> userObjectList = new ArrayList<Object>();
 
+        UserType.Type oppositeUserType;
+        if (userType.equals(UserType.Type.PATIENT.toString())) {
+            oppositeUserType = UserType.Type.DOCTOR;
+        } else {
+            oppositeUserType = UserType.Type.PATIENT;
+        }
+
         //Query chat data
         try {
-            chatObjectList = (ArrayList<Object>) daoChat.findData();
+            daoChat.findData();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         //Query user data
-        UserType.Type oppositeUserType;
-        if (userType == UserType.Type.PATIENT.toString()) {
-            oppositeUserType = UserType.Type.DOCTOR;
-        } else {
-            oppositeUserType = UserType.Type.PATIENT;
-        }
+
+        /*
         try {
             userObjectList = (ArrayList<Object>) daoUser.findData(oppositeUserType);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
+        Log.e("oppositeUserType", oppositeUserType +"");
 
+
+
+        /*
         //For each user found, find the corresponding chat data
         for (Object userObject : userObjectList) {
             User user = (User) userObject;
@@ -102,9 +115,10 @@ public class ChatController {
             }
 
         }
+        */
 
         //Done
-        chatCallback.chatCallback();
+        //chatCallback.chatCallback();
     }
 
 }

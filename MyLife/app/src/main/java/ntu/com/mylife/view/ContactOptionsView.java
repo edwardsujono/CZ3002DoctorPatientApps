@@ -77,7 +77,6 @@ public class ContactOptionsView extends Fragment {
             }
         });
 
-
         startChatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -37,7 +37,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Type message" >
+            android:hint="Type message"
+            android:textColor="@color/cardview_dark_background">
         </EditText>
 
         <ImageButton
