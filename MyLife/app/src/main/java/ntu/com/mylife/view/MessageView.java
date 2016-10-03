@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -65,12 +66,14 @@ public class MessageView extends AppCompatActivity implements MessageCallback {
         public TextView mMessageTextView;
         public TextView mRespondentTextView;
         public TextView mTimeTextView;
+        public LinearLayout mLinearLayout;
 
         public MessageViewHolder(View v) {
             super(v);
             mMessageTextView = (TextView)v.findViewById(R.id.messageRespondentTextView);
             mRespondentTextView = (TextView) v.findViewById(R.id.respondentTextView);
             mTimeTextView = (TextView) v.findViewById(R.id.timeTextView);
+            mLinearLayout = (LinearLayout) v.findViewById(R.id.bubble);
         }
     }
 
@@ -133,13 +136,16 @@ public class MessageView extends AppCompatActivity implements MessageCallback {
                 mDatabaseReference.child(MESSAGE_CHILD).orderByChild("date")) {
             @Override
             protected void populateViewHolder(MessageViewHolder viewHolder, Message model, int position) {
-                //if ((model.getSenderUsername().equals(userId) && model.getReceiverUsername().equals(respondentUsername)) ||
-                //                (model.getSenderUsername().equals(respondentUsername) && model.getReceiverUsername().equals(userId)))
+                if ((model.getSenderUsername().equals(userId) && model.getReceiverUsername().equals(respondentUsername)) ||
+                                (model.getSenderUsername().equals(respondentUsername) && model.getReceiverUsername().equals(userId)))
                 {
+                    viewHolder.mLinearLayout.setVisibility(View.VISIBLE);
                     viewHolder.mMessageTextView.setText(model.getMessage());
                     viewHolder.mRespondentTextView.setText(model.getSenderUsername());
                     viewHolder.mTimeTextView.setText(model.getDate());
-
+                }
+                else {
+                    viewHolder.mLinearLayout.setVisibility(View.GONE);
                 }
             }
 

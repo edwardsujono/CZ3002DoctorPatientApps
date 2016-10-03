@@ -56,10 +56,12 @@ public class DatabaseDaoContactImpl implements DatabaseDaoContact {
         this.callback = callback;
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        if(type.equals(DOCTOR))
+        if(type.equals(UserType.Type.DOCTOR+""))
             stringType = PATIENT;
         else
             stringType = DOCTOR;
+
+        Log.e("stringType", type + " " + stringType);
 
         contactDatabaseReference = databaseReference.child(stringType);
 

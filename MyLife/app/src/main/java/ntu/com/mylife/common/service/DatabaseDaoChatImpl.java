@@ -78,6 +78,9 @@ public class DatabaseDaoChatImpl implements DatabaseDaoChat {
 
         HashMap hashMessage = (HashMap) hashMapSaved.get(CHAT);
 
+        if(hashMessage == null)
+            return;
+
         Log.e("Inside process data", hashMessage.toString());
         for (Object key : hashMessage.keySet()) {
             HashMap chatMaps = (HashMap) hashMessage.get(key);
