@@ -10,15 +10,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
-import ntu.com.mylife.common.entity.databaseentity.MedicalRecord;
+import ntu.com.mylife.common.service.SharedPreferencesKey;
 import ntu.com.mylife.common.service.SharedPreferencesService;
-import ntu.com.mylife.controller.ContactOptionsController;
+import ntu.com.mylife.controller.ControllerConfiguration;
 
 
 /**
@@ -87,8 +85,8 @@ public class ContactOptionsView extends Fragment {
 
 
                 Intent intent = new Intent(getContext(), MessageView.class);
-                intent.putExtra("respondentUsername", currentClickedUser);
-                intent.putExtra("chatExist", false);
+                intent.putExtra(ControllerConfiguration.CHAT_RESPONDENTUSERID, currentClickedUser);
+                intent.putExtra(ControllerConfiguration.CHAT_CHATEXIST, false);
                 startActivity(intent);
             }
         });

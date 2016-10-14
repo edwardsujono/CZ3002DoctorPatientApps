@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
+import ntu.com.mylife.common.service.SharedPreferencesKey;
 import ntu.com.mylife.common.entity.databaseentity.MedicalRecord;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 import ntu.com.mylife.controller.ContactOptionsController;
@@ -52,7 +52,7 @@ public class SubmitMedicalRecordView extends Fragment {
 
         //set the name of textView in the fragment as the name that we clicked
         final String nameClicked = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.CURRENT_CLICK_CONTACT);
-        final String currentDoctor = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_FULL_NANE);
+        final String currentDoctor = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_FULL_NAME);
         nameClick.setText(nameClicked);
 
         submitMedicalDescriptionButton.setOnClickListener(new View.OnClickListener() {

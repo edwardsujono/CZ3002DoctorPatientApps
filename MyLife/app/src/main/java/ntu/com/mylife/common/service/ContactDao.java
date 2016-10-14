@@ -8,6 +8,6 @@ import ntu.com.mylife.common.entity.databaseentity.UserType;
 /**
  * Created by micha on 9/17/2016.
  */
-public interface DatabaseDaoContact {
+public interface ContactDao {
     void findData();
 }

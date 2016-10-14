@@ -18,7 +18,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import ntu.com.mylife.view.ContactOptionsView;
 import ntu.com.mylife.R;
 import ntu.com.mylife.common.entity.applicationentity.Contact;
-import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
+import ntu.com.mylife.common.service.SharedPreferencesKey;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 
 /**
@@ -27,14 +27,14 @@ import ntu.com.mylife.common.service.SharedPreferencesService;
 public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecyclerViewAdapter.ViewHolder> {
     private ArrayList<Contact> contactList;
     private Context context;
-    private Activity myActivity;
+    private Activity activity;
     private SharedPreferencesService sharedPreferencesService;
 
     public ContactRecyclerViewAdapter(ArrayList<Contact> chatList, Context context, Activity activity) {
         this.contactList = chatList;
         this.context = context;
-        this.myActivity = activity;
-        sharedPreferencesService = new SharedPreferencesService(myActivity.getBaseContext());
+        this.activity = activity;
+        sharedPreferencesService = new SharedPreferencesService(activity.getBaseContext());
     }
 
     @Override
@@ -73,7 +73,7 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
         @Override
         public void onClick(View v) {
             Log.i("position",getPosition()+"");
-            AppCompatActivity tmp = (AppCompatActivity)myActivity;
+            AppCompatActivity tmp = (AppCompatActivity) activity;
 
             final FragmentTransaction ft = tmp.getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_transition_main_page, new ContactOptionsView());

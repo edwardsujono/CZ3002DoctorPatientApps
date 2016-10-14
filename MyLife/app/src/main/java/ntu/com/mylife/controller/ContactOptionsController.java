@@ -1,11 +1,10 @@
 package ntu.com.mylife.controller;
 
 import android.app.Activity;
-import android.content.Context;
 
-import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
-import ntu.com.mylife.common.service.DatabaseDaoMedicalRecord;
-import ntu.com.mylife.common.service.DatabaseDaoMedicalRecordImpl;
+import ntu.com.mylife.common.service.SharedPreferencesKey;
+import ntu.com.mylife.common.service.MedicalRecordDao;
+import ntu.com.mylife.common.service.MedicalRecordDaoImpl;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 
 /**
@@ -14,14 +13,14 @@ import ntu.com.mylife.common.service.SharedPreferencesService;
 public class ContactOptionsController {
 
     private Activity myActivity;
-    private DatabaseDaoMedicalRecord dbMedicalRecord;
+    private MedicalRecordDao dbMedicalRecord;
     private SharedPreferencesService sharedPreferencesService;
 
     public ContactOptionsController(Activity myActivity){
 
         this.myActivity = myActivity;
         sharedPreferencesService = new SharedPreferencesService(myActivity.getBaseContext());
-        dbMedicalRecord = new DatabaseDaoMedicalRecordImpl(myActivity);
+        dbMedicalRecord = new MedicalRecordDaoImpl(myActivity);
     }
 
     public void submitMedicalReport(Object object){

@@ -1,5 +1,6 @@
 package ntu.com.mylife.common.service;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.firebase.client.DataSnapshot;
@@ -10,20 +11,20 @@ import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ntu.com.mylife.common.entity.databaseentity.DatabaseConfiguration;
 import ntu.com.mylife.common.entity.databaseentity.Message;
 
 /**
  * Created by MARTINUS on 07-Sep-16.
  */
-public class DatabaseDaoMessageImpl implements DatabaseDaoMessage {
+public class MessageDaoImpl implements MessageDao {
 
     private Firebase firebaseDb;
     private HashMap hashMapSaved;
-    private static final String MESSAGE = "messages";
 
-    public DatabaseDaoMessageImpl() {
+    public MessageDaoImpl() {
 
-        this.firebaseDb = new Firebase("https://lifemate.firebaseio.com/");
+        this.firebaseDb = new Firebase(DatabaseConfiguration.DATABASE_URL);
 
         //always put the event listener at constructor
         //this below code will create separate thread so all this functionality will be
@@ -44,7 +45,7 @@ public class DatabaseDaoMessageImpl implements DatabaseDaoMessage {
 
     public void addData(Object object) throws Exception {
         Message message = (Message) object;
-        Firebase baseMessage = firebaseDb.child(MESSAGE);
+        Firebase baseMessage = firebaseDb.child(DatabaseConfiguration.MESSAGE);
         Firebase listMessage = baseMessage.push();
         listMessage.setValue(message);
         return;
@@ -56,7 +57,7 @@ public class DatabaseDaoMessageImpl implements DatabaseDaoMessage {
         final ArrayList<Object> listReturned = new ArrayList<Object>();
         Log.i("executed Find Data","yes");
 
-        HashMap hashMessage = (HashMap)hashMapSaved.get(MESSAGE);
+        HashMap hashMessage = (HashMap)hashMapSaved.get(DatabaseConfiguration.MESSAGE);
         for(Object key:hashMessage.keySet()){
             HashMap doctorMaps = (HashMap) hashMessage.get(key);
 
@@ -67,14 +68,14 @@ public class DatabaseDaoMessageImpl implements DatabaseDaoMessage {
             String userId = "";
 
             String respondentName;
-            if (userId.equals(doctorMaps.get("sender"))) {
-                respondentName = (String) doctorMaps.get("receiverId");
+            if (userId.equals(doctorMaps.get(DatabaseConfiguration.MESSAGE_SENDERUSERID))) {
+                respondentName = (String) doctorMaps.get(DatabaseConfiguration.MESSAGE_RECEIVERUSERID);
             } else {
-                respondentName = (String) doctorMaps.get("senderId");
+                respondentName = (String) doctorMaps.get(DatabaseConfiguration.MESSAGE_SENDERUSERID);
             }
 
-            String content = (String) doctorMaps.get("message");
-            String date = (String) doctorMaps.get("date");
+            String content = (String) doctorMaps.get(DatabaseConfiguration.MESSAGE_MESSAGE);
+            String date = (String) doctorMaps.get(DatabaseConfiguration.MESSAGE_DATE);
 
             Message message = new Message(respondentName, respondentName, content, date);
             listReturned.add(message);

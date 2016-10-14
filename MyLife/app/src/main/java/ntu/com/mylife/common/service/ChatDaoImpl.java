@@ -11,24 +11,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import ntu.com.mylife.common.entity.databaseentity.Chat;
-import ntu.com.mylife.common.entity.databaseentity.UserType;
+import ntu.com.mylife.common.entity.databaseentity.DatabaseConfiguration;
 
 /**
  * Created by MARTINUS on 17-Sep-16.
  */
-public class DatabaseDaoChatImpl implements DatabaseDaoChat {
+public class ChatDaoImpl implements ChatDao {
 
     private Firebase firebaseDb;
     private HashMap hashMapSaved;
-    private MyCallback callback;
-    private static final String CHAT = "Chat";
-    private static String KEY_USER = "userName";
-    private static String NAME_SHARED_PREFERENCES = "UserSharedPreferences";
-    private static String USER_TYPE = "userType";
+    private BaseCallback callback;
 
-    public DatabaseDaoChatImpl(MyCallback callback) {
+    public ChatDaoImpl(BaseCallback callback) {
 
-        this.firebaseDb = new Firebase("https://lifemate.firebaseio.com/");
+        this.firebaseDb = new Firebase(DatabaseConfiguration.DATABASE_URL);
         this.callback = callback;
 
         //always put the event listener at constructor
@@ -36,9 +32,9 @@ public class DatabaseDaoChatImpl implements DatabaseDaoChat {
         //asynchronous
     }
 
-    public DatabaseDaoChatImpl() {
+    public ChatDaoImpl() {
 
-        this.firebaseDb = new Firebase("https://lifemate.firebaseio.com/");
+        this.firebaseDb = new Firebase(DatabaseConfiguration.DATABASE_URL);
 
         //always put the event listener at constructor
         //this below code will create separate thread so all this functionality will be
@@ -48,7 +44,7 @@ public class DatabaseDaoChatImpl implements DatabaseDaoChat {
 
     public void addData(Object object) throws Exception {
         Chat chat = (Chat) object;
-        Firebase baseChat = firebaseDb.child(CHAT);
+        Firebase baseChat = firebaseDb.child(DatabaseConfiguration.CHAT);
         Firebase listChat = baseChat.push();
         listChat.setValue(chat);
         return;
@@ -76,7 +72,7 @@ public class DatabaseDaoChatImpl implements DatabaseDaoChat {
     private void processData() {
         final ArrayList<Object> listReturned = new ArrayList<Object>();
 
-        HashMap hashMessage = (HashMap) hashMapSaved.get(CHAT);
+        HashMap hashMessage = (HashMap) hashMapSaved.get(DatabaseConfiguration.CHAT);
 
         if(hashMessage == null)
             return;
@@ -85,15 +81,14 @@ public class DatabaseDaoChatImpl implements DatabaseDaoChat {
         for (Object key : hashMessage.keySet()) {
             HashMap chatMaps = (HashMap) hashMessage.get(key);
 
-            String username1 = (String) chatMaps.get("username1");
-            String username2 = (String) chatMaps.get("username2");
-            String latestMessage = (String) chatMaps.get("latestMessage");
+            String user1Id = (String) chatMaps.get(DatabaseConfiguration.CHAT_USER1ID);
+            String user2Id = (String) chatMaps.get(DatabaseConfiguration.CHAT_USER2ID);
+            String latestMessage = (String) chatMaps.get(DatabaseConfiguration.CHAT_LATESTMESSAGE);
+            String latestMessageTime = (String) chatMaps.get(DatabaseConfiguration.CHAT_LATESTMESSAGETIME);
 
-            String latestMessageTime = (String) chatMaps.get("latestMessageTime");
+            Log.e("per key", user1Id + ' ' + user2Id);
 
-            Log.e("per key", username1 + ' ' + username2);
-
-            Chat chat = new Chat(username1, username2, latestMessage, latestMessageTime);
+            Chat chat = new Chat(user1Id, user2Id, latestMessage, latestMessageTime);
             listReturned.add(chat);
         }
 

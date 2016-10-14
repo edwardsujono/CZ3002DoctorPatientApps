@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import ntu.com.mylife.R;
 import ntu.com.mylife.common.entity.applicationentity.Chat;
+import ntu.com.mylife.common.service.ServiceConfiguration;
 import ntu.com.mylife.view.MessageView;
 
 /**
@@ -73,8 +74,8 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
         public void onClick(View v) {
             int position = getLayoutPosition();
             Intent intent = new Intent(context, MessageView.class);
-            intent.putExtra("respondentUsername", chatList.get(position).getRespondentId());
-            intent.putExtra("chatExist", true);
+            intent.putExtra(ControllerConfiguration.CHAT_RESPONDENTUSERID, chatList.get(position).getRespondentId());
+            intent.putExtra(ControllerConfiguration.CHAT_CHATEXIST, true);
             context.startActivity(intent);
 
         }

@@ -7,14 +7,13 @@ public class MedicalRecord {
 
     private String time;
     private String medicalRecordDescription;
-    private String fromDoctor;
+    private String doctorId;
 
-    public MedicalRecord(String time,String medicalRecordDescription,String fromDoctor){
+    public MedicalRecord(String time,String medicalRecordDescription,String doctorId){
         this.time = time;
         this.medicalRecordDescription = medicalRecordDescription;
-        this.fromDoctor = fromDoctor;
+        this.doctorId = doctorId;
     }
-
 
     public String getTime() {
         return time;
@@ -31,11 +30,12 @@ public class MedicalRecord {
     public void setMedicalRecordDescription(String medicalRecordDescription) {
         this.medicalRecordDescription = medicalRecordDescription;
     }
-    public String getFromDoctor() {
-        return fromDoctor;
+
+    public String getDoctorId() {
+        return doctorId;
     }
 
-    public void setFromDoctor(String fromDoctor) {
-        this.fromDoctor = fromDoctor;
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
     }
 }

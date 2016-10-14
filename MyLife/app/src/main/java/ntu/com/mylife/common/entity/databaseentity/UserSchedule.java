@@ -21,26 +21,32 @@ import java.util.ArrayList;
 * */
 
 
-public class UserSchedule {
-    private String userName;
-    private ArrayList<DaySchedule> listDaySchedule;
+public class UserSchedule extends Schedule {
+    private String userId;
+    private ArrayList<DaySchedule> dayScheduleList;
 
+    public UserSchedule() {
 
-    public ArrayList<DaySchedule> getListDaySchedule() {
-        return listDaySchedule;
     }
 
-    public void setListDaySchedule(ArrayList<DaySchedule> listDaySchedule) {
-        this.listDaySchedule = listDaySchedule;
+    public UserSchedule(String userId, ArrayList<DaySchedule> dayScheduleList) {
+        this.userId = userId;
+        this.dayScheduleList = dayScheduleList;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
+    public ArrayList<DaySchedule> getDayScheduleList() {
+        return dayScheduleList;
+    }
 
+    public void setDayScheduleList(ArrayList<DaySchedule> dayScheduleList) {
+        this.dayScheduleList = dayScheduleList;
+    }
 }

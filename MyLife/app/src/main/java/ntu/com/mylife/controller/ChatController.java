@@ -1,9 +1,6 @@
 package ntu.com.mylife.controller;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
 import android.util.Log;
 
 import com.firebase.client.Firebase;
@@ -11,15 +8,14 @@ import com.firebase.client.Firebase;
 import java.util.ArrayList;
 import java.util.List;
 
-import ntu.com.mylife.common.entity.databaseentity.Chat;
-import ntu.com.mylife.common.entity.databaseentity.User;
 import ntu.com.mylife.common.entity.databaseentity.UserType;
 import ntu.com.mylife.common.service.AlertDialogService;
-import ntu.com.mylife.common.service.DatabaseDaoChat;
-import ntu.com.mylife.common.service.DatabaseDaoChatImpl;
-import ntu.com.mylife.common.service.DatabaseDaoUser;
-import ntu.com.mylife.common.service.DatabaseDaoUserImpl;
-import ntu.com.mylife.common.service.MyCallback;
+import ntu.com.mylife.common.service.ChatDao;
+import ntu.com.mylife.common.service.ChatDaoImpl;
+import ntu.com.mylife.common.service.SharedPreferencesKey;
+import ntu.com.mylife.common.service.UserDao;
+import ntu.com.mylife.common.service.UserDaoImpl;
+import ntu.com.mylife.common.service.BaseCallback;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 
 /**
@@ -27,30 +23,27 @@ import ntu.com.mylife.common.service.SharedPreferencesService;
  */
 public class ChatController {
 
-    private DatabaseDaoChat daoChat;
-    private DatabaseDaoUser daoUser;
+    private ChatDao daoChat;
+    private UserDao daoUser;
     private AlertDialogService alertDialog;
-    private MyCallback callback;
+    private BaseCallback callback;
     private Context context;
     private SharedPreferencesService sharedPreferencesService;
-    private static String KEY_USER = "userName";
-    private static String NAME_SHARED_PREFERENCES = "UserSharedPreferences";
-    private static String USER_TYPE = "userType";
     private String userId;
     private String userType;
 
     private List<ntu.com.mylife.common.entity.applicationentity.Chat> chatList;
 
-    public ChatController(ArrayList<ntu.com.mylife.common.entity.applicationentity.Chat> chatList, Context context, MyCallback callback){
+    public ChatController(ArrayList<ntu.com.mylife.common.entity.applicationentity.Chat> chatList, Context context, BaseCallback callback){
         Firebase.setAndroidContext(context);
         this.chatList = chatList;
-        this.daoChat = new DatabaseDaoChatImpl(callback);
-        this.daoUser = new DatabaseDaoUserImpl();
+        this.daoChat = new ChatDaoImpl(callback);
+        this.daoUser = new UserDaoImpl();
         this.context = context;
         this.callback = callback;
         sharedPreferencesService = new SharedPreferencesService(context);
-        userId = sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER);
-        userType = sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES, USER_TYPE);
+        userId = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USER);
+        userType = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USERTYPE);
 
         Log.e("Key User", userId);
         Log.e("User Type", userType);
@@ -79,13 +72,6 @@ public class ChatController {
 
         //Query user data
 
-        /*
-        try {
-            userObjectList = (ArrayList<Object>) daoUser.findData(oppositeUserType);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
         Log.e("oppositeUserType", oppositeUserType +"");
 
 

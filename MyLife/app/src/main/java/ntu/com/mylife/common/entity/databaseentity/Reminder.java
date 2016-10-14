@@ -10,9 +10,16 @@ public class Reminder {
     private Date date;
     private String notification;
     private String time;
-    private String doctor;
-    private String patient;
+    private String doctorId;
+    private String patientId;
 
+    public Reminder(Date date, String notification, String time, String doctorId, String patientId) {
+        this.date = date;
+        this.notification = notification;
+        this.time = time;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+    }
 
     public Date getDate() {
         return date;
@@ -38,19 +45,19 @@ public class Reminder {
         this.time = time;
     }
 
-    public String getDoctor() {
-        return doctor;
+    public String getDoctorId() {
+        return doctorId;
     }
 
-    public void setDoctor(String doctor) {
-        this.doctor = doctor;
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public String getPatient() {
-        return patient;
+    public String getPatientId() {
+        return patientId;
     }
 
-    public void setPatient(String patient) {
-        this.patient = patient;
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
     }
 }

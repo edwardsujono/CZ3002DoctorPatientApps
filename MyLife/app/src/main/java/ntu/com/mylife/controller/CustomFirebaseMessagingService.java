@@ -16,7 +16,7 @@ import ntu.com.mylife.R;
 import ntu.com.mylife.view.MainPageView;
 
 
-public class MyFirebaseMessagingService extends FirebaseMessagingService {
+public class CustomFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
 

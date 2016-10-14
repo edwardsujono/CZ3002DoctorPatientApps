@@ -1,6 +1,5 @@
 package ntu.com.mylife.view;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,24 +16,20 @@ import java.util.ArrayList;
 import ntu.com.mylife.R;
 import ntu.com.mylife.common.entity.applicationentity.Chat;
 
-import ntu.com.mylife.common.entity.databaseentity.UserType;
-import ntu.com.mylife.common.service.MyCallback;
+import ntu.com.mylife.common.service.BaseCallback;
+import ntu.com.mylife.common.service.SharedPreferencesKey;
 import ntu.com.mylife.common.service.SharedPreferencesService;
-import ntu.com.mylife.controller.ChatCallback;
 import ntu.com.mylife.controller.ChatController;
 import ntu.com.mylife.controller.ChatRecyclerViewAdapter;
 
 
-public class ChatView extends Fragment implements MyCallback {
+public class ChatView extends Fragment implements BaseCallback {
 
     private ArrayList<Chat> chatList;
     private RecyclerView chatRecyclerView;
     private ChatRecyclerViewAdapter chatAdapter;
     private ChatController chatController;
     private SharedPreferencesService sharedPreferencesService;
-    private static String KEY_USER = "userName";
-    private static String NAME_SHARED_PREFERENCES = "UserSharedPreferences";
-    private static String USER_TYPE = "userType";
     private String userId;
     private String userType;
 
@@ -63,8 +58,8 @@ public class ChatView extends Fragment implements MyCallback {
         chatRecyclerView.setAdapter(chatAdapter);
 
         sharedPreferencesService = new SharedPreferencesService(getContext());
-        userId = sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER);
-        userType = sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES, USER_TYPE);
+        userId = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USER);
+        userType = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USERTYPE);
 
         return view;
     }
@@ -82,26 +77,26 @@ public class ChatView extends Fragment implements MyCallback {
     public void callbackFunction(Object object) {
         ArrayList<ntu.com.mylife.common.entity.databaseentity.Chat> tmp = (ArrayList<ntu.com.mylife.common.entity.databaseentity.Chat>) object;
 
-        Log.e("callbackFunction", tmp.get(0).getUsername1() + " " + userId);
+        Log.e("callbackFunction", tmp.get(0).getUser1Id() + " " + userId);
 
         chatList.clear();
 
         for(Object o: tmp) {
             ntu.com.mylife.common.entity.databaseentity.Chat c1 = (ntu.com.mylife.common.entity.databaseentity.Chat)o;
 
-            String username1 = c1.getUsername1();
-            String username2 = c1.getUsername2();
+            String user1Id = c1.getUser1Id();
+            String user2Id = c1.getUser2Id();
 
-            if(username1.equals(userId) || username2.equals(userId)) {
+            if(user1Id.equals(userId) || user2Id.equals(userId)) {
                 String latestMessage = c1.getLatestMessage();
                 String latestMessageTime = c1.getLatestMessageTime();
                 String respondentName;
 
-                if(username1.equals(userId)) {
-                    respondentName = username2;
+                if(user1Id.equals(userId)) {
+                    respondentName = user2Id;
                 }
                 else {
-                    respondentName = username1;
+                    respondentName = user1Id;
                 }
 
                 Chat c2 = new Chat(null, respondentName, respondentName, latestMessage, latestMessageTime);

@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.firebase.client.utilities.Base64;
@@ -21,9 +20,7 @@ import java.io.ByteArrayOutputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
-import ntu.com.mylife.common.service.DatabaseDaoUser;
-import ntu.com.mylife.common.service.DatabaseDaoUserImpl;
+import ntu.com.mylife.common.service.SharedPreferencesKey;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 
 /**
@@ -80,7 +77,7 @@ public class ProfileView extends Fragment {
                 textBloodType.setText(textBloodType.getText());
                 textAllergy.setText(textAllergy.getText());
                 textMedicalRecord.setText(textMedicalRecord.getText());
-                sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_FULL_NANE,textFullName.getText().toString());
+                sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_FULL_NAME,textFullName.getText().toString());
                 sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_AGE,textAge.getText().toString());
                 sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_DOB,textDob.getText().toString());
                 sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_BLOOD,textBloodType.getText().toString());
@@ -114,8 +111,8 @@ public class ProfileView extends Fragment {
 
 
     public void loadEditText(){
-        if(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_FULL_NANE) != null){
-            textFullName.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_FULL_NANE));
+        if(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_FULL_NAME) != null){
+            textFullName.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_FULL_NAME));
         }
         if(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_DOB) != null){
             textDob.setText(sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_DOB));

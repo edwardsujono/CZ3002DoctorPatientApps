@@ -12,29 +12,28 @@ import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
-import ntu.com.mylife.common.entity.databaseentity.FireBaseKey;
-import ntu.com.mylife.common.entity.databaseentity.ListMedicalRecordUser;
+import ntu.com.mylife.common.entity.databaseentity.DatabaseConfiguration;
+import ntu.com.mylife.common.entity.databaseentity.UserMedicalRecordList;
 import ntu.com.mylife.common.entity.databaseentity.MedicalRecord;
 
 /**
  * Created by LENOVO on 17/09/2016.
  */
-public class DatabaseDaoMedicalRecordImpl implements DatabaseDaoMedicalRecord{
+public class MedicalRecordDaoImpl implements MedicalRecordDao {
 
     private Activity activity;
     private Firebase firebaseDb;
     private HashMap<String,Object> hashMapSaved = new HashMap<String,Object>();
-    private MyCallback callback = null;
+    private BaseCallback callback = null;
     private SharedPreferencesService sharedPreferencesService;
 
 
-    public DatabaseDaoMedicalRecordImpl(Activity activity, MyCallback callback){
+    public MedicalRecordDaoImpl(Activity activity, BaseCallback callback){
         this.activity = activity;
         this.callback = callback;
         this.sharedPreferencesService = new SharedPreferencesService(activity.getBaseContext());
         //initialize firebaseDB
-        this.firebaseDb = new Firebase("https://lifemate.firebaseio.com/");
+        this.firebaseDb = new Firebase(DatabaseConfiguration.DATABASE_URL);
 
         //always put the event listener at constructor
         //this below code will create separate thread so all this functionality will be
@@ -56,28 +55,28 @@ public class DatabaseDaoMedicalRecordImpl implements DatabaseDaoMedicalRecord{
 
 
     //constructor useful for adding because it's process no need to have callback function
-    public DatabaseDaoMedicalRecordImpl(Activity activity){
+    public MedicalRecordDaoImpl(Activity activity){
         this.activity = activity;
-        this.firebaseDb = new Firebase("https://lifemate.firebaseio.com/");
+        this.firebaseDb = new Firebase(DatabaseConfiguration.DATABASE_URL);
     }
 
 
     @Override
     public Object getRecord(Object object) {
         ArrayList<MedicalRecord> listMedicalRecord = new ArrayList<MedicalRecord>();
-        HashMap<String,Object> mapMedicalRecords = (HashMap<String,Object>) hashMapSaved.get("MedicalRecords");
+        HashMap<String,Object> mapMedicalRecords = (HashMap<String,Object>) hashMapSaved.get(DatabaseConfiguration.MEDICAL_RECORD);
         if(mapMedicalRecords == null) return null;
         for(String key: mapMedicalRecords.keySet()){
             //if userID asked same with the userId checked
             HashMap<String,Object> mapObjectRetrieved =(HashMap<String,Object>) mapMedicalRecords.get(key);
-            String userId = (String) mapObjectRetrieved.get("userName");
+            String userId = (String) mapObjectRetrieved.get(DatabaseConfiguration.USERMEDICALRECORDLIST_USERID);
             if(userId.equals(object)){
-                ArrayList<HashMap<String,Object>> mapListRecord  = (ArrayList<HashMap<String,Object>>) mapObjectRetrieved.get("listmedicalRecord");
+                ArrayList<HashMap<String,Object>> mapListRecord  = (ArrayList<HashMap<String,Object>>) mapObjectRetrieved.get(DatabaseConfiguration.USERMEDICALRECORDLIST_MEDICALRECORDLIST);
                 for(HashMap<String,Object> recordIter: mapListRecord){
-                    String time =(String) recordIter.get("time");
-                    String medicalRecordDescription = (String) recordIter.get("medicalRecordDescription");
-                    String fromDoctor = (String) recordIter.get("fromDoctor");
-                    MedicalRecord medicalRecord = new MedicalRecord(time,medicalRecordDescription,fromDoctor);
+                    String time =(String) recordIter.get(DatabaseConfiguration.MEDICALRECORD_TIME);
+                    String medicalRecordDescription = (String) recordIter.get(DatabaseConfiguration.MEDICALRECORD_MEDICALRECORDDESCRIPTION);
+                    String doctorId = (String) recordIter.get(DatabaseConfiguration.REMINDER_DOCTORID);
+                    MedicalRecord medicalRecord = new MedicalRecord(time,medicalRecordDescription,doctorId);
                     listMedicalRecord.add(medicalRecord);
                 }
             }
@@ -90,11 +89,11 @@ public class DatabaseDaoMedicalRecordImpl implements DatabaseDaoMedicalRecord{
     public void addNewMedicalRecord(Object object,String userName) {
 
         MedicalRecord medicalRecord = (MedicalRecord) object;
-        Object objectToInsert = medicalRecord;
-        Firebase baseMedicalReport = firebaseDb.child(FireBaseKey.MEDICAL_RECORD);
+        Object objectToInsert;
+        Firebase baseMedicalReport = firebaseDb.child(DatabaseConfiguration.MEDICAL_RECORD);
         ArrayList<MedicalRecord> listAddedObject = new ArrayList<MedicalRecord>();
         listAddedObject.add(medicalRecord);
-        ListMedicalRecordUser listMedicalRecordUser = new ListMedicalRecordUser(userName, listAddedObject);
+        UserMedicalRecordList listMedicalRecordUser = new UserMedicalRecordList(userName, listAddedObject);
         objectToInsert = listMedicalRecordUser;
         Firebase addedMedicalRecords = baseMedicalReport.push();
         addedMedicalRecords.setValue(objectToInsert);

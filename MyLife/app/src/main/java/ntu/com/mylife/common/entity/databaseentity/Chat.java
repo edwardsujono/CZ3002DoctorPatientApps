@@ -5,47 +5,47 @@ package ntu.com.mylife.common.entity.databaseentity;
  */
 public class Chat {
 
-    private String username1;
-    private String username2;
+    private String user1Id;
+    private String user2Id;
     private String latestMessage;
     private String latestMessageTime;
 
-    public Chat(String username1, String username2, String latestMessage, String latestMessageTime) {
-        this.username1 = username1;
-        this.username2 = username2;
+    public Chat(String user1Id, String user2Id, String latestMessage, String latestMessageTime) {
+        this.user1Id = user1Id;
+        this.user2Id = user2Id;
         this.latestMessage = latestMessage;
         this.latestMessageTime = latestMessageTime;
     }
 
-    public void setUsername1(String username) {
-        this.username1 = username;
+    public String getUser1Id() {
+        return user1Id;
     }
 
-    public void setUsername2(String username2) {
-        this.username2 = username2;
+    public void setUser1Id(String user1Id) {
+        this.user1Id = user1Id;
     }
 
-    public void setLatestMessage (String message) {
-        this.latestMessage = message;
+    public String getUser2Id() {
+        return user2Id;
     }
 
-    public void setLatestMessageTime(String time) {
-        this.latestMessageTime = time;
-    }
-
-    public String getUsername1() {
-        return username1;
-    }
-
-    public String getUsername2() {
-        return username2;
+    public void setUser2Id(String user2Id) {
+        this.user2Id = user2Id;
     }
 
     public String getLatestMessage() {
         return latestMessage;
     }
 
+    public void setLatestMessage(String latestMessage) {
+        this.latestMessage = latestMessage;
+    }
+
     public String getLatestMessageTime() {
         return latestMessageTime;
+    }
+
+    public void setLatestMessageTime(String latestMessageTime) {
+        this.latestMessageTime = latestMessageTime;
     }
 }

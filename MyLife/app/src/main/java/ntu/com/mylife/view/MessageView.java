@@ -11,14 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -28,9 +26,11 @@ import java.util.Date;
 
 import ntu.com.mylife.R;
 import ntu.com.mylife.common.entity.databaseentity.Chat;
+import ntu.com.mylife.common.entity.databaseentity.DatabaseConfiguration;
 import ntu.com.mylife.common.entity.databaseentity.Message;
-import ntu.com.mylife.common.service.DatabaseDaoChat;
-import ntu.com.mylife.common.service.DatabaseDaoChatImpl;
+import ntu.com.mylife.common.service.ChatDao;
+import ntu.com.mylife.common.service.ChatDaoImpl;
+import ntu.com.mylife.common.service.SharedPreferencesKey;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 import ntu.com.mylife.controller.MessageCallback;
 import ntu.com.mylife.controller.MessageController;
@@ -47,10 +47,9 @@ public class MessageView extends AppCompatActivity implements MessageCallback {
     private MessageRecyclerViewAdapter mMessageAdapter;
     private MessageController messageController;
 
-    private String respondentUsername;
+    private String respondentUserId;
     private boolean chatExist;
 
-    private static String MESSAGE_CHILD = "Message";
     private DatabaseReference mDatabaseReference;
     private FirebaseRecyclerAdapter<Message, MessageViewHolder> firebaseRecyclerAdapter;
     private RecyclerView mMessageRecyclerView;
@@ -58,9 +57,6 @@ public class MessageView extends AppCompatActivity implements MessageCallback {
 
     private String userId;
     private SharedPreferencesService sharedPreferencesService;
-    private static String KEY_USER = "userName";
-    private static String NAME_SHARED_PREFERENCES = "UserSharedPreferences";
-    private static String USER_TYPE = "userType";
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
         public TextView mMessageTextView;
@@ -87,17 +83,17 @@ public class MessageView extends AppCompatActivity implements MessageCallback {
         getSupportActionBar().setDisplayShowTitleEnabled(true);//disable title
 
         sharedPreferencesService = new SharedPreferencesService(this);
-        userId = sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER);
+        userId = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USER);
 
         Intent intent = getIntent();
-        respondentUsername = intent.getStringExtra("respondentUsername");
+        respondentUserId = intent.getStringExtra("respondentUsername");
 
         chatExist = intent.getBooleanExtra("chatExist", true);
 
         if(!chatExist) {
-            Chat c = new Chat(userId, respondentUsername, "", "");
+            Chat c = new Chat(userId, respondentUserId, "", "");
 
-            DatabaseDaoChat db = new DatabaseDaoChatImpl();
+            ChatDao db = new ChatDaoImpl();
             try {
                 db.addData(c);
             } catch (Exception e) {
@@ -105,7 +101,7 @@ public class MessageView extends AppCompatActivity implements MessageCallback {
             }
         }
 
-        getSupportActionBar().setTitle(respondentUsername);
+        getSupportActionBar().setTitle(respondentUserId);
 
 
         //Initialize all variable
@@ -133,15 +129,15 @@ public class MessageView extends AppCompatActivity implements MessageCallback {
                 Message.class,
                 R.layout.message,
                 MessageViewHolder.class,
-                mDatabaseReference.child(MESSAGE_CHILD).orderByChild("date")) {
+                mDatabaseReference.child(DatabaseConfiguration.MESSAGE).orderByChild("date")) {
             @Override
             protected void populateViewHolder(MessageViewHolder viewHolder, Message model, int position) {
-                if ((model.getSenderUsername().equals(userId) && model.getReceiverUsername().equals(respondentUsername)) ||
-                                (model.getSenderUsername().equals(respondentUsername) && model.getReceiverUsername().equals(userId)))
+                if ((model.getSenderUserId().equals(userId) && model.getReceiverUserId().equals(respondentUserId)) ||
+                                (model.getSenderUserId().equals(respondentUserId) && model.getReceiverUserId().equals(userId)))
                 {
                     viewHolder.mLinearLayout.setVisibility(View.VISIBLE);
                     viewHolder.mMessageTextView.setText(model.getMessage());
-                    viewHolder.mRespondentTextView.setText(model.getSenderUsername());
+                    viewHolder.mRespondentTextView.setText(model.getSenderUserId());
                     viewHolder.mTimeTextView.setText(model.getDate());
                 }
                 else {
@@ -204,9 +200,9 @@ public class MessageView extends AppCompatActivity implements MessageCallback {
 
         Date date = new Date();
 
-        Message m = new Message(respondentUsername, userId, messageContent, date.getHours() + ":" + date.getMinutes());
+        Message m = new Message(respondentUserId, userId, messageContent, date.getHours() + ":" + date.getMinutes());
 
-        mDatabaseReference.child(MESSAGE_CHILD)
+        mDatabaseReference.child(DatabaseConfiguration.MESSAGE)
                 .push().setValue(m);
 
         //Add the message to the server (via messageManager)

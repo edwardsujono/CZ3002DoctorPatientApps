@@ -21,23 +21,23 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
-import ntu.com.mylife.common.service.MyCallback;
-import ntu.com.mylife.common.service.DatabaseDaoUserScheduleImpl;
-import ntu.com.mylife.common.service.DatabaseUserScheduleDao;
-import ntu.com.mylife.common.entity.databaseentity.CurrentScheduleRecyclerViewAdaptor;
+import ntu.com.mylife.common.service.SharedPreferencesKey;
+import ntu.com.mylife.common.service.BaseCallback;
+import ntu.com.mylife.common.service.UserScheduleDaoImpl;
+import ntu.com.mylife.common.service.UserScheduleDao;
+import ntu.com.mylife.controller.CurrentScheduleRecyclerViewAdapter;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 
 
-public class HomeView extends Fragment implements MyCallback {
+public class HomeView extends Fragment implements BaseCallback {
 
     private OnFragmentInteractionListener mListener;
     private TextView todaySchedule,todayNumberSchedule,todayMonthSchedule;
     private RecyclerView mRecyclerView;
-    private DatabaseUserScheduleDao dbScehdule;
+    private UserScheduleDao dbScehdule;
     private LinearLayoutManager mLayoutManager;
     private SharedPreferencesService sharedPreferencesService;
-    private String userName;
+    private String userId;
 
     public HomeView() {
         // Required empty public constructor
@@ -48,7 +48,7 @@ public class HomeView extends Fragment implements MyCallback {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this.getActivity());
         sharedPreferencesService = new SharedPreferencesService(getActivity());
-        userName = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER);
+        userId = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER);
     }
 
     @Override
@@ -66,10 +66,10 @@ public class HomeView extends Fragment implements MyCallback {
         final Calendar myCalendar = Calendar.getInstance();
         String today =myCalendar.get(Calendar.DAY_OF_MONTH)+"-"+myCalendar.get(Calendar.MONTH)+"-"+myCalendar.get(Calendar.YEAR);
         //instanstiate current schedule
-        dbScehdule = new DatabaseDaoUserScheduleImpl(this.getActivity(),this,userName,today);
+        dbScehdule = new UserScheduleDaoImpl(this.getActivity(),this,userId,today);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.current_schedule_recyler_view);
-        CurrentScheduleRecyclerViewAdaptor adaptor;
-        adaptor = new CurrentScheduleRecyclerViewAdaptor(new ArrayList<String>(), new ArrayList<String>());
+        CurrentScheduleRecyclerViewAdapter adaptor;
+        adaptor = new CurrentScheduleRecyclerViewAdapter(new ArrayList<String>(), new ArrayList<String>());
         mRecyclerView.setAdapter(adaptor);
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -116,8 +116,8 @@ public class HomeView extends Fragment implements MyCallback {
     @Override
     public void callbackFunction(Object object) {
         HashMap hashReturned = (HashMap) object;
-        CurrentScheduleRecyclerViewAdaptor adaptor;
-        adaptor = new CurrentScheduleRecyclerViewAdaptor((ArrayList)hashReturned.get("listTime"),(ArrayList)hashReturned.get("listMessage"));
+        CurrentScheduleRecyclerViewAdapter adaptor;
+        adaptor = new CurrentScheduleRecyclerViewAdapter((ArrayList)hashReturned.get("listTime"),(ArrayList)hashReturned.get("listMessage"));
         mRecyclerView.setAdapter(adaptor);
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);

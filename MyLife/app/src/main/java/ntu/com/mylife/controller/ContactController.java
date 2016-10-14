@@ -5,9 +5,10 @@ import android.content.Context;
 import java.util.ArrayList;
 
 import ntu.com.mylife.common.entity.applicationentity.Contact;
-import ntu.com.mylife.common.service.DatabaseDaoContact;
-import ntu.com.mylife.common.service.DatabaseDaoContactImpl;
-import ntu.com.mylife.common.service.MyCallback;
+import ntu.com.mylife.common.service.ContactDao;
+import ntu.com.mylife.common.service.ContactDaoImpl;
+import ntu.com.mylife.common.service.BaseCallback;
+import ntu.com.mylife.common.service.SharedPreferencesKey;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 
 /**
@@ -19,32 +20,29 @@ public class ContactController {
     private Context context;
 
     private SharedPreferencesService sharedPreferencesService;
-    private static String KEY_USER = "userName";
-    private static String NAME_SHARED_PREFERENCES = "UserSharedPreferences";
-    private static String USER_TYPE = "userType";
 
     private String userId;
     private String userType;
 
-    private DatabaseDaoContact databaseDaoContact;
+    private ContactDao contactDao;
 
-    private MyCallback callback;
+    private BaseCallback callback;
 
-    public ContactController(ArrayList<Contact> contactList, Context context, MyCallback callback) {
+    public ContactController(ArrayList<Contact> contactList, Context context, BaseCallback callback) {
         this.contactList = contactList;
         this.context = context;
         this.callback = callback;
 
         sharedPreferencesService = new SharedPreferencesService(context);
 
-        userId = sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES, KEY_USER);
-        userType = sharedPreferencesService.getDataFromSharedPreferences(NAME_SHARED_PREFERENCES, USER_TYPE);
+        userId = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USER);
+        userType = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USERTYPE);
 
-        databaseDaoContact = new DatabaseDaoContactImpl(userType, callback);
+        contactDao = new ContactDaoImpl(userType, callback);
     }
 
     public void fetchContact() {
-        databaseDaoContact.findData();
+        contactDao.findData();
     }
 
 

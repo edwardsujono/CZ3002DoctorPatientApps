@@ -13,14 +13,10 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.entity.databaseentity.CurrentScheduleRecyclerViewAdaptor;
 import ntu.com.mylife.common.entity.databaseentity.MedicalRecord;
-import ntu.com.mylife.common.service.DatabaseDaoMedicalRecord;
-import ntu.com.mylife.common.service.DatabaseDaoMedicalRecordImpl;
-import ntu.com.mylife.common.service.DatabaseUserScheduleDao;
-import ntu.com.mylife.common.service.MyCallback;
+import ntu.com.mylife.common.service.BaseCallback;
 import ntu.com.mylife.controller.MedicalRecordController;
-import ntu.com.mylife.controller.MedicalRecordRecyclerViewAdaptor;
+import ntu.com.mylife.controller.MedicalRecordRecyclerViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +26,7 @@ import ntu.com.mylife.controller.MedicalRecordRecyclerViewAdaptor;
  * Use the {@link MedicalRecordView#} factory method to
  * create an instance of this fragment.
  */
-public class MedicalRecordView extends Fragment implements MyCallback {
+public class MedicalRecordView extends Fragment implements BaseCallback {
 
     //this class simply will show recycler view
 
@@ -59,10 +55,10 @@ public class MedicalRecordView extends Fragment implements MyCallback {
         // instanstiate
         medicalRecordController.getListMedicalRecord();
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.medical_record_recycler_view);
-        MedicalRecordRecyclerViewAdaptor adaptor;
+        MedicalRecordRecyclerViewAdapter adaptor;
         ArrayList<MedicalRecord> ls = new ArrayList<MedicalRecord>();
         ls.add((new MedicalRecord("12:30 thursday","wow it is coughing","Edward Sujono")));
-        adaptor = new MedicalRecordRecyclerViewAdaptor(ls);
+        adaptor = new MedicalRecordRecyclerViewAdapter(ls);
         mRecyclerView.setAdapter(adaptor);
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -92,8 +88,8 @@ public class MedicalRecordView extends Fragment implements MyCallback {
     public void callbackFunction(Object object) {
         //fill the recycler view after finish the execution
         ArrayList<MedicalRecord> listMedicalRecord =(ArrayList<MedicalRecord>) object;
-        MedicalRecordRecyclerViewAdaptor adaptor;
-        adaptor = new MedicalRecordRecyclerViewAdaptor(listMedicalRecord);
+        MedicalRecordRecyclerViewAdapter adaptor;
+        adaptor = new MedicalRecordRecyclerViewAdapter(listMedicalRecord);
         mRecyclerView.setAdapter(adaptor);
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);

@@ -5,26 +5,24 @@ import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 
-import ntu.com.mylife.common.service.DatabaseDaoReminder;
-import ntu.com.mylife.common.service.DatabaseDaoReminderImpl;
-import ntu.com.mylife.common.service.DatabaseDaoUserScheduleImpl;
+import ntu.com.mylife.common.service.UserScheduleDaoImpl;
 
 /**
  * Created by LENOVO on 28/09/2016.
  */
 public class CreateReminderController {
 
-    private DatabaseDaoUserScheduleImpl databaseDaoUserSchedule;
-    private Activity myActivity;
+    private UserScheduleDaoImpl databaseDaoUserSchedule;
+    private Activity activity;
 
     public CreateReminderController(Activity activity){
         Firebase.setAndroidContext(activity);
-        databaseDaoUserSchedule  = new DatabaseDaoUserScheduleImpl();
+        databaseDaoUserSchedule  = new UserScheduleDaoImpl();
     }
 
     public void addToDatabaseReminder(Object object) throws Exception{
         databaseDaoUserSchedule.addData(object);
-        Toast.makeText(myActivity, "Schedule is added", Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "Schedule is added", Toast.LENGTH_SHORT).show();
     }
 
 

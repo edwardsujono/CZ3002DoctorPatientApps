@@ -1,4 +1,4 @@
-package ntu.com.mylife.common.entity.databaseentity;
+package ntu.com.mylife.controller;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -16,15 +15,15 @@ import ntu.com.mylife.R;
 /**
  * Created by LENOVO on 07/09/2016.
  */
-public class CurrentScheduleRecyclerViewAdaptor extends RecyclerView.Adapter<CurrentScheduleRecyclerViewAdaptor.ViewHolder>{
+public class CurrentScheduleRecyclerViewAdapter extends RecyclerView.Adapter<CurrentScheduleRecyclerViewAdapter.ViewHolder>{
 
-    private ArrayList<String> listTime;
-    private ArrayList<String> listMessage;
+    private ArrayList<String> timeList;
+    private ArrayList<String> messageList;
 
 
-    public CurrentScheduleRecyclerViewAdaptor(ArrayList<String> listTime,ArrayList<String> listMessage){
-        this.listMessage = listMessage;
-        this.listTime  = listTime;
+    public CurrentScheduleRecyclerViewAdapter(ArrayList<String> listTime, ArrayList<String> listMessage){
+        this.messageList = listMessage;
+        this.timeList  = listTime;
     }
 
     @Override
@@ -35,8 +34,8 @@ public class CurrentScheduleRecyclerViewAdaptor extends RecyclerView.Adapter<Cur
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String timeStamp = listTime.get(position);
-        String message = listMessage.get(position);
+        String timeStamp = timeList.get(position);
+        String message = messageList.get(position);
         holder.currentMessage.setTextColor(Color.parseColor("#009688"));
         holder.currentMessage.setText(message);
         holder.currentTime.setTextColor(Color.parseColor("#009688"));
@@ -51,7 +50,7 @@ public class CurrentScheduleRecyclerViewAdaptor extends RecyclerView.Adapter<Cur
 
     @Override
     public int getItemCount() {
-        return listTime.size();
+        return timeList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

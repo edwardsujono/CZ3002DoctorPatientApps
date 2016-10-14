@@ -9,8 +9,9 @@ import ntu.com.mylife.common.entity.databaseentity.Doctor;
 import ntu.com.mylife.common.entity.databaseentity.Patient;
 import ntu.com.mylife.common.entity.databaseentity.UserType;
 import ntu.com.mylife.common.service.AlertDialogService;
-import ntu.com.mylife.common.service.DatabaseDaoUser;
-import ntu.com.mylife.common.service.DatabaseDaoUserImpl;
+import ntu.com.mylife.common.service.SharedPreferencesKey;
+import ntu.com.mylife.common.service.UserDao;
+import ntu.com.mylife.common.service.UserDaoImpl;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 
 /**
@@ -18,15 +19,14 @@ import ntu.com.mylife.common.service.SharedPreferencesService;
  */
 public class SignUpController {
 
-    private DatabaseDaoUser db;
+    private UserDao db;
     private AlertDialogService alertDialog;
     private Context myContext;
     private SharedPreferencesService sharedPreferencesService;
-    private static String KEY_USER = "userName", USER_TYPE="userType", NAME_SHARED_PREFERENCES = "UserSharedPreferences";
 
     public SignUpController(Context myContext){
         Firebase.setAndroidContext(myContext);
-        this.db =  new DatabaseDaoUserImpl();
+        this.db =  new UserDaoImpl();
         alertDialog = new AlertDialogService(myContext);
         this.myContext = myContext;
         sharedPreferencesService = new SharedPreferencesService(myContext);
@@ -47,13 +47,13 @@ public class SignUpController {
             if (type == UserType.Type.PATIENT) {
                 Patient patient = new Patient(fullName, userName, email, password, "");
                 db.addData(type, patient);
-                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES, KEY_USER, userName);
-                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,USER_TYPE,type.toString());
+                sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USER, userName);
+                sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USERTYPE,type.toString());
             } else {
                 Doctor doctor = new Doctor(fullName, userName, email, password, "");
                 db.addData(type, doctor);
-                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER,userName);
-                sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,USER_TYPE,type.toString());
+                sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER,userName);
+                sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USERTYPE,type.toString());
             }
             alertDialog.showDialog("Sign In to your account");
             return true;

@@ -15,12 +15,12 @@ import ntu.com.mylife.common.entity.databaseentity.MedicalRecord;
 /**
  * Created by LENOVO on 17/09/2016.
  */
-public class MedicalRecordRecyclerViewAdaptor extends RecyclerView.Adapter<MedicalRecordRecyclerViewAdaptor.ViewHolder>{
+public class MedicalRecordRecyclerViewAdapter extends RecyclerView.Adapter<MedicalRecordRecyclerViewAdapter.ViewHolder>{
 
     private ArrayList<MedicalRecord> listMedicalRecord;
 
 
-    public MedicalRecordRecyclerViewAdaptor(ArrayList<MedicalRecord> listMedicalRecord){
+    public MedicalRecordRecyclerViewAdapter(ArrayList<MedicalRecord> listMedicalRecord){
         this.listMedicalRecord = listMedicalRecord;
 
     }
@@ -40,7 +40,7 @@ public class MedicalRecordRecyclerViewAdaptor extends RecyclerView.Adapter<Medic
 
         holder.medicalRecordTme.setText(medicalRecord.getTime());
         holder.medicalRecordDescription.setText(medicalRecord.getMedicalRecordDescription());
-        holder.medicalRecordFromDoctor.setText(medicalRecord.getFromDoctor());
+        holder.medicalRecordFromDoctor.setText(medicalRecord.getDoctorId());
 
     }
 

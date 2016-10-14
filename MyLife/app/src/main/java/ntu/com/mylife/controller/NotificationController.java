@@ -6,30 +6,30 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import ntu.com.mylife.R;
 import ntu.com.mylife.common.entity.databaseentity.DaySchedule;
-import ntu.com.mylife.common.service.DatabaseDaoUserScheduleImpl;
-import ntu.com.mylife.common.service.MyCallback;
+import ntu.com.mylife.common.service.ServiceConfiguration;
+import ntu.com.mylife.common.service.UserScheduleDaoImpl;
+import ntu.com.mylife.common.service.BaseCallback;
 import ntu.com.mylife.common.service.NotificationBroadcastReceiver;
 
 /**
  * Created by LENOVO on 02/10/2016.
  */
-public class NotificationController implements MyCallback {
+public class NotificationController implements BaseCallback {
 
     private Activity myActivity;
-    private DatabaseDaoUserScheduleImpl dbSchedule;
+    private UserScheduleDaoImpl dbSchedule;
     private long beforeTime  = 1;
 
 
-    public NotificationController(Activity activity,String userName){
+    public NotificationController(Activity activity,String userId){
         this.myActivity = activity;
-        dbSchedule = new DatabaseDaoUserScheduleImpl(this,userName);
+        dbSchedule = new UserScheduleDaoImpl(this,userId);
     }
 
 
@@ -49,8 +49,8 @@ public class NotificationController implements MyCallback {
         Intent notificationIntent = new Intent(this.myActivity, NotificationBroadcastReceiver.class);
         Random random = new Random();
         int nextInt = random.nextInt();
-        notificationIntent.putExtra(NotificationBroadcastReceiver.NOTIFICATION_ID, nextInt);
-        notificationIntent.putExtra(NotificationBroadcastReceiver.NOTIFICATION, notification);
+        notificationIntent.putExtra(ServiceConfiguration.NOTIFICATION_ID, nextInt);
+        notificationIntent.putExtra(ServiceConfiguration.NOTIFICATION, notification);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this.myActivity, nextInt, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager)this.myActivity.getSystemService(this.myActivity.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,timeFuture, pendingIntent);

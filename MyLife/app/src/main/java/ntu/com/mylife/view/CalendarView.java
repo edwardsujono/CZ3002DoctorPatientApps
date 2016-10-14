@@ -12,8 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -24,14 +22,12 @@ import java.util.Date;
 import java.util.HashMap;
 
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
-import ntu.com.mylife.common.entity.databaseentity.CurrentScheduleRecyclerViewAdaptor;
-import ntu.com.mylife.common.entity.databaseentity.DaySchedule;
-import ntu.com.mylife.common.service.DatabaseDaoUserScheduleImpl;
-import ntu.com.mylife.common.service.DatabaseUserScheduleDao;
-import ntu.com.mylife.common.service.MyCallback;
+import ntu.com.mylife.common.service.SharedPreferencesKey;
+import ntu.com.mylife.controller.CurrentScheduleRecyclerViewAdapter;
+import ntu.com.mylife.common.service.UserScheduleDaoImpl;
+import ntu.com.mylife.common.service.UserScheduleDao;
+import ntu.com.mylife.common.service.BaseCallback;
 import ntu.com.mylife.common.service.SharedPreferencesService;
-import ntu.com.mylife.controller.MedicalRecordRecyclerViewAdaptor;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,7 +37,7 @@ import ntu.com.mylife.controller.MedicalRecordRecyclerViewAdaptor;
  * Use the {@link CalendarView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CalendarView extends Fragment implements MyCallback{
+public class CalendarView extends Fragment implements BaseCallback {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,11 +55,11 @@ public class CalendarView extends Fragment implements MyCallback{
     private MaterialCalendarView mCalendarView;
 
     private RecyclerView mRecyclerView;
-    private CurrentScheduleRecyclerViewAdaptor adaptor;
+    private CurrentScheduleRecyclerViewAdapter adaptor;
     private LinearLayoutManager mLayoutManager;
-    private DatabaseUserScheduleDao dbSchedule;
+    private UserScheduleDao dbSchedule;
     private SharedPreferencesService sharedPreferencesService;
-    private String userName;
+    private String userId;
     private Context myContext;
 
     public CalendarView() {
@@ -92,7 +88,7 @@ public class CalendarView extends Fragment implements MyCallback{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPreferencesService   = new SharedPreferencesService(getActivity());
-        userName = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER);
+        userId = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER);
         myContext = getContext();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -125,11 +121,11 @@ public class CalendarView extends Fragment implements MyCallback{
 
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.current_schedule_recyler_view);
-        adaptor = new CurrentScheduleRecyclerViewAdaptor(t, s);
+        adaptor = new CurrentScheduleRecyclerViewAdapter(t, s);
         mRecyclerView.setAdapter(adaptor);
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        final MyCallback callback = this;
+        final BaseCallback callback = this;
         /**
          * Callback when a date is selected
          */
@@ -139,7 +135,7 @@ public class CalendarView extends Fragment implements MyCallback{
                 Log.e("onDateSelected", String.valueOf(date.getDay()));
                 //dbScheduleImplementation
                 String dateInserted = date.getDay()+"-"+date.getMonth()+"-"+date.getYear();
-                dbSchedule = new DatabaseDaoUserScheduleImpl(myContext,callback,userName,dateInserted);
+                dbSchedule = new UserScheduleDaoImpl(myContext,callback,userId,dateInserted);
             }
         });
 
@@ -149,8 +145,8 @@ public class CalendarView extends Fragment implements MyCallback{
     @Override
     public void callbackFunction(Object object) {
         HashMap hashReturned = (HashMap) object;
-        CurrentScheduleRecyclerViewAdaptor adaptor;
-        adaptor = new CurrentScheduleRecyclerViewAdaptor((ArrayList)hashReturned.get("listTime"),(ArrayList)hashReturned.get("listMessage"));
+        CurrentScheduleRecyclerViewAdapter adaptor;
+        adaptor = new CurrentScheduleRecyclerViewAdapter((ArrayList)hashReturned.get("listTime"),(ArrayList)hashReturned.get("listMessage"));
         mRecyclerView.setAdapter(adaptor);
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);

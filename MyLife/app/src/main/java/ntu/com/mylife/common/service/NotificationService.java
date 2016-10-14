@@ -25,12 +25,12 @@ public class NotificationService extends IntentService {
 
     public NotificationService()
     {
-        super("Notification");
+        super(ServiceConfiguration.NOTIFICATIONBROADCASTRECEIVER_NOTIFICATION);
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        sendMessage(intent.getStringExtra("notification"));
+        sendMessage(intent.getStringExtra(ServiceConfiguration.NOTIFICATION));
     }
 
 
@@ -42,7 +42,7 @@ public class NotificationService extends IntentService {
         Random generate = new Random();
         PendingIntent contentIntent = PendingIntent.getService(this,generate.nextInt(),new Intent(this,this.getClass()),0);
         NotificationCompat.Builder alamNotificationBuilder = new NotificationCompat.Builder(
-                this).setContentTitle("Alarm").setSmallIcon(R.drawable.icon_doctor)
+                this).setContentTitle(ServiceConfiguration.ALARM).setSmallIcon(R.drawable.icon_doctor)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                 .setContentText(msg);
 

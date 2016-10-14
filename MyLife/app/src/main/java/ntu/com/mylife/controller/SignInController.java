@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import ntu.com.mylife.common.entity.databaseentity.Doctor;
 import ntu.com.mylife.common.entity.databaseentity.Patient;
 import ntu.com.mylife.common.entity.databaseentity.UserType;
-import ntu.com.mylife.common.service.DatabaseDaoUser;
-import ntu.com.mylife.common.service.DatabaseDaoUserImpl;
+import ntu.com.mylife.common.service.SharedPreferencesKey;
+import ntu.com.mylife.common.service.UserDao;
+import ntu.com.mylife.common.service.UserDaoImpl;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 
 /**
@@ -19,15 +20,14 @@ import ntu.com.mylife.common.service.SharedPreferencesService;
  */
 public class SignInController {
 
-    private DatabaseDaoUser db;
+    private UserDao db;
     private Context myContext;
     private SharedPreferencesService sharedPreferencesService;
-    private static String KEY_USER = "userName",USER_TYPE="userType", NAME_SHARED_PREFERENCES = "UserSharedPreferences";
 
 
     public SignInController(Context context){
         Firebase.setAndroidContext(context);
-        this.db = new DatabaseDaoUserImpl();
+        this.db = new UserDaoImpl();
         this.myContext = context;
         sharedPreferencesService = new SharedPreferencesService(context);
     }
@@ -39,19 +39,19 @@ public class SignInController {
             listUserFromDb = (ArrayList) db.findData(type);
             if(type == UserType.Type.PATIENT){
                 for(Patient patient:(ArrayList<Patient>) listUserFromDb){
-                    if(patient.getUserName().equals(userName) && patient.getPassword().equals(password)){
+                    if(patient.getUserId().equals(userName) && patient.getPassword().equals(password)){
                         Toast.makeText(myContext,"Sign In To Your Account",Toast.LENGTH_LONG).show();
-                        sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER,userName);
-                        sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,USER_TYPE,type.toString());
+                        sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USER, userName);
+                        sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USERTYPE, type.toString());
                         return true;
                     }
                 }
             }else{
                 for(Doctor doctor:(ArrayList<Doctor>) listUserFromDb){
-                    if(doctor.getUserName().equals(userName) && doctor.getPassword().equals(password)){
+                    if(doctor.getUserId().equals(userName) && doctor.getPassword().equals(password)){
                         Toast.makeText(myContext,"Sign In To Your Account",Toast.LENGTH_LONG).show();
-                        sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,KEY_USER,userName);
-                        sharedPreferencesService.saveToSharedPreferences(NAME_SHARED_PREFERENCES,USER_TYPE,type.toString());
+                        sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER,userName);
+                        sharedPreferencesService.saveToSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USERTYPE,type.toString());
                         return true;
                     }
                 }

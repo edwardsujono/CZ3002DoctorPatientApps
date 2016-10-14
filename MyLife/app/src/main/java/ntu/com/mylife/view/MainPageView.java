@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,12 +18,11 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 import ntu.com.mylife.R;
-import ntu.com.mylife.common.entity.applicationentity.SharedPreferencesKey;
+import ntu.com.mylife.common.service.SharedPreferencesKey;
 import ntu.com.mylife.common.entity.databaseentity.UserType;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 import ntu.com.mylife.controller.NavigationDrawerRecyclerViewAdapter;
 import ntu.com.mylife.controller.NotificationController;
-import ntu.com.mylife.controller.TabsPagerAdapter;
 
 public class MainPageView extends AppCompatActivity implements HomeView.OnFragmentInteractionListener,ProfileView.OnFragmentInteractionListener,
         MedicalRecordView.OnFragmentInteractionListener, ChatView.OnFragmentInteractionListener,
@@ -83,8 +81,8 @@ public class MainPageView extends AppCompatActivity implements HomeView.OnFragme
 
 
         //set up notification Controller
-        String userName = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER);
-        notificationController = new NotificationController(this,userName);
+        String userId = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USER);
+        notificationController = new NotificationController(this,userId);
     }
 
 

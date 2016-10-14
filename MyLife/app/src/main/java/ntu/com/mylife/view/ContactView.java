@@ -1,6 +1,5 @@
 package ntu.com.mylife.view;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,11 +15,11 @@ import java.util.ArrayList;
 
 import ntu.com.mylife.R;
 import ntu.com.mylife.common.entity.applicationentity.Contact;
-import ntu.com.mylife.common.service.MyCallback;
+import ntu.com.mylife.common.service.BaseCallback;
 import ntu.com.mylife.controller.ContactController;
 import ntu.com.mylife.controller.ContactRecyclerViewAdapter;
 
-public class ContactView extends Fragment implements MyCallback {
+public class ContactView extends Fragment implements BaseCallback {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";

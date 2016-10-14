@@ -2,19 +2,17 @@ package ntu.com.mylife.common.service;
 
 import android.util.Log;
 
-import com.firebase.client.Firebase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import ntu.com.mylife.common.entity.applicationentity.Contact;
+import ntu.com.mylife.common.entity.databaseentity.DatabaseConfiguration;
 import ntu.com.mylife.common.entity.databaseentity.UserType;
 
 /**
@@ -39,31 +37,27 @@ import ntu.com.mylife.common.entity.databaseentity.UserType;
 * */
 
 
-public class DatabaseDaoContactImpl implements DatabaseDaoContact {
+public class ContactDaoImpl implements ContactDao {
 
     private DatabaseReference databaseReference;
     private DatabaseReference contactDatabaseReference;
     private HashMap hashMapSaved;
-    private static String DOCTOR = "doctors";
-    private static String PATIENT = "patients";
-    private static String FULLNAME = "fullName";
-    private static String USERNAME = "userName";
-    private String stringType;
+    private String userTypeString;
 
-    private MyCallback callback;
+    private BaseCallback callback;
 
-    public DatabaseDaoContactImpl(String type, MyCallback callback) {
+    public ContactDaoImpl(String type, BaseCallback callback) {
         this.callback = callback;
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         if(type.equals(UserType.Type.DOCTOR+""))
-            stringType = PATIENT;
+            userTypeString = DatabaseConfiguration.PATIENTS;
         else
-            stringType = DOCTOR;
+            userTypeString = DatabaseConfiguration.DOCTORS;
 
-        Log.e("stringType", type + " " + stringType);
+        Log.e("stringType", type + " " + userTypeString);
 
-        contactDatabaseReference = databaseReference.child(stringType);
+        contactDatabaseReference = databaseReference.child(userTypeString);
 
     }
 
@@ -71,7 +65,7 @@ public class DatabaseDaoContactImpl implements DatabaseDaoContact {
     public void findData() {
 
 
-        Log.e("DatabaseDaoContact", contactDatabaseReference.toString());
+        Log.e("ContactDao", contactDatabaseReference.toString());
 
         contactDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -83,7 +77,7 @@ public class DatabaseDaoContactImpl implements DatabaseDaoContact {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e("DatabaseDaoContactImpl", databaseError.getMessage());
+                Log.e("ContactDaoImpl", databaseError.getMessage());
             }
         });
     }
@@ -101,7 +95,8 @@ public class DatabaseDaoContactImpl implements DatabaseDaoContact {
 
             HashMap hashMapAttr = (HashMap) attr;
 
-            String contactName = (String)hashMapAttr.get(USERNAME);
+            String contactName = (String)hashMapAttr.get(DatabaseConfiguration.USER_FULLNAME);
+            //Temporary
             String imageName = "";
 
             Contact contact = new Contact(contactName, null);

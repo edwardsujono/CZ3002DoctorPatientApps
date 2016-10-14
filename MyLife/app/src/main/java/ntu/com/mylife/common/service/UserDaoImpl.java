@@ -9,6 +9,7 @@ import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ntu.com.mylife.common.entity.databaseentity.DatabaseConfiguration;
 import ntu.com.mylife.common.entity.databaseentity.Doctor;
 import ntu.com.mylife.common.entity.databaseentity.Patient;
 import ntu.com.mylife.common.entity.databaseentity.UserType;
@@ -33,15 +34,13 @@ import ntu.com.mylife.common.entity.databaseentity.UserType;
 
 * */
 
-public class DatabaseDaoUserImpl implements DatabaseDaoUser {
+public class UserDaoImpl implements UserDao {
 
     private Firebase firebaseDb;
-    private static String PATIENT = "patients";
-    private static String DOCTOR = "doctors";
     private HashMap hashMapSaved;
 
 
-    public DatabaseDaoUserImpl(){
+    public UserDaoImpl(){
 
         this.firebaseDb = new Firebase("https://lifemate.firebaseio.com/");
 
@@ -70,13 +69,13 @@ public class DatabaseDaoUserImpl implements DatabaseDaoUser {
         if(type == UserType.Type.PATIENT){
             //save patient data record
             Patient patient = (Patient) object;
-            Firebase basePatient =  firebaseDb.child(PATIENT);
+            Firebase basePatient =  firebaseDb.child(DatabaseConfiguration.PATIENTS);
             Firebase listPatients = basePatient.push();
             listPatients.setValue(patient);
         }else{
             //save doctor data record
             Doctor doctor =  (Doctor) object;
-            Firebase baseDoctor =  firebaseDb.child(DOCTOR);
+            Firebase baseDoctor =  firebaseDb.child(DatabaseConfiguration.DOCTORS);
             Firebase listDoctors = baseDoctor.push();
             listDoctors.setValue(doctor);
         }
@@ -92,28 +91,28 @@ public class DatabaseDaoUserImpl implements DatabaseDaoUser {
         final ArrayList<Object> listReturned = new ArrayList<Object>();
         Log.i("executed Find Data","yes");
         if(type == UserType.Type.PATIENT){
-            HashMap hashPatients = (HashMap)hashMapSaved.get(PATIENT);
+            HashMap hashPatients = (HashMap)hashMapSaved.get(DatabaseConfiguration.PATIENTS);
             for(Object key:hashPatients.keySet()){
                 HashMap patientMaps = (HashMap)hashPatients.get(key);
-                String email =(String) patientMaps.get("email");
-                String password = (String) patientMaps.get("password");
-                String userName = (String) patientMaps.get("userName");
-                String fullName = (String) patientMaps.get("fullName");
-                String encodedImage = (String) patientMaps.get("encodedImage");
-                Patient patient = new Patient(fullName,userName,email,password, encodedImage);
+                String email =(String) patientMaps.get(DatabaseConfiguration.USER_EMAIL);
+                String password = (String) patientMaps.get(DatabaseConfiguration.USER_PASSWORD);
+                String userId = (String) patientMaps.get(DatabaseConfiguration.USER_USERID);
+                String fullName = (String) patientMaps.get(DatabaseConfiguration.USER_FULLNAME);
+                String encodedImage = (String) patientMaps.get(DatabaseConfiguration.USER_IMAGE);
+                Patient patient = new Patient(fullName,userId,email,password, encodedImage);
                 //just for patient need to get the other info regarding with the user
                 listReturned.add(patient);
             }
        }else{
-            HashMap hashDoctor = (HashMap)hashMapSaved.get(DOCTOR);
+            HashMap hashDoctor = (HashMap)hashMapSaved.get(DatabaseConfiguration.DOCTORS);
             for(Object key:hashDoctor.keySet()){
                 HashMap doctorMaps = (HashMap)hashDoctor.get(key);
-                String email =(String) doctorMaps.get("email");
-                String password = (String) doctorMaps.get("password");
-                String userName = (String) doctorMaps.get("userName");
-                String fullName = (String) doctorMaps.get("fullName");
-                String encodedImage = (String) doctorMaps.get("encodedImage");
-                Doctor doctor = new Doctor(fullName,userName,email,password, encodedImage);
+                String email =(String) doctorMaps.get(DatabaseConfiguration.USER_EMAIL);
+                String password = (String) doctorMaps.get(DatabaseConfiguration.USER_PASSWORD);
+                String userId = (String) doctorMaps.get(DatabaseConfiguration.USER_USERID);
+                String fullName = (String) doctorMaps.get(DatabaseConfiguration.USER_FULLNAME);
+                String encodedImage = (String) doctorMaps.get(DatabaseConfiguration.USER_IMAGE);
+                Doctor doctor = new Doctor(fullName,userId,email,password, encodedImage);
                 listReturned.add(doctor);
             }
        }
