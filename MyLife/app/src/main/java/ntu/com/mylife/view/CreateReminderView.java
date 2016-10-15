@@ -7,6 +7,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -71,10 +74,10 @@ public class CreateReminderView extends Fragment {
         editTextDescription = (EditText) rootView.findViewById(R.id.edit_text_description_createReminder);
         buttonCreateReminder = (Button) rootView.findViewById(R.id.create_reminder_button);
         nameTextView = (TextView) rootView.findViewById(R.id.name_click_create_reminder);
-
+        final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         nameTextView.setText(userId);
 
-        //showing DatePicket when editText is click
+        //showing DatePicker when editText is click
         final Calendar myCalendar = Calendar.getInstance();
 
 
@@ -89,7 +92,6 @@ public class CreateReminderView extends Fragment {
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 editTextDate.setText(dayOfMonth+"-"+monthOfYear+"-"+year);
-
             }
         };
 
@@ -98,7 +100,7 @@ public class CreateReminderView extends Fragment {
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(myContext,date,myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH)+1,
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
@@ -128,7 +130,6 @@ public class CreateReminderView extends Fragment {
             }
         });
 
-
         buttonCreateReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,7 +137,7 @@ public class CreateReminderView extends Fragment {
                     ArrayList<TimeSchedule> listTimeSchedule = new ArrayList<TimeSchedule>();
                     UserSchedule userSchedule = new UserSchedule();
                     userSchedule.setUserId(userId);
-                    String date = myCalendar.get(Calendar.DAY_OF_MONTH) + "-" + myCalendar.get(Calendar.MONTH) + "-" + myCalendar.get(Calendar.YEAR);
+                    String date = myCalendar.get(Calendar.DAY_OF_MONTH) + "-" + (myCalendar.get(Calendar.MONTH)-1) + "-" + myCalendar.get(Calendar.YEAR);
                     String time = editTextTime.getText().toString();
                     String message = editTextDescription.getText().toString();
                     long futureTimeMillis = myCalendar.getTimeInMillis();
@@ -144,8 +145,13 @@ public class CreateReminderView extends Fragment {
                     reminderController.addToDatabaseReminder(daySchedule);
 
                 }catch(Exception e){
+
                     Log.e("error on create",e.getMessage());
                 }
+                Toast.makeText(getActivity(),"Reminder has been made",Toast.LENGTH_LONG).show();
+                //go to the previous fragment
+                ft.replace(R.id.fragment_transition_main_page, new ContactOptionsView());
+                ft.commit();
             }
         });
         return rootView;

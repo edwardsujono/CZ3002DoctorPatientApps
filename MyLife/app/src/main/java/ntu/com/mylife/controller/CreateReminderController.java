@@ -22,7 +22,6 @@ public class CreateReminderController {
 
     public void addToDatabaseReminder(Object object) throws Exception{
         databaseDaoUserSchedule.addData(object);
-        Toast.makeText(activity, "Schedule is added", Toast.LENGTH_SHORT).show();
     }
 
 

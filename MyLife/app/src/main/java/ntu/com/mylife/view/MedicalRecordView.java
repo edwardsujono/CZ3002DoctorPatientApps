@@ -57,7 +57,7 @@ public class MedicalRecordView extends Fragment implements BaseCallback {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.medical_record_recycler_view);
         MedicalRecordRecyclerViewAdapter adaptor;
         ArrayList<MedicalRecord> ls = new ArrayList<MedicalRecord>();
-        ls.add((new MedicalRecord("12:30 thursday","wow it is coughing","Edward Sujono")));
+        //ls.add((new MedicalRecord("12:30 thursday","wow it is coughing","Edward Sujono")));
         adaptor = new MedicalRecordRecyclerViewAdapter(ls);
         mRecyclerView.setAdapter(adaptor);
         mLayoutManager = new LinearLayoutManager(this.getActivity());

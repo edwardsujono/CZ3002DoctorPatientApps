@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import ntu.com.mylife.R;
+import ntu.com.mylife.common.entity.databaseentity.UserType;
 import ntu.com.mylife.common.service.SharedPreferencesKey;
 import ntu.com.mylife.common.service.SharedPreferencesService;
 import ntu.com.mylife.controller.ControllerConfiguration;
@@ -58,9 +59,16 @@ public class ContactOptionsView extends Fragment {
 
         nameClicked = (TextView) rootView.findViewById(R.id.username_contact_options);
 
+
         sharedPreferencesService = new SharedPreferencesService(getActivity().getBaseContext());
         currentClickedUser = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.CURRENT_CLICK_CONTACT);
         nameClicked.setText(currentClickedUser);
+
+        String userType = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES,SharedPreferencesKey.KEY_USERTYPE);
+        if(userType.equals(UserType.Type.PATIENT+"")){
+            submitMedicalReportButton.setVisibility(View.GONE);
+        }
+
         final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         submitMedicalReportButton.setOnClickListener(new View.OnClickListener() {
             @Override
