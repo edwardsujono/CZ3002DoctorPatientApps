@@ -36,19 +36,18 @@ public class MessageController {
 
     private List<Message> messageList;
 
-    public MessageController (String respondentUserId, ArrayList<Message> messageList, Context context, MessageCallback callback) {
+    public MessageController (String respondentUserId, boolean chatExist, Context context) {
         this.respondentUserId = respondentUserId;
-        this.messageList = messageList;
         this.context = context;
-        this.messageCallback = callback;
         this.daoMessage = new MessageDaoImpl();
         this.daoUser = new UserDaoImpl();
         sharedPreferencesService = new SharedPreferencesService(context);
         userId = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USER);
-        userType = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USERTYPE);
+        //userType = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USERTYPE);
+        this.respondentUserId = respondentUserId;
+        if(!chatExist) {
 
-        //Load message
-        loadMessage();
+        }
     }
 
     private void loadMessage() {

@@ -32,6 +32,7 @@ import ntu.com.mylife.common.service.ChatDao;
 import ntu.com.mylife.common.service.ChatDaoImpl;
 import ntu.com.mylife.common.service.SharedPreferencesKey;
 import ntu.com.mylife.common.service.SharedPreferencesService;
+import ntu.com.mylife.controller.ControllerConfiguration;
 import ntu.com.mylife.controller.MessageCallback;
 import ntu.com.mylife.controller.MessageController;
 import ntu.com.mylife.controller.MessageRecyclerViewAdapter;
@@ -52,6 +53,7 @@ public class MessageView extends AppCompatActivity implements MessageCallback {
 
     private DatabaseReference mDatabaseReference;
     private FirebaseRecyclerAdapter<Message, MessageViewHolder> firebaseRecyclerAdapter;
+    private ChatDao chatDao;
     private RecyclerView mMessageRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
 
@@ -86,16 +88,17 @@ public class MessageView extends AppCompatActivity implements MessageCallback {
         userId = sharedPreferencesService.getDataFromSharedPreferences(SharedPreferencesKey.NAME_SHARED_PREFERENCES, SharedPreferencesKey.KEY_USER);
 
         Intent intent = getIntent();
-        respondentUserId = intent.getStringExtra("respondentUsername");
+        respondentUserId = intent.getStringExtra(ControllerConfiguration.CHAT_RESPONDENTUSERID);
 
-        chatExist = intent.getBooleanExtra("chatExist", true);
+        chatExist = intent.getBooleanExtra(ControllerConfiguration.CHAT_CHATEXIST, true);
+
+        chatDao = new ChatDaoImpl();
 
         if(!chatExist) {
             Chat c = new Chat(userId, respondentUserId, "", "");
 
-            ChatDao db = new ChatDaoImpl();
             try {
-                db.addData(c);
+                chatDao.addData(c);
             } catch (Exception e) {
                 Log.e("addData", "Cannot add");
             }
@@ -132,19 +135,27 @@ public class MessageView extends AppCompatActivity implements MessageCallback {
                 mDatabaseReference.child(DatabaseConfiguration.MESSAGE).orderByChild("date")) {
             @Override
             protected void populateViewHolder(MessageViewHolder viewHolder, Message model, int position) {
+                if(model == null)
+                    return;
+
                 if ((model.getSenderUserId().equals(userId) && model.getReceiverUserId().equals(respondentUserId)) ||
                                 (model.getSenderUserId().equals(respondentUserId) && model.getReceiverUserId().equals(userId)))
                 {
                     viewHolder.mLinearLayout.setVisibility(View.VISIBLE);
                     viewHolder.mMessageTextView.setText(model.getMessage());
                     viewHolder.mRespondentTextView.setText(model.getSenderUserId());
-                    viewHolder.mTimeTextView.setText(model.getDate());
+
+
+
+
+                    Date date = new Date(Long.parseLong(model.getDate()));
+
+                    viewHolder.mTimeTextView.setText(date.getHours() + ":" + date.getMinutes());
                 }
                 else {
                     viewHolder.mLinearLayout.setVisibility(View.GONE);
                 }
             }
-
 
         };
 
@@ -198,9 +209,10 @@ public class MessageView extends AppCompatActivity implements MessageCallback {
             return;
         }
 
-        Date date = new Date();
 
-        Message m = new Message(respondentUserId, userId, messageContent, date.getHours() + ":" + date.getMinutes());
+        String numSecond = String.valueOf(System.currentTimeMillis());
+
+        Message m = new Message(respondentUserId, userId, messageContent, numSecond);
 
         mDatabaseReference.child(DatabaseConfiguration.MESSAGE)
                 .push().setValue(m);

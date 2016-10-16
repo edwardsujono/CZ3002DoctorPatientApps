@@ -90,8 +90,6 @@ public class ContactOptionsView extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-
                 Intent intent = new Intent(getContext(), MessageView.class);
                 intent.putExtra(ControllerConfiguration.CHAT_RESPONDENTUSERID, currentClickedUser);
                 intent.putExtra(ControllerConfiguration.CHAT_CHATEXIST, false);

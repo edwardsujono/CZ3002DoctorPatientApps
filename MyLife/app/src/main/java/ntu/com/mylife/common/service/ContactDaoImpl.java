@@ -95,7 +95,7 @@ public class ContactDaoImpl implements ContactDao {
 
             HashMap hashMapAttr = (HashMap) attr;
 
-            String contactName = (String)hashMapAttr.get(DatabaseConfiguration.USER_FULLNAME);
+            String contactName = (String)hashMapAttr.get(DatabaseConfiguration.USER_USERID);
             //Temporary
             String imageName = "";
 
